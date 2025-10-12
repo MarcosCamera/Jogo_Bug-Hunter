@@ -1,0 +1,3 @@
+/home/isabella/jogo_simao/build/CMakeFiles/jogo.dir
+/home/isabella/jogo_simao/build/CMakeFiles/edit_cache.dir
+/home/isabella/jogo_simao/build/CMakeFiles/rebuild_cache.dir
