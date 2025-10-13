@@ -3,7 +3,8 @@
 
 class Jogador : public Entidade{
     private:
-      
+    
+      //corpo velocidade
     public:
      Jogador();
      ~Jogador();
