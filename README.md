@@ -1,4 +1,4 @@
-# Jogo_Ca-adora-de-Insetos
+# Jogo_Bug-Hunter
 
 Objetivos:
 -  Comportamento inimigos
