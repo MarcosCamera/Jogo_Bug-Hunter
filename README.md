@@ -1,9 +1,3 @@
 # Jogo_Bug-Hunter
 
-Objetivos:
--  Comportamento inimigos
--  Movimento de personagem
--  Algoritmos de colisoes 
--  Projeteis
--  Obstáculos
--  Fases
+Jogo simples de plataforma, projetado para atender aos requisitos da disciplina de Técnicas de Programação do curso de Engenharia de Computação da UTFPR (Universidade Tecnológica Federal do Paraná).
