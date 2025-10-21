@@ -1,0 +1,13 @@
+# Pasta de compilação do CMake
+build/
+
+# Arquivos de compilação
+*.o
+*.a
+*.so
+
+# Executável final (se tiver um nome específico)
+jogo
+
+# Arquivos do VSCode (opcional, mas recomendado)
+.vscode/
