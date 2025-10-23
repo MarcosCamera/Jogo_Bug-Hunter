@@ -19,7 +19,7 @@ static void seed()
 class Ant
 {
 private:
-	bool direcao; //se 1, est· se movendo para direita, 0 esquerda
+	bool direcao; //se 1, est√° se movendo para direita, 0 esquerda
 	bool ground; // 1 se toca no chao, 0 se nao
 	float gravidade;
 	float velocidadeY;
@@ -27,7 +27,7 @@ private:
 	Sprite ant;
 public:
 	void inicializar(){}
-	Ant():direcao(true), gravidade(0.01), velocidadeY(0.0), ground(false)
+	Ant():direcao(true), gravidade(10.0), velocidadeY(0.0), ground(false)
 	{
 		if (!antTex.loadFromFile("Textures/ant2.png"))
 			throw "nao abriu imagem";
@@ -57,7 +57,7 @@ public:
 class Spider
 {
 private:
-	bool direcao; // se 1, est· se movendo para direita, 0 esquerda
+	bool direcao; // se 1, est√° se movendo para direita, 0 esquerda
 	bool ground; // 1 se toca no chao, 0 se nao
 	float gravidade;
 	float velocidadeY;
@@ -95,6 +95,7 @@ int main()
 	Spider player;
 	Ant formiga;
 	list<Ant> Ants;
+	formiga.getSprite()->setPosition(100.0, 100.0);
 
 	/*Texture spiderTex;
 	Sprite spider;
@@ -126,8 +127,11 @@ int main()
 
 		/* enemies */
 		formiga.getSprite()->move(0.f, formiga.getVelocidadeY());
-		if (formiga.getSprite()->getPosition().y + formiga.getSprite()->getGlobalBounds().height >= window.getSize().y)
+		if (formiga.getSprite()->getPosition().y >= window.getSize().y - formiga.getSprite()->getGlobalBounds().height)
+		{
 			formiga.steped();
+			formiga.getSprite()->setPosition(formiga.getSprite()->getPosition().x, window.getSize().y - formiga.getSprite()->getGlobalBounds().height);
+		}
 		
 		if (formiga.getGround())
 		{
@@ -139,9 +143,9 @@ int main()
 			}
 
 			if (formiga.getDirecao())
-				formiga.getSprite()->move(10.0, 0.0);
+				formiga.getSprite()->move(1.0, 0.0);
 			else
-				formiga.getSprite()->move(-10.0, 0.0);
+				formiga.getSprite()->move(-1.0, 0.0);
 		}
 		/* projectiles */
 
