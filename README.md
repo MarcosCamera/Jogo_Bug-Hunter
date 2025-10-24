@@ -5,11 +5,11 @@ Jogo simples de plataforma, projetado para atender aos requisitos da disciplina 
 # Objetivos a cumprir:
 
 * Makefile (para rodar em qualquer PC)
-* Comportamento inimigos (ISABELLA)
+* Comportamento inimigos 
 * Movimento de personagem (MARCOS)
 * Algoritmos de colisoes
 * Projeteis
-* Obstáculos
+* Obstáculos(ISABELLA)
 * Fases
 
 # Ideias:
