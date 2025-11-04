@@ -5,15 +5,22 @@
 
 namespace Entidades{
 class Entidade : public Ente{
-   protected://classe totalmente abstrata usa protected, para poder acessar body
+   protected:
       sf::Vector2f vel;
-      
+      sf::Vector2f pos;
+      sf::Texture textura;
+
     public:
-    Entidade();
-     virtual ~Entidade();
-     virtual void executar() = 0;
-     void setVel(const float x, const float y);//pode ser utilizado MRU
-     void setPos(const float x, const float y);
-     
-};
+      Entidade();
+      Entidade(const std::string& caminhoSprite, sf::Vector2f posicao);//sobrecarga construtora
+      virtual ~Entidade();
+
+      virtual void executar() = 0;
+      void setVel(sf::Vector2f velocidade);
+      void setPos(sf::Vector2f posicao);
+
+      sf::Vector2f getVel() const;
+      sf::Vector2f getPos() const;
+      void colidirParede();
+  };
 }
