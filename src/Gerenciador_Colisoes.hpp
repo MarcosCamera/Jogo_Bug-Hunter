@@ -16,30 +16,30 @@ namespace Gerenciadores
     class Gerenciador_Colisoes
     {
         private:
-         vector<Inimigo*> LIs;
-         list<Obstaculo*> LOs;
-         set<Projetil*> LPs;
-         Jogador* pJog1;
+            vector<Inimigo*> LIs;
+            list<Obstaculo*> LOs;
+            set<Projetil*> LPs;
+            Jogador* pJog1;
         
-         public:
-           Gerenciador_Colisoes();
-           ~Gerenciador_Colisoes();
+        public:
+            Gerenciador_Colisoes();
+            ~Gerenciador_Colisoes();
 
-           void incluirInimigo(Inimigo* pi);
-           void incluirObstaculo(Obstaculo* po);
-           void incluirProjetil(Projetil* pj);
-           void setJogador(Jogador* pJ);
-           //void incluirEntidade()   //fazer para incluir qualquer tipo de entidade e chamar as funçoes "tratar colisoes" (ou melhor nao)
-           void executar();
+            void incluirInimigo(Inimigo* pi);
+            void incluirObstaculo(Obstaculo* po);
+            void incluirProjetil(Projetil* pj);
+            void setJogador(Jogador* pJ);
+            /*void incluirEntidade()*/   //fazer para incluir qualquer tipo de entidade e chamar as funçoes "tratar colisoes" (ou melhor nao?)
+            void executar();
 
         private:
-         const bool verificarColisao(Entidade* pe1, Entidade* pe2) const;
+            const bool verificarColisao(Entidade* pe1, Entidade* pe2) const;
          
-         void tratarColisoesJogsObstacs();
-         void tratarColisoesJogsInimigs(); 
-         void tratarColisoesJogsProjeteis();
-         void tratarColisoesInimigsObstacs(); //nao estava no UML padrao
-         void tratarColisoesInimigsObstacs(); //nao estava no UML padrao
-
+            void tratarColisoesJogsObstacs();
+            void tratarColisoesJogsInimigs(); 
+            void tratarColisoesJogsProjeteis();
+            void tratarColisoesInimigsObstacs(); //nao estava no UML padrao
+            void tratarColisoesInimigsObstacs(); //nao estava no UML padrao
+            void tratarColisoesObstacsProjeteis(); //nao estava no UML padrao
     };
 }

@@ -15,14 +15,14 @@ pJog1(NULL)
 {
     LIs.clear();
     LOs.clear();
-    LPs.clear(); //esta correto?
+    LPs.clear();
 }
 
-Gerenciador_Colisoes::~Gerenciador_Colisoes() {
-
+Gerenciador_Colisoes::~Gerenciador_Colisoes() 
+{
     LIs.clear();
     LOs.clear();
-    LPs.clear(); //esta correto?
+    LPs.clear(); 
     pJog1 = NULL;
 }
 
@@ -88,8 +88,6 @@ void Gerenciador_Colisoes::tratarColisoesJogsObstacs()
             pObst->obstaculizar(pJog1);
         }
     }
-
-
 }
 
 
@@ -112,7 +110,6 @@ void Gerenciador_Colisoes::tratarColisoesJogsInimigs()
             pJog1->colidir(pInim);
         }
     }
-    
 }
 
 void Gerenciador_Colisoes::tratarColisoesJogsProjeteis()
@@ -130,7 +127,7 @@ void Gerenciador_Colisoes::tratarColisoesJogsProjeteis()
 
         if (pProj && verificarColisao(pJog1, pProj))
         {
-            //faz o que;
+            pProj->danificarJogador(pJog);//ainda nao implementada em Projetil. setar ativo para false 
         }
     }
 }
@@ -154,10 +151,9 @@ void Gerenciador_Colisoes::tratarColisoesInimigsObstacs()
             }
         }
     }
-    //...
 }
 
-void Gerenciador_Colisoes::tratarColisoesInimigsProjeteis()
+void Gerenciador_Colisoes::tratarColisoesInimigsProjeteis() //apenas para quando a aranha tiver projetil
 {
     vector<Inimigo*>::iterator itIn;
     set<Projetil*>::iterator itPj;
@@ -172,17 +168,40 @@ void Gerenciador_Colisoes::tratarColisoesInimigsProjeteis()
 
             if (pInim && pProj && verificarColisao(pInim, pProj)
             {
-                //faz o que ...   
+                //setar bool ativo para false 
             }
         }
 
     }
 }
 
-void Gerenciador_Colisoes::executar() {
+void Gerenciador_Colisoes::tratarColisoesObstacsProjeteis()
+{
+    list<Obstaculo*>::iterator itObs;
+    set<Projetil*>::iterator itPj;
 
-    //tratar o resto das colisoes
-    tratarColisoesJogsObstacs();
-    tratarColisoesJogsInimigs();
+    for (itObs = LOs.begin(); itObs != LOs.end(); itObs++)
+    {
+        Obstaculo* pObst = itObs;
+
+        for (itPj = LPs.begin(); itPj != LPs.end(); itPj++)
+        {
+            Projetil* pProj = itPj;
+            if (pObst && pProj && verificarColisao(pObst, pProj))
+            {
+                //setar bool ativo para false se for de inimigo
+                //se projetil for de aranha, o projetil fica estatico e muda a sprite
+            }
+        }
+    }
 }
 
+void Gerenciador_Colisoes::executar() 
+{
+    tratarColisoesJogsObstacs();
+    tratarColisoesJogsInimigs();
+    tratarColisoesJogsProjeteis();
+    tratarColisoesInimigsObstacs();
+    tratarColisoesInimigsProjeteis();
+    tratarColisoesObstacsProjeteis();
+}
