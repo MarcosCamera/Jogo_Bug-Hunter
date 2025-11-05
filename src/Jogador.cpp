@@ -5,23 +5,20 @@ using namespace std;
 
 using namespace Entidades::Personagens;
 
-Jogador::Jogador() : Personagem(), pontos(0)
+Jogador::Jogador():Personagem(), pontos(0)
 {
-  if (!tex.loadFromFile("Textures/spider.png")) {
-        cout<< "ERRO: Nao foi possivel carregar a textura da aranha!" << endl;
-  }
-  pFig->setTexture(tex);
-  pFig->setScale(0.03f, 0.03f);
-  setPos(1.0f, 1.0f);
+//... setar posiçao padrao na fase.
 }
-
 Jogador::~Jogador() {}
+
+/*colidir?*/ Jogador::colidir(){}//...
 
 void Jogador::executar()
 {
    mover();
-   desenhar();
 }
+
+void Jogador::salvar(){}//...
 
 void Jogador::mover()
 {

@@ -7,19 +7,20 @@
 #include <list>
 
 namespace Entidades::Personagens{
-class Jogador : public Personagem{
-    protected:
-       int pontos;
-       sf::Texture tex;
+    class Jogador : public Personagem{
+        protected:
+            int pontos;
 
-    public:
-     Jogador();
-     ~Jogador();
+        public:
+            Jogador();
+            ~Jogador();
 
-    void executar();
-    void mover();
+            /*tipo?*/ colidir(Inimigo* pIn);
+            void executar();
+            void salvar();
+            void mover();
     
 
 
-};
+    };
 }
