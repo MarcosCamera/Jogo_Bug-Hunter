@@ -1,0 +1,3 @@
+﻿  BugHunter.cpp
+C:\Users\marco\Documents\1.Estudos Gerais\1.Faculdade\Tec_Prog\Projetos\BugHunter\BugHunter\BugHunter.cpp(21,12): warning C4244: 'argumento': conversão de 'time_t' para 'unsigned int', possível perda de dados
+  BugHunter.vcxproj -> C:\Users\marco\Documents\1.Estudos Gerais\1.Faculdade\Tec_Prog\Projetos\BugHunter\x64\Debug\BugHunter.exe
