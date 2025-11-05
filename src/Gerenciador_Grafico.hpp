@@ -7,8 +7,8 @@ namespace Gerenciadores
 {
     class Gerenciador_Grafico{
     private:
-       static Gerenciador_Grafico* instancia;
-       Gerenciador_Grafico();
+       static Gerenciador_Grafico* instancia;    //pra que serve?
+       Gerenciador_Grafico();    //por que private?
        sf::RenderWindow * window;
 
     public:
