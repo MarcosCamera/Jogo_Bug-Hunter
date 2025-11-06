@@ -10,7 +10,7 @@
 <XPD:BODY>
 <XPD:OBJ name="DocumentElement" type="UMLProject" guid="qpfnOauhrkq4FnNSL/BU5QAA">
 <XPD:ATTR name="Title" type="string">Untitled</XPD:ATTR>
-<XPD:ATTR name="#OwnedElements" type="integer">4</XPD:ATTR>
+<XPD:ATTR name="#OwnedElements" type="integer">5</XPD:ATTR>
 <XPD:OBJ name="OwnedElements[0]" type="UMLModel" guid="dOkbfYCUy0qUfwhLnpfiEgAA">
 <XPD:ATTR name="Name" type="string">Use Case Model</XPD:ATTR>
 <XPD:ATTR name="StereotypeProfile" type="string">UMLStandard</XPD:ATTR>
@@ -40,7 +40,7 @@
 <XPD:REF name="Diagram">OikmohWNHEKv8drdElwApAAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:ATTR name="#OwnedElements" type="integer">30</XPD:ATTR>
+<XPD:ATTR name="#OwnedElements" type="integer">29</XPD:ATTR>
 <XPD:OBJ name="OwnedElements[0]" type="UMLAssociation" guid="TlFG4+NkFEWUxWebgKfdKgAA">
 <XPD:REF name="Namespace">XqTvRQqsnkuWZZwgQBMH+AAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
@@ -1013,11 +1013,12 @@
 <XPD:REF name="Views[3]">55tiZi3izk6Jop1Z31VPZQAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[29]" type="UMLModel" guid="IoH8RzmxEE6xOc9zvj2jawAA">
+</XPD:OBJ>
+<XPD:OBJ name="OwnedElements[2]" type="UMLModel" guid="IoH8RzmxEE6xOc9zvj2jawAA">
 <XPD:ATTR name="Name" type="string">Design Model</XPD:ATTR>
 <XPD:ATTR name="StereotypeProfile" type="string">UMLStandard</XPD:ATTR>
 <XPD:ATTR name="StereotypeName" type="string">designModel</XPD:ATTR>
-<XPD:REF name="Namespace">XqTvRQqsnkuWZZwgQBMH+AAA</XPD:REF>
+<XPD:REF name="Namespace">qpfnOauhrkq4FnNSL/BU5QAA</XPD:REF>
 <XPD:ATTR name="#OwnedDiagrams" type="integer">1</XPD:ATTR>
 <XPD:OBJ name="OwnedDiagrams[0]" type="UMLClassDiagram" guid="O5eFn4h62kaG+YUl4qXABgAA">
 <XPD:ATTR name="Name" type="string">Main</XPD:ATTR>
@@ -2096,7 +2097,7 @@
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">1324</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">408</XPD:ATTR>
-<XPD:ATTR name="Width" type="integer">213</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">128</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">147</XPD:ATTR>
 <XPD:REF name="Model">82LAi2UIo02RgIoh3hOn0gAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="nV3en3xTdUasqVnGoBLUFwAA">
@@ -2586,7 +2587,7 @@
 <XPD:ATTR name="LineColor" type="string">clBlue</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">1449,1085;1512,1085;1512,554</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">1449,1085;1512,1085;1512,516;1451,516</XPD:ATTR>
 <XPD:REF name="Model">KKnAz5/Oq0qgSabsSZLFwgAA</XPD:REF>
 <XPD:REF name="Head">1zHvYZ8qvEG1sDyzawk99QAA</XPD:REF>
 <XPD:REF name="Tail">2LBH7olYe0qxzXsQ8Y2j3AAA</XPD:REF>
@@ -4570,7 +4571,7 @@ Neste sentido, os atributos indicados também podem ser alterados, modificado et
 <XPD:ATTR name="LineColor" type="string">$00808040</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">1536,456;1540,456;1540,1236;496,1236;496,840;445,840</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">1451,456;1540,456;1540,1236;496,1236;496,840;445,840</XPD:ATTR>
 <XPD:REF name="Model">L5T8pIUYx0iNg7r+RFYCgAAA</XPD:REF>
 <XPD:REF name="Head">uslvQORP4EGdRLZDAsxcQwAA</XPD:REF>
 <XPD:REF name="Tail">1zHvYZ8qvEG1sDyzawk99QAA</XPD:REF>
@@ -6357,7 +6358,7 @@ Neste sentido, os atributos indicados também podem ser alterados, modificado et
 <XPD:OBJ name="Attributes[1]" type="UMLAttribute" guid="cSAHtPzBz0C5CA9BNhnVmAAA">
 <XPD:ATTR name="Name" type="string">ativo</XPD:ATTR>
 <XPD:ATTR name="Visibility" type="UMLVisibilityKind">vkProtected</XPD:ATTR>
-<XPD:ATTR name="TypeExpression" type="string">bool //projetil aliado/inimigo,pode?</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">bool</XPD:ATTR>
 <XPD:REF name="Owner">82LAi2UIo02RgIoh3hOn0gAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
@@ -6670,8 +6671,7 @@ Neste sentido, os atributos indicados também podem ser alterados, modificado et
 </XPD:OBJ>
 </XPD:OBJ>
 </XPD:OBJ>
-</XPD:OBJ>
-<XPD:OBJ name="OwnedElements[2]" type="UMLModel" guid="tb+9UuQRKE2bY4zRml/RFgAA">
+<XPD:OBJ name="OwnedElements[3]" type="UMLModel" guid="tb+9UuQRKE2bY4zRml/RFgAA">
 <XPD:ATTR name="Name" type="string">Implementation Model</XPD:ATTR>
 <XPD:ATTR name="StereotypeProfile" type="string">UMLStandard</XPD:ATTR>
 <XPD:ATTR name="StereotypeName" type="string">implementationModel</XPD:ATTR>
@@ -6685,7 +6685,7 @@ Neste sentido, os atributos indicados também podem ser alterados, modificado et
 </XPD:OBJ>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[3]" type="UMLModel" guid="y27A1CDKEE2+bnhpk0yJAAAA">
+<XPD:OBJ name="OwnedElements[4]" type="UMLModel" guid="y27A1CDKEE2+bnhpk0yJAAAA">
 <XPD:ATTR name="Name" type="string">Deployment Model</XPD:ATTR>
 <XPD:ATTR name="StereotypeProfile" type="string">UMLStandard</XPD:ATTR>
 <XPD:ATTR name="StereotypeName" type="string">deploymentModel</XPD:ATTR>

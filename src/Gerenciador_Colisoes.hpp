@@ -39,7 +39,7 @@ namespace Gerenciadores
             void tratarColisoesJogsInimigs(); 
             void tratarColisoesJogsProjeteis();
             void tratarColisoesInimigsObstacs(); //nao estava no UML padrao
-            void tratarColisoesInimigsObstacs(); //nao estava no UML padrao
+            void tratarColisoesInimigsProjeteis(); //nao estava no UML padrao
             void tratarColisoesObstacsProjeteis(); //nao estava no UML padrao
     };
 }

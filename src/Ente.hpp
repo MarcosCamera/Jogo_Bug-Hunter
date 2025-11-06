@@ -12,7 +12,7 @@ class Ente
       int id;
       static Gerenciadores :: Gerenciador_Grafico* pGG;//da acesso a todas os entes ao mesmo gerenciador grafico
       static int  cont_id;//contar cada ente criado
-      sf::Sprite* pFig;
+      sf::Sprite* pFig; 
     public:
       Ente();
       virtual ~Ente();
@@ -22,7 +22,12 @@ class Ente
       void static setpGG(Gerenciadores :: Gerenciador_Grafico* pG);
       sf::Sprite* getFigura();
       //void setCor(const sf::Color &cor);
-
       
 
 };
+
+//inicializar corretamente as construtoras das classes derivadas
+//escrever cout's para cada teste (else)
+//testar ponteiros
+//aterrar ponteiros
+//inicializar atributos e ponteiros

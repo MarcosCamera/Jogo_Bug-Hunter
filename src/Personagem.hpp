@@ -7,11 +7,12 @@ namespace Entidades::Personagens{
     class Personagem : public Entidade{
         protected:
             int num_vidas;
+
         public:
             Personagem();
             virtual ~Personagem();
 
-            void salvarDataBuffer();
+            void salvarDataBuffer(); //pra que serve???
 
             virtual void executar() = 0;
             virtual void salvar() = 0;

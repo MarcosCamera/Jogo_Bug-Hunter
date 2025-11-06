@@ -4,13 +4,11 @@
 using namespace Gerenciadores;
 
 
-
 Gerenciador_Grafico* Gerenciadores::Gerenciador_Grafico::instancia(NULL);
 
 
-
 Gerenciador_Grafico::Gerenciador_Grafico():
-window(new sf::RenderWindow(sf::VideoMode(800.0f, 800.0f), "Jogo"))
+window(new sf::RenderWindow(sf::VideoMode(800.0f, 800.0f), "BUG - HUNTER", sf::style::Default))
 {
     
 }
@@ -21,7 +19,7 @@ Gerenciador_Grafico::~Gerenciador_Grafico()
      if(window)
      {
         delete(window);
-        window = nullptr;
+        window = NULL;
      }
 }
 
@@ -59,11 +57,12 @@ void Gerenciador_Grafico::fecharJanela()
 }
 
 
-sf::RenderWindow* Gerenciador_Grafico::getWindow()
+static sf::RenderWindow* Gerenciador_Grafico::getWindow()
 {
     return window;
 }
-//estático
+
+
 Gerenciador_Grafico* Gerenciadores::Gerenciador_Grafico::getInstancia()
 {
     if(instancia == NULL)
