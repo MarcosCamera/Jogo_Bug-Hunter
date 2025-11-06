@@ -11,7 +11,7 @@ Ente::Ente():id(cont_id++), pFig(new sf::Sprite())
     
 }
 
-Ente::~Ente()
+Ente::~Ente() //pode isso, sendo ela virtual??? nao devia acontecer em classe nao abstrata???
 {
     if(pFig)
     {
