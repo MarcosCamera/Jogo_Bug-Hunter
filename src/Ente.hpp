@@ -25,9 +25,3 @@ class Ente
       
 
 };
-
-//inicializar corretamente as construtoras das classes derivadas
-//escrever cout's para cada teste (else)
-//testar ponteiros
-//aterrar ponteiros
-//inicializar atributos e ponteiros

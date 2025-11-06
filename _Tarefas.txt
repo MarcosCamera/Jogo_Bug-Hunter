@@ -1,0 +1,36 @@
+## Falta:
+* Documentar UML (e imprimir)
+* Inim_Medio
+* Chefao
+*
+
+## Terminar:
+* Inim_Facil
+*
+
+## Consertar:
+* 
+* 
+
+## Refazer:
+* 
+* 
+
+## Lembrar:
+* Inicializar corretamente as construtoras das classes derivadas
+* Escrever cout's para cada teste (else)
+* Testar ponteiros
+* Aterrar ponteiros
+* Inicializar atributos e ponteiros
+*
+
+## Dúvidas: 
+* É necessário o atributo posição em "Entidade"? Talvez apenas para a função salvar.
+* Implementar andar na parede?
+* Fazer mais de um tipo de inimigo fácil (abelha por exemplo) e vários Médios também.
+*
+
+## Ideias (após a implementação da fase 1):
+* Inimigo fácil abelha: seu ferrão será sesacoplado de seu corpo, assim como a formiga, mas apenas em um grau 
+  limitado. Voará em direção ao jogador em uma investida suicida. Dará muito dano, mas morrerá em seguida. 
+*

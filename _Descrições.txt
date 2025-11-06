@@ -1,0 +1,16 @@
+## Entidade:
+* Cada entidade tem atributos como posição, velocidade
+
+## Jogador:
+* Cada jogador será um aracnídeo (aranha/escorpião), em que a aranha atira teia e
+  o escorpião, veneno. A teia paraliza e dá dano leve e o veneno dá dano contínuo por um tempo.
+* 
+
+## Inim_Facil:
+* Formiga
+* Cabeça segue direção do personagem e suas pinças dão dano ao jogador. Já o corpo segue a 
+  direção horizontal do jogador.
+
+## Inim_Medio:
+
+## Chefao:

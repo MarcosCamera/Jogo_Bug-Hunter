@@ -8,17 +8,14 @@ namespace Entidades::Personagens
     {
         private:
           float raio;
-          sf::Texture tex;
-          bool direcao; // true = direita, false = esquerda
-          bool ground;
-          float gravidade;
+          //pCabeca //a cabeça será separada do corpo e terá movimento próprio, seguindo o jogador.
           
-        
         public:
           Inim_Facil();
           ~Inim_Facil();
-          void executar();
+
           void danificar(Jogador* p);
           void mover();
+          void executar();
     };
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include "Personagem.hpp"
-#include <iostream>
+#include <iostream>  //precisa desses includes que foram adicionados nas primitivas???
 #include <SFML/Graphics.hpp>
 #include <cstdlib>
 #include <ctime>
@@ -10,8 +10,6 @@ namespace Entidades::Personagens{
     class Jogador : public Personagem{
         protected:
             int pontos;
-
-
 
         public:
             Jogador();

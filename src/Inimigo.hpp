@@ -20,6 +20,3 @@ namespace Entidades::Personagens{
             virtual void danificar(Jogador* p) = 0;
     };
 }
-
-//inimigo formiga tem nivel de maldade maior e portanto maior dano, se proximo ao formigueiro
-//aumenta o nivel se nao houver formigas por perto (printar na tela: berserk mode)

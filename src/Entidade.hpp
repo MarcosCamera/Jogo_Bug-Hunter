@@ -10,7 +10,7 @@ namespace Entidades{
             sf::Vector2f pos;
             sf::Vector2f vel;
             //sf::Vector2f acel; //faço um vetor aceleracao???
-            //bool direcao
+            //bool direcao //true se for pra direita e false se for pra esquerda.
             //bool piso //se está pisando em algo
             //const float velMax;  //implementar
             //const float acelera;
