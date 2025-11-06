@@ -1,5 +1,4 @@
 #include "Inimigo.hpp"
-#include <SFML/Graphics.hpp>
 
 using namespace Entidades;
 using namespace Personagens;

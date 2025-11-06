@@ -9,7 +9,7 @@
 *
 
 ## Consertar:
-* 
+* Verificar os includes.
 * 
 
 ## Refazer:
@@ -22,13 +22,14 @@
 * Testar ponteiros.
 * Aterrar ponteiros.
 * Inicializar atributos e ponteiros.
-*
+* 
 
 ## Dúvidas: 
 * É necessário o atributo posição em "Entidade"? Talvez apenas para a função salvar.
 * Implementar andar na parede?
 * Fazer mais de um tipo de inimigo fácil (abelha por exemplo) e vários Médios também.
-*
+* O Inim_Facil será implementado para as duas fases, como nos requisitos. Posso eu colocar então um Inim_Facil
+  de um tipo (formiga) em uma delas e outro tipo (abelha) na outra fase.
 
 ## Ideias (após a implementação da fase 1):
 * Inimigo fácil abelha: seu ferrão será sesacoplado de seu corpo, assim como a formiga, mas apenas em um grau 

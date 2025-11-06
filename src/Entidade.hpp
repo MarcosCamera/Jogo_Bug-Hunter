@@ -13,7 +13,7 @@ namespace Entidades{
             //bool direcao //true se for pra direita e false se for pra esquerda.
             //bool piso //se está pisando em algo
             //const float velMax;  //implementar
-            //const float acelera;
+            //const float acelera; //conta a aceleração, desaceleração e gravidade
             //const float desacelera; //pode ser const para inicializar em classe herdada e nao ser mais alterada?
             //const float gravidade;
  

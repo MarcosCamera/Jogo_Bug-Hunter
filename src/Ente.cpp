@@ -1,12 +1,11 @@
 #include "Ente.hpp"
 #include "Gerenciador_Grafico.hpp"
-#include <iostream>
 using namespace std;
 
 int Ente::cont_id(0);
 Gerenciadores::Gerenciador_Grafico* Ente::pGG(Gerenciadores::Gerenciador_Grafico::getInstancia());
 
-Ente::Ente():id(cont_id++), pFig(new sf::Sprite())
+Ente::Ente():id(cont_id++), pFig(new sf::Sprite()) //new deve ser aqui mesmo?
 {
     
 }

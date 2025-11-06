@@ -7,7 +7,7 @@ namespace Entidades::Personagens
     class Inim_Facil : public Inimigo
     {
         private:
-          float raio;
+          float raio; //alcance do jogador para nivel de maldade.
           //pCabeca //a cabeça será separada do corpo e terá movimento próprio, seguindo o jogador.
           
         public:

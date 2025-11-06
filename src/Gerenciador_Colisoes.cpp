@@ -85,8 +85,8 @@ void Gerenciador_Colisoes::tratarColisoesJogsObstacs()
 
         if (pObst && verificarColisao(pJog1, pObst))
         {
-            pObst->obstaculizar(pJog1);
-        }
+            pObst->obstaculizar(pJog1); //tratar em obstaculizar os obstaculos de dano também. obstaculizar deve 
+        }                               //ser implementada em cada tipo de obstaculo diferentemente.
     }
 }
 
@@ -127,7 +127,8 @@ void Gerenciador_Colisoes::tratarColisoesJogsProjeteis()
 
         if (pProj && verificarColisao(pJog1, pProj))
         {
-            pProj->danificarJogador(pJog);//ainda nao implementada em Projetil. setar ativo para false 
+            pProj->danificarJogador(pJog);//ainda nao implementada em Projetil. 
+            //setar ativo para false 
         }
     }
 }
@@ -147,7 +148,7 @@ void Gerenciador_Colisoes::tratarColisoesInimigsObstacs()
 
             if (pInim && pObst && verificarColisao(pInim, pObst)
             {
-                pObst->obstaculizar() //o obstaculizar personagem ou obstacularizar inimigos e jogadores (2 funçoes)?
+                pObst->obstaculizar() //o obstaculizar personagem ou obstaculizar inimigos e jogadores (2 funçoes)?
             }
         }
     }
