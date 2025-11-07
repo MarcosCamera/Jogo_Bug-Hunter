@@ -36,27 +36,21 @@ void Inim_Facil::mover() //pode fazer sobrecarga para o caso em que nao houver j
 {
     if (chao)
     {
-        if (!nivel_maldade)
+        if (direcao && vel < velMovMax)
         {
-            if (/*colisao horizontal */)
-            {
-                direcao = !direcao; // Inverte a direção //ser chamada no gerenciador de colisao
-                vel.x = -vel.x;
-            }
-            //aceleração...
+            acel.x = velMovMax / 4;
         }
-        else
+        else if (!direcao && vel > -velMovMax)
         {
-            //velMax = n + nivel_maldade
-            //aceleração...
+            acel.x = -velMovMax / 4;
         }
-        //acel = acelPadrao * (nivel_maldade + 1);
     }
     else
     {
-        vel.y += gravidade;
+        acel.y = gravidade;
     }
 
+    vel += acel * (nivel_maldade + 1);
     pFig->move(vel);
 }
 

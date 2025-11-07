@@ -11,7 +11,7 @@ namespace Entidades::Personagens
                       //se estiver no raio de alcance, a velocidade altera
                       //e deixa de ser aleatoria para seguir o jogador
           //pCabeca //a cabeça será separada do corpo e terá movimento próprio, seguindo o jogador.
-          float velFuria
+          //float velFuria; //será? 
           
         public:
           Inim_Facil();

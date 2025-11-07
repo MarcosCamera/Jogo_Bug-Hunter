@@ -7,14 +7,14 @@
 
 ## Terminar:
 * Inim_Facil
-*
+* Implementar mecanicas de aceleração e velocidade de jogador em inimigos (talvez faça em gerenciador de eventos)
 
 ## Consertar:
 * Desacoplar movimentos de Personagem's.
 * Desacoplar colisões: fazer função knockBack, etc.
 
 ## Refazer:
-* 
+* Tratar "direcao" de Entidade's em obstaculizar de Obstaculo.
 * 
 
 ## Lembrar:
