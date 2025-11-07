@@ -12,6 +12,7 @@ namespace Gerenciadores
         sf::RenderWindow* window;
 
     public:
+        /*tratar textura de cada instancia aqui*/
         Gerenciador_Grafico();    
         ~Gerenciador_Grafico();
         void desenharEnte(Ente* pE);

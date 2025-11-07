@@ -41,5 +41,6 @@ namespace Gerenciadores
             void tratarColisoesInimigsObstacs(); //nao estava no UML padrao
             void tratarColisoesInimigsProjeteis(); //nao estava no UML padrao
             void tratarColisoesObstacsProjeteis(); //nao estava no UML padrao
+            //InimigsInimigs
     };
 }

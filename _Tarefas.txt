@@ -1,5 +1,6 @@
 ## Falta:
 * Documentar UML (e imprimir)
+* Documentar Google Docs (e imprimir)
 * Inim_Medio
 * Chefao
 * sf::Texture textura; vai onde?
@@ -9,8 +10,8 @@
 *
 
 ## Consertar:
-* 
-* 
+* Desacoplar movimentos de Personagem's.
+* Desacoplar colisões: fazer função knockBack, etc.
 
 ## Refazer:
 * 
@@ -22,15 +23,18 @@
 * Testar ponteiros
 * Aterrar ponteiros
 * Inicializar atributos e ponteiros
-*
+* Passar ponteiros implicitamente
 
 ## Dúvidas: 
 * É necessário o atributo posição em "Entidade"? Talvez apenas para a função salvar.
 * Implementar andar na parede?
 * Fazer mais de um tipo de inimigo fácil (abelha por exemplo) e vários Médios também.
-*
+* This usa um ponteiro do objeto?
+* Sobrecarga de função: posso fazer uma função que recebe um ponteiro inimigo e a mesma função mas que recebe ponteiro jogador?
 
 ## Ideias (após a implementação da fase 1):
-* Inimigo fácil abelha: seu ferrão será sesacoplado de seu corpo, assim como a formiga, mas apenas em um grau 
+* Inimigo fácil abelha: seu ferrão será sesacoplado de seu corpo, assim como a formiga, mas apenas em um grau.
   limitado. Voará em direção ao jogador em uma investida suicida. Dará muito dano, mas morrerá em seguida. 
+* Fazer sobrecarga de construtora que tenha alguma utilidade.
+* Teias atiradas grudam nas estruturas. Se um inimigo encostar, o projetil desaparece e o inimigo fica paralizado por um tempo.
 *

@@ -7,6 +7,7 @@ namespace Entidades::Personagens{
     class Personagem : public Entidade{
         protected:
             int num_vidas;
+            float forca;
 
         public:
             Personagem();

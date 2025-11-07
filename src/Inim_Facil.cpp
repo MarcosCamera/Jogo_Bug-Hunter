@@ -9,25 +9,61 @@ Inim_Facil::Inim_Facil():Inimigo(),raio(0){}
 Inim_Facil::~Inim_Facil(){}
 
 
-void Inim_Facil::danificar(Jogador*p)
+void Inim_Facil::verificaAlcance(*pJog)
 {
-   //...
+    if (!pJog)
+    {
+        cout << "Jogador não encontrado" << endl;
+        return;
+    }
+
+    float x = pos.x - pJog->pos.x;
+    float y = pos.y - pJog->pos.y;
+    if (sqrt(x * x + y * y) <= raio && !nivel_maldade)
+    {
+        nivel_maldade++;
+    }
 }
 
 
-void Inim_Facil::mover()
+void Inim_Facil::danificar(Jogador*pJog)
+{
+    pJog->num_vidas -= forca;
+}
+
+
+void Inim_Facil::mover() //pode fazer sobrecarga para o caso em que nao houver jogador proximo e o caso em que estiver no alcance do raio?
 {
     if (chao)
     {
-        if (/*colisao horizontal */ )
+        if (!nivel_maldade)
         {
-            direcao = !direcao; // Inverte a direção //ser chamada no gerenciador de colisao
+            if (/*colisao horizontal */)
+            {
+                direcao = !direcao; // Inverte a direção //ser chamada no gerenciador de colisao
+                vel.x = -vel.x;
+            }
+            //aceleração...
         }
-
-        float velocidadeX = direcao ? 2.0f : -2.0f;
-        pFig->move(velocidadeX, 0.0f);
+        else
+        {
+            //velMax = n + nivel_maldade
+            //aceleração...
+        }
+        //acel = acelPadrao * (nivel_maldade + 1);
     }
+    else
+    {
+        vel.y += gravidade;
+    }
+
     pFig->move(vel);
+}
+
+
+void Inim_Facil::salva()
+{
+    //
 }
 
 

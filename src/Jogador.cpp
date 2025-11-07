@@ -13,8 +13,18 @@ Jogador::Jogador():Personagem(), pontos(0)
 	//para jogador2, posiçao relativa ao jogador 1, ou ambos aparecem ao mesmo tempo.
 }
 
+/* Posso fazer: (?)
+Jogador::Jogador():Personagem():Entidade(5, 10, ...), pontos {}
+*/
 
-Jogador::~Jogador() {}
+
+Jogador::~Jogador() {} //dar delete aqui (???)
+
+
+void Jogador::danificarInim(Inimigo* pIn)
+{
+	pIn->num_vidas -= forca;
+}
 
 
 void Jogador::colidir(Inimigo* pIn)
@@ -22,8 +32,9 @@ void Jogador::colidir(Inimigo* pIn)
 	float alturaJog = getFigura()->getGlobalBounds().height;
 
 	if (pos.y + 0.9 * alturaJog < pIn->pos.y) //para o caso de o jogador passar pelo inimigo
+											  //ao invés de 0.9, o que poderia ser?
 	{
-		/*danifica inimigo*/
+		danificarInim(pIn);
 		vel.y = - 0.9 * vel.y // 0.9 relativo a perda de energia. Pode se tornar atributo?
 	}
 	else
@@ -79,9 +90,9 @@ void Jogador::controlar()
 void Jogador::mover()
 {
 	
-	controlar(); //vai por primeiro ou por último?
+	controlar();
 	acelerar();
-	
+	atualizaVel(); //antes ou depois das acelerações? Testar com ambas formas.
 
 	pFig->move(vel); //ou uso (this)->move ?
 }

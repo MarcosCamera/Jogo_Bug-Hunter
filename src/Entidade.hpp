@@ -13,10 +13,11 @@ namespace Entidades{
             const float gravidade;
             const float arrasto;
             const float velMovMax; //cada ente terá uma velocidade maxima para a qual pode acelerar atraves de mover
-            bool direcao //true se for pra direita e false se for pra esquerda.
-            bool chao //se está pisando em algo
+            bool direcao; //true se for pra direita e false se for pra esquerda.
+            bool chao; //se está pisando em algo
             //const float acelera; //conta a aceleração, desaceleração e gravidade
             //const float desacelera; //pode ser const para inicializar em classe herdada e nao ser mais alterada?
+
             sf::Texture textura;
  
             //toda entidade tem gravidade, mas algumas tem força externa agindo sobre e equilibram. 

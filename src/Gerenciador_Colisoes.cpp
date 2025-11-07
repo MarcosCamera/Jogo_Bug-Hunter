@@ -105,6 +105,10 @@ void Gerenciador_Colisoes::tratarColisoesJogsInimigs()
 
     for(it = LIs.begin(); it != LIs.end(); it++)
     {
+        if (!it)
+        {
+            cout << "Ponteiro Nulo" << endl;
+        }
         Inimigo* pInim = *it;
 
         if(pInim && verificarColisao(pJog1, pInim))

@@ -13,6 +13,7 @@ class Ente
       static Gerenciadores :: Gerenciador_Grafico* pGG;//da acesso a todas os entes ao mesmo gerenciador grafico
       static int  cont_id;//contar cada ente criado
       sf::Sprite* pFig; 
+      //textura 
     public:
       Ente();
       virtual ~Ente();
