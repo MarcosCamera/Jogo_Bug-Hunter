@@ -8,8 +8,7 @@ namespace Entidades::Personagens{
     class Inimigo : public Personagem{
         protected:
             int nivel_maldade;
-            bool alcanceJogador; //se estiver no raio de alcance, a velocidade altera
-                                 //e deixa de ser aleatoria para seguir o jogador
+             
 
         public:
             Inimigo();

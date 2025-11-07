@@ -2,7 +2,7 @@
 * Documentar UML (e imprimir)
 * Inim_Medio
 * Chefao
-*
+* sf::Texture textura; vai onde?
 
 ## Terminar:
 * Inim_Facil

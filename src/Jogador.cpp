@@ -54,34 +54,36 @@ void Jogador::controlar()
 	//implementar o mesmo para outras entidades.
 	if (Keyboard::isKeyPressed(Keyboard::A) && keyTime >= keyTimeMax && vel.x < (-velMax))
 	{
-		vel.x -= acelera;
+		vel.x -= velMax/10; //há uma aceleração
 		keyTime = 0;
 	}
 	if (Keyboard::isKeyPressed(Keyboard::D) && keyTime >= keyTimeMax && vel.x < velMax)
 	{
-		vel.x += acelera;
+		vel.x += velMax/10;
 		keyTime = 0;
 	}
 	if (Keyboard::isKeyPressed(Keyboard::W) && keyTime >= keyTimeMax && vel.y < (-velMax))
 	{
-		vel.y -= acelera; //fazer como velocidade de pulo depois
+		vel.y -= velMax/10; //fazer como velocidade de pulo depois
 		keyTime = 0;
 	}
 	if (Keyboard::isKeyPressed(Keyboard::S) && keyTime >= keyTimeMax && vel.y < velMax)
 	{
-		vel.y += acelera; //na pratica so a gravidade acelera
+		vel.y += velMax/10; //na pratica so a gravidade acelera
 		keyTime = 0;
 	}
 }
+//é possivel implementar tambem sem haver uma velocidade maxima, mas a desaceleraçao naturalmente limita
 
 
 void Jogador::mover()
 {
+	
 	controlar(); //vai por primeiro ou por último?
-	cair();
-	desacelerar();
+	acelerar();
+	
 
-	pFig->move(vel);
+	pFig->move(vel); //ou uso (this)->move ?
 }
 
 

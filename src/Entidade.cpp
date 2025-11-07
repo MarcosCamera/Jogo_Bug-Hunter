@@ -3,12 +3,14 @@
 using namespace std;
 using namespace Entidades;
 
-Entidade::Entidade():Ente(), vel(), pos(), textura()
+Entidade::Entidade():
+Ente(), pos(0, 0), vel(0, 0), acel(0, 0), gravidade(10), arrasto(), direcao(true), textura()
 {
 
 }
 
-Entidade::Entidade(const std::string& caminhoSprite, sf::Vector2f posicao) :Ente(), vel(), pos(), textura()
+Entidade::Entidade(const std::string& caminhoSprite, sf::Vector2f posicao):
+Ente(), pos(0,0), vel(0,0), acel(0,0), gravidade(10), arrasto(), direcao(true), textura()
 {
     
      if (!textura.loadFromFile(caminhoSprite))
@@ -16,9 +18,10 @@ Entidade::Entidade(const std::string& caminhoSprite, sf::Vector2f posicao) :Ente
         cout << "não foi possivel carregar a sprite: " << caminhoSprite << endl;
     }
 
-    if (this->pFig) { 
+    if (this->pFig) //é necessário o this ou posso deixar so "pFig"?
+    { 
         pFig->setTexture(textura);
-        //pFig->setOrigin(textura.getSize().x / 2.f, textura.getSize().y / 2.f);
+        //pFig->setOrigin(textura.getSize().x / 2.f, textura.getSize().y / 2.f); //caso trabalhemos com o centro da sprite
     }
 
     
@@ -34,7 +37,6 @@ Entidade::~Entidade()
 void Entidade::setVel(sf::Vector2f velocidade)
 {
    vel = velocidade;
-
 }
 
 void Entidade::setPos(sf::Vector2f posicao)
@@ -46,16 +48,6 @@ void Entidade::setPos(sf::Vector2f posicao)
    }
    else
     cout<<"Entidade::setPos(posicao) -> pFig NULO"<<endl;
-}
-
-sf::Vector2f Entidade::getVel() const
-{
-    return vel;
-}
-
-sf::Vector2f Entidade::getPos() const
-{
-    return pos;
 }
 
 void Entidade::colidirParede()
@@ -85,4 +77,18 @@ void Entidade::colidirParede()
         posFinal.y = ALTURA_JANELA - bounds.height;
     }
     setPos(posFinal);
+}
+
+
+void Entidade::acelerar() //incluir todas acelerações
+{
+        acel.y = (gravidade * !chao) - vel * arrasto; // -vel * vel * arrasto * area //ou apenas largura * largura 
+                                      //talvez use so atributo arrasto como um numero conveniente para desacelerar
+        acel.x = - vel * arrasto;
+        //acel.x com resistencia e nao com um numero aleatório
+}
+
+void Entidade::atualizaVel()
+{
+    vel += acel;
 }

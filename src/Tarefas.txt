@@ -37,3 +37,8 @@
 * se proximo ao formigueiro, inimigo formiga tem nivel de maldade maior e portanto maior dano e velocidade
   aumenta o nivel se nao houver formigas por perto (printar na tela: berserk mode).
 * Criar FaseTeste para testes de mecânicas.
+* Planta carnívora ser Obstaculo e Inimigo (herança dupla).
+* Abelha move aleatoriamente num quadrado (limite) e quem se move é o quadrado. Não exatamente aleatório,
+  pois podem ocorrer colisões indesejadas, mas a velocidade ser muito alta em direção aleatória.
+* Animação de Ente's: vetor com vários sprites de mesmo tamanho. Ex.: 10 imagens: vetor de 10 posições e cont++.
+  Para o movimento, essas imagens têm o mesmo contador do botão de movimento?

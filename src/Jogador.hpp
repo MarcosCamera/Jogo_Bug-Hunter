@@ -6,8 +6,10 @@
 #include <ctime>
 #include <list>
 
-namespace Entidades::Personagens{
-    class Jogador : public Personagem{
+namespace Entidades::Personagens
+{
+    class Jogador : public Personagem
+    {
         protected:
             int pontos;
 
@@ -17,7 +19,7 @@ namespace Entidades::Personagens{
 
             void colidir(Inimigo* pIn);
             //void danificar(Inimigo* pIn); faço???
-            void movimento();
+            void controlar();
             void mover();
             void salvar();
             void executar();

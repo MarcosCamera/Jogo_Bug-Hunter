@@ -79,6 +79,8 @@ void Gerenciador_Colisoes::tratarColisoesJogsObstacs()
       cout << "GerenciadorColisoes::tratarColisoesJogsObstacs() -> pJog1 NULL" << endl;
         return;
     }
+
+    pJog1->chao = false; //vai dar true na funçao obstaculizar se estiver pisando em obstaculo.
     for(it = LOs.begin(); it != LOs.end(); it++)
     {
         Obstaculo* pObst = *it;
