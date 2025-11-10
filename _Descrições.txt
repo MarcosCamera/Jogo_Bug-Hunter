@@ -1,10 +1,38 @@
+## Jogo:
+
+## Menu:
+
+## Gerenciador_Colisoes:
+
+## Gerenciador_Grafico:
+
+
+## Fase:
+
+## Fase_Primeira:
+
+## Fase_Segunda:
+
+
+## Lista:
+
+## Elemento:
+
+## ListaEntidades:
+
+
+## Ente:
+
 ## Entidade:
 * Cada entidade tem atributos como posição, velocidade
 
+## Personagem:
+
 ## Jogador:
 * Cada jogador será um aracnídeo (aranha/escorpião), em que a aranha atira teia e
-  o escorpião, veneno. A teia paraliza e dá dano leve e o veneno dá dano contínuo por um tempo.
-* 
+  o escorpião, veneno. A teia paraliza e dá dano leve e o veneno dá dano contínuo por um tempo. 
+
+## Inimigo:
 
 ## Inim_Facil:
 * Formiga
@@ -14,3 +42,15 @@
 ## Inim_Medio:
 
 ## Chefao:
+
+
+## Obstaculo:
+
+## Plataforma:
+
+## Obst_Medio:
+
+## Obst_Dificil:
+
+
+## Projetil:

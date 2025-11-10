@@ -18,7 +18,7 @@ namespace Entidades{
             //const float acelera; //conta a aceleração, desaceleração e gravidade
             //const float desacelera; //pode ser const para inicializar em classe herdada e nao ser mais alterada?
 
-            sf::Texture textura;
+            //sf::Texture textura; //está em ente
  
             //toda entidade tem gravidade, mas algumas tem força externa agindo sobre e equilibram. 
             //implementar funçao contraForça. para algumas plataformas, ha uma força quando um objeto pisa sobre

@@ -9,11 +9,13 @@ class Gerenciador_Grafico;
 class Ente
 {
     protected:
+  
+      static int  cont_id; //contar cada ente criado. deve estar antes de id?(ordem de inicialização na construtora)
       int id;
-      static Gerenciadores :: Gerenciador_Grafico* pGG;//da acesso a todas os entes ao mesmo gerenciador grafico
-      static int  cont_id;//contar cada ente criado
+      static Gerenciadores :: Gerenciador_Grafico* pGG; //da acesso a todas os entes ao mesmo gerenciador grafico
       sf::Sprite* pFig; 
-      //textura 
+      sf::Texture* pTex; //textura aqui? //ou crio tex em gerenciador grafico e trato pFig?
+
     public:
       Ente();
       virtual ~Ente();
@@ -21,8 +23,4 @@ class Ente
       void desenhar();
 
       void static setpGG(Gerenciadores :: Gerenciador_Grafico* pG);
-      sf::Sprite* getFigura();
-      //void setCor(const sf::Color &cor);
-      
-
 };

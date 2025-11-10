@@ -10,7 +10,7 @@ Gerenciador_Grafico* Gerenciadores::Gerenciador_Grafico::instancia(NULL);
 Gerenciador_Grafico::Gerenciador_Grafico():
 window(new sf::RenderWindow(sf::VideoMode(800.0f, 800.0f), "BUG - HUNTER", sf::style::Default))
 {
-    
+    //ver testes.cpp como limite de fps, etc.
 }
 
 

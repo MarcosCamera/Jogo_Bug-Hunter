@@ -2,22 +2,28 @@
 #include "Gerenciador_Grafico.hpp"
 using namespace std;
 
-int Ente::cont_id(0);
+int Ente::cont_id(0); //ta certa a inicialização aqui? Assim?
 Gerenciadores::Gerenciador_Grafico* Ente::pGG(Gerenciadores::Gerenciador_Grafico::getInstancia());
 
-Ente::Ente():id(cont_id++), pFig(new sf::Sprite()) //new deve ser aqui mesmo?
+Ente::Ente():id(cont_id++), pFig(new sf::Sprite()), pTex(new sf::Texture()) //new deve ser aqui mesmo? tex tem new tambem?
 {
+    //inicializar pFig e pTex como null e tratar em gerenciador grafico? 
+    if (!spiderTex.loadFromFile("Textures/spider.png"))
+        throw "nao abriu imagem";
+    pFig->setTexture(spiderTex);
+    //pFig->setScale(0.03, 0.03); //tratar em gerenciador grafico
     
 }
 
 Ente::~Ente() //pode isso, sendo ela virtual??? nao devia acontecer em classe nao abstrata???
 {
-    if(pFig)
+    /*
+    if (pFig)
     {
         delete pFig;
         pFig = NULL;
     }
-
+    */ //o delete fica nas classes herdadas
 }
 
 void Ente::desenhar()
@@ -33,16 +39,3 @@ void  Ente::setpGG(Gerenciadores::Gerenciador_Grafico* pG)
 {
     pGG = pG;
 }
-
-sf::Sprite* Ente::getFigura() 
-{ 
-    return pFig; 
-}
-
-/*void Ente::setCor(const sf:: Color &cor)
-{
-    if(pFig)
-      pFig->setFillColor(cor);
-    else
-     cout<<"pFig NULL"<<endl;
-}*/
