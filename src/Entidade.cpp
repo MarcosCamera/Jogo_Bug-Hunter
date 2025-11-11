@@ -4,13 +4,13 @@ using namespace std;
 using namespace Entidades;
 
 Entidade::Entidade():
-Ente(), pos(0, 0), vel(0, 0), acel(0, 0), gravidade(10), arrasto(), direcao(true), chao(false), textura()
+Ente(), pos(0, 0), vel(0, 0), acel(0, 0), gravidade(10), arrasto(1), velMovMax(10), direcao(true), chao(false)
 {
 
 }
 
 /*Entidade::Entidade(const std::string& caminhoSprite, sf::Vector2f posicao) :
-Ente(), pos(0,0), vel(0,0), acel(0,0), gravidade(10), arrasto(), direcao(true), chao(false), textura()
+Ente(), pos(0,0), vel(0,0), acel(0,0), gravidade(10), arrasto(), direcao(true), chao(false)
 {
     
      if (!textura.loadFromFile(caminhoSprite))

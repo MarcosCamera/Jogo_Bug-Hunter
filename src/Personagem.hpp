@@ -11,7 +11,7 @@ namespace Entidades::Personagens
     {
         protected:
             int num_vidas;
-            float forca;
+            int forca;
 
         public:
             Personagem();

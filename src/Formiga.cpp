@@ -4,9 +4,21 @@
 using namespace Entidades::Personagens;
 using namespace std;
 
-Formiga::Formiga():Inimigo(),raio(0){}
+Formiga::Formiga():Inimigo(),raio(0)
+{
+    pFig->setPosition(250, 300); //setar posiçao padrao na fase.
+    forca = 1;
+    num_vidas = 10;
+}
 
-Formiga::Formiga(){}
+Formiga::~Formiga()
+{
+    if (pFig)
+    {
+        delete pFig;
+        pFig = NULL;
+    }
+}
 
 
 void Formiga::verificaAlcance(*pJog)

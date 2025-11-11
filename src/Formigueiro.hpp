@@ -1,13 +1,15 @@
+#pragma once
+
 #include "Obstaculo.hpp"
 #include "Jogador.hpp"
-#pragma once
+
 /* obstáculo imóvel e que não causa dano ao jogador*/
 namespace Entidades::Obstaculos
 {
     class Formigueiro:public Obstaculo
     {
          protected:
-            float largura;
+            float largura; //largura diz quantas formigas saem ao destruir
             
          public:
           Formigueiro();

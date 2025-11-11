@@ -11,7 +11,7 @@ namespace Entidades::Obstaculos
             
          public:
           Plataforma();
-          Plataforma(const std::string& caminhoSprite, sf::Vector2f position);
+          //Plataforma(const std::string& caminhoSprite, sf::Vector2f position);
           ~Plataforma();
 
           void executar();

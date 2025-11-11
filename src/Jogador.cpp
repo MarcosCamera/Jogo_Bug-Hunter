@@ -8,10 +8,12 @@ using namespace Entidades::Personagens;
 
 Jogador::Jogador():Personagem(), pontos(0)
 {
-	pFig->setPosition(10, 500); //em cima de uma plataforma (ninho)
-	//setar posiçao padrao na fase. (funçao de entidade)
-	//para jogador2, posiçao relativa ao jogador 1, ou ambos aparecem ao mesmo tempo.
+	pFig->setPosition(10, 300); //setar posiçao padrao na fase.
+	forca = 1;
+	num_vidas = 10;
+
 }
+	//para jogador2, posiçao relativa ao jogador 1, ou ambos aparecem ao mesmo tempo.
 
 /* Posso fazer: (?)
 Jogador::Jogador():Personagem():Entidade(5, 10, ...), pontos {}

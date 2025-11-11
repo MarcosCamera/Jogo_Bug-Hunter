@@ -2,7 +2,7 @@
 #include "Gerenciador_Grafico.hpp"
 using namespace std;
 
-int Ente::cont_id(0); //ta certa a inicialização aqui? Assim?
+int Ente::cont_id(0);
 Gerenciadores::Gerenciador_Grafico* Ente::pGG(Gerenciadores::Gerenciador_Grafico::getInstancia());
 
 Ente::Ente() :id(cont_id++), pFig(new sf::Sprite()) //new deve ser aqui mesmo?

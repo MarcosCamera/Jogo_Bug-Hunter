@@ -4,18 +4,28 @@ using namespace std;
 
 using namespace Entidades::Obstaculos;
 
-Plataforma::Plataforma():Obstaculo(), altura(){}
+Plataforma::Plataforma():Obstaculo(), altura()
+{
+    pFig->setPosition(0, 500); //setar posiçao padrao na fase.
+}
 
-Plataforma::Plataforma( const std::string& caminhoSprite, sf::Vector2f posicao):Obstaculo(caminhoSprite, posicao), altura(0)
+/*Plataforma::Plataforma(const std::string& caminhoSprite, sf::Vector2f posicao) :Obstaculo(caminhoSprite, posicao), altura(0)
 {
     if (pFig)
       pFig->setScale(0.6f, 0.3f);
     else
       std::cout << "Plataforma::Plataforma()-> pFig NULL" << std::endl;
     setDano(false);
-} 
+} */
 
-Plataforma::~Plataforma(){}
+Plataforma::~Plataforma()
+{
+    if (pFig)
+    {
+        delete pFig;
+        pFig = NULL;
+    }
+}
 
 void Plataforma::executar(){}
 

@@ -1,10 +1,11 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include Gerenciador_Grafico
 
-namespace Gerenciadores
+/*namespace Gerenciadores
 {
     class Gerenciador_Grafico;
-}
+}*/
 
 class Entidade;
 class Fase;

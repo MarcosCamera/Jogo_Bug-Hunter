@@ -34,6 +34,7 @@
 
 ** ostream buffer: o que é?
 ** void salvarDataBuffer: o que é?
+** BiblioGrafica obj: o que é?
 
 
 ## Ideias (após a implementação da fase 1):
