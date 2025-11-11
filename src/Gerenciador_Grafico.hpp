@@ -14,13 +14,13 @@ namespace Gerenciadores
     public:
         Gerenciador_Grafico();    
         ~Gerenciador_Grafico();
-        static sf::RenderWindow* getWindow();
+        static sf::RenderWindow* getWindow();//pq static?
         static Gerenciador_Grafico* getInstancia();
         void mostrar();
         void limparJanela();
         bool abertaJanela();
         void fecharJanela();
         void desenharEnte(Ente* pE);
-        //criar executar para limpar, desenhar e mostrar. nesse caso, pE (Ente) é uma lista
+        //criar executar para limpar, desenhar e mostrar. nesse caso, pE (Ente) Ã© uma lista
     };
 }
