@@ -72,24 +72,24 @@ void Jogador::controlar()
 	//posiçao = posiçao + velocidade; // talvez esse seja melhor para padronizar. Teria que fazer um setPosicao.
 	//.move(velocidade); um dos dois.
 	//implementar o mesmo para outras entidades.
-	if (Keyboard::isKeyPressed(Keyboard::A) && keyTime >= keyTimeMax && vel.x < (-velMax))
+	if (Keyboard::isKeyPressed(Keyboard::A) && keyTime >= keyTimeMax && vel.x < (-velMovMax))
 	{
-		vel.x -= velMax/10; //há uma aceleração
+		vel.x -= velMovMax/10; //há uma aceleração
 		keyTime = 0;
 	}
-	if (Keyboard::isKeyPressed(Keyboard::D) && keyTime >= keyTimeMax && vel.x < velMax)
+	if (Keyboard::isKeyPressed(Keyboard::D) && keyTime >= keyTimeMax && vel.x < velMovMax)
 	{
-		vel.x += velMax/10;
+		vel.x += velMovMax/10;
 		keyTime = 0;
 	}
-	if (Keyboard::isKeyPressed(Keyboard::W) && keyTime >= keyTimeMax && vel.y < (-velMax))
+	if (Keyboard::isKeyPressed(Keyboard::W) && keyTime >= keyTimeMax && vel.y < (-velMovMax))
 	{
-		vel.y -= velMax/10; //fazer como velocidade de pulo depois
+		vel.y -= velMovMax/10; //fazer como velocidade de pulo depois
 		keyTime = 0;
 	}
-	if (Keyboard::isKeyPressed(Keyboard::S) && keyTime >= keyTimeMax && vel.y < velMax)
+	if (Keyboard::isKeyPressed(Keyboard::S) && keyTime >= keyTimeMax && vel.y < velMovMax)
 	{
-		vel.y += velMax/10; //na pratica so a gravidade acelera
+		vel.y += velMovMax/10; //na pratica so a gravidade acelera
 		keyTime = 0;
 	}
 }

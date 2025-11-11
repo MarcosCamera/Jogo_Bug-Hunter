@@ -7,7 +7,7 @@ using namespace std;
 using namespace Entidades::Obstaculos;
 
 Formigueiro::Formigueiro():Obstaculo(), largura(){}
-Formigueiro::Formigueiro(const std::string& caminhoSprite, sf::Vector2f posicao):
+/*Formigueiro::Formigueiro(const std::string& caminhoSprite, sf::Vector2f posicao) :
 Obstaculo(caminhoSprite, posicao),
 largura(0)
 {
@@ -17,7 +17,7 @@ largura(0)
       cout<<"Formigueiro::Formigueiro()-> pFig NULL"<<endl;
   setDano(false);
 
-}
+}*/
 
 Formigueiro::~Formigueiro(){}
 

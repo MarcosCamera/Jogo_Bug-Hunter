@@ -7,7 +7,7 @@ Gerenciadores::Gerenciador_Grafico* Ente::pGG(Gerenciadores::Gerenciador_Grafico
 
 Ente::Ente() :id(cont_id++), pFig(new sf::Sprite()) //new deve ser aqui mesmo?
 {
-    std::string caminho = "Texturas/imagem" + std::to_string(id) + ".png";
+    string caminho = "Texturas/imagem" + to_string(id) + ".png";
     if (!text.loadFromFile(caminho))
         throw "nao abriu imagem";
 

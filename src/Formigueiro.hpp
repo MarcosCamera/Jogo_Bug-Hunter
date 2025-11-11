@@ -13,12 +13,12 @@ namespace Entidades::Obstaculos
             
          public:
           Formigueiro();
-          Formigueiro(const std::string& caminhoSprite, sf::Vector2f posicao);
+          //Formigueiro(const std::string& caminhoSprite, sf::Vector2f posicao);
           ~Formigueiro();
           
-           void executar();
-           void obstaculizar(Personagens::Jogador* p);
            void setLargura(float l);
            float getLargura();
+           void obstaculizar(Personagens::Jogador* p);
+           void executar();
     };
 }

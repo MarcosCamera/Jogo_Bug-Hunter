@@ -30,52 +30,6 @@ Entidade::~Entidade()
 {
 }
 
-void Entidade::setVel(sf::Vector2f velocidade)
-{
-   vel = velocidade;
-}
-
-void Entidade::setPos(sf::Vector2f posicao)
-{
-   pos = posicao;
-
-   if (pFig) {
-      pFig->setPosition(pos);
-   }
-   else
-    cout<<"Entidade::setPos(posicao) -> pFig NULO"<<endl;
-}
-
-void Entidade::colidirParede()
-{
-    sf::Vector2f posFinal = getPos();
-    sf::FloatRect bounds = getGlobalBounds(); 
-
-    const float LARGURA_JANELA = 800.0f;
-    const float ALTURA_JANELA = 800.0f;
-    
-    if (bounds.left < 0.0f)
-    {
-        posFinal.x -= bounds.left; 
-    }
-    else if (bounds.left + bounds.width > LARGURA_JANELA)
-    {
-        posFinal.x = LARGURA_JANELA - bounds.width; 
-    }
-    
-
-    if (bounds.top < 0.0f)
-    {
-        posFinal.y -= bounds.top;
-    }
-    else if (bounds.top + bounds.height > ALTURA_JANELA)
-    {
-        posFinal.y = ALTURA_JANELA - bounds.height;
-    }
-    setPos(posFinal);
-}
-
-
 void Entidade::acelerar() //incluir todas acelerações
 {
         acel.y = (gravidade * !chao) - vel * arrasto; // -vel * vel * arrasto * area //ou apenas largura * largura 
