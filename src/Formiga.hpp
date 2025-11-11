@@ -1,10 +1,9 @@
 #pragma once
 #include "Inimigo.hpp"
-#include "Jogador.hpp"
 
 namespace Entidades::Personagens
 {
-    class Inim_Facil : public Inimigo
+    class Formiga : public Inimigo
     {
         private:
           float raio; //alcance do jogador para nivel de maldade. TRATAR EM COLISOES (???) ou em eventos...
@@ -14,11 +13,11 @@ namespace Entidades::Personagens
           //float velFuria; //será? 
           
         public:
-          Inim_Facil();
-          ~Inim_Facil();
+          Formiga();
+          ~Formiga();
 
-          void verificaAlcance(*pJog);
-          void danificar(Jogador* p);
+          void verificaAlcance(Jogador* pJog);
+          void danificar(Jogador* pJog);
           void mover();
           void salva();
           void executar();

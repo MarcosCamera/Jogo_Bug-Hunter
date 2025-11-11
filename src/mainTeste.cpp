@@ -12,9 +12,11 @@ int main()
 	Gerenciador_Grafico graf;
 	Gerenciador_Colisoes colis;
 
-	Inimigo_Facil formiga;
+	Plataforma plat;
+	Formiga form;
 	Jogador jog;
 
+	plat.pFig->setPosition(0, 500);
 
 
 }

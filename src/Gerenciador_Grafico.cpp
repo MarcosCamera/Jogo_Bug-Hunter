@@ -8,40 +8,43 @@ Gerenciador_Grafico* Gerenciadores::Gerenciador_Grafico::instancia(NULL);
 
 
 Gerenciador_Grafico::Gerenciador_Grafico():
-window(new sf::RenderWindow(sf::VideoMode(800.0f, 800.0f), "BUG - HUNTER", sf::style::Default))
+window(sf::RenderWindow(sf::VideoMode(800, 800), "BUG - HUNTER", sf::Style::Default))
 {
-    //ver testes.cpp como limite de fps, etc.
+    window.setFramerateLimit(60); //ver testes.cpp como limite de fps, etc.
 }
 
 
 Gerenciador_Grafico::~Gerenciador_Grafico()
 {
-     if(window)
-     {
-        delete(window);
-        window = NULL;
-     }
+     
 }
 
 
-void Gerenciador_Grafico::desenharEnte(::Ente* pE)
+static sf::RenderWindow Gerenciador_Grafico::getWindow()
 {
-    if (pE) {
-       if(pE->getFigura())
-        window->draw(*pE->getFigura());
+    return window;
+}
+
+
+Gerenciador_Grafico* Gerenciadores::Gerenciador_Grafico::getInstancia()
+{
+    if(instancia == NULL)
+    {
+        instancia = new Gerenciador_Grafico();
     }
-}
-
-
-void Gerenciador_Grafico::limparJanela()
-{
-      window->clear(sf::Color::Black);
+    return instancia;
 }
 
 
 void Gerenciador_Grafico::mostrar()
 {
     window->display();
+}
+
+
+void Gerenciador_Grafico::limparJanela()
+{
+      window->clear(sf::Color::Black);
 }
 
 
@@ -57,17 +60,11 @@ void Gerenciador_Grafico::fecharJanela()
 }
 
 
-static sf::RenderWindow* Gerenciador_Grafico::getWindow()
+void Gerenciador_Grafico::desenharEnte(Ente* pE)
 {
-    return window;
-}
-
-
-Gerenciador_Grafico* Gerenciadores::Gerenciador_Grafico::getInstancia()
-{
-    if(instancia == NULL)
+    if (pE) 
     {
-        instancia = new Gerenciador_Grafico();
+        if(pE->getFigura())
+            window->draw(*(pE->pFig));
     }
-    return instancia;
 }

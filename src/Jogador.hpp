@@ -11,7 +11,7 @@ namespace Entidades::Personagens
     class Jogador : public Personagem
     {
         protected:
-            int pontos;
+            int pontos; //falta usar pontuação e morrer
 
         public:
             Jogador();
@@ -19,16 +19,11 @@ namespace Entidades::Personagens
 
             void danificarInim(Inimigo* pIn); 
             // fazer danificar estrutura, ou o danificar ser geral e usar sobrecarga ou cast?
+            // danificar estrutura pelo projétil
             void colidir(Inimigo* pIn);
             void controlar();
             void mover();
-            void salvar();
             void executar();
+            void salvar();
     };
 }
-
-//fazer classe jogador 1 e classe jogador 2 (ou aranha e escorpião)
-//usar sprite de aranaha que levanta pernas dianteiras ao saltar.
-//aranha 2 salto horizontal no botao atirar
-//aranha 1 atira teia
-//fase 2: aranha 1 voa, aranha 2 anda na parede

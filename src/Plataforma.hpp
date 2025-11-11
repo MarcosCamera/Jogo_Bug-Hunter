@@ -15,6 +15,7 @@ namespace Entidades::Obstaculos
           ~Plataforma();
 
           void executar();
+          void salvar();
           void obstaculizar(Personagens::Jogador* p);
     };
 }

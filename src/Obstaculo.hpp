@@ -11,12 +11,12 @@ namespace Entidades::Obstaculos
         bool danoso;
      public:
        Obstaculo();
-       Obstaculo(const std::string& caminhoSprite, sf::Vector2f posicao);
+       //Obstaculo(const std::string& caminhoSprite, sf::Vector2f posicao);
        virtual ~Obstaculo();
        
        virtual void obstaculizar(Personagens::Jogador* p) = 0;
-       virtual void executar()= 0;
-       virtual void setDano(bool dano)=0;
+       virtual void executar() = 0;
+       virtual void salvar() = 0
+       virtual void setDano(bool dano) = 0;
        virtual bool getDano() = 0;
-
   };

@@ -9,7 +9,7 @@ Ente(), pos(0, 0), vel(0, 0), acel(0, 0), gravidade(10), arrasto(), direcao(true
 
 }
 
-Entidade::Entidade(const std::string& caminhoSprite, sf::Vector2f posicao):
+/*Entidade::Entidade(const std::string& caminhoSprite, sf::Vector2f posicao) :
 Ente(), pos(0,0), vel(0,0), acel(0,0), gravidade(10), arrasto(), direcao(true), chao(false), textura()
 {
     
@@ -18,20 +18,16 @@ Ente(), pos(0,0), vel(0,0), acel(0,0), gravidade(10), arrasto(), direcao(true), 
         cout << "não foi possivel carregar a sprite: " << caminhoSprite << endl;
     }
 
-    if (this->pFig) //é necessário o this ou posso deixar so "pFig"?
+    if (pFig)
     { 
         pFig->setTexture(textura);
-        //pFig->setOrigin(textura.getSize().x / 2.f, textura.getSize().y / 2.f); //caso trabalhemos com o centro da sprite
     }
-
-    
     
     setPos(posicao);
-}
+}*/
 
 Entidade::~Entidade()
 {
-
 }
 
 void Entidade::setVel(sf::Vector2f velocidade)

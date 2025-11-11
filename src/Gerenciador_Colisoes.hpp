@@ -25,16 +25,8 @@ namespace Gerenciadores
             Gerenciador_Colisoes();
             ~Gerenciador_Colisoes();
 
-            void incluirInimigo(Inimigo* pi);
-            void incluirObstaculo(Obstaculo* po);
-            void incluirProjetil(Projetil* pj);
-            void setJogador(Jogador* pJ);
-            /*void incluirEntidade()*/   //fazer para incluir qualquer tipo de entidade e chamar as funçoes "tratar colisoes" (ou melhor nao?)
-            void executar();
-
         private:
             const bool verificarColisao(Entidade* pe1, Entidade* pe2) const;
-         
             void tratarColisoesJogsObstacs();
             void tratarColisoesJogsInimigs(); 
             void tratarColisoesJogsProjeteis();
@@ -42,5 +34,13 @@ namespace Gerenciadores
             void tratarColisoesInimigsProjeteis(); //nao estava no UML padrao
             void tratarColisoesObstacsProjeteis(); //nao estava no UML padrao
             //InimigsInimigs
+
+        public:
+            void incluirInimigo(Inimigo* pi);
+            void incluirObstaculo(Obstaculo* po);
+            void incluirProjetil(Projetil* pj);
+            void setJogador(Jogador* pJ);
+            /*void incluirEntidade()*/   //fazer para incluir qualquer tipo de entidade e chamar as funçoes "tratar colisoes" (ou melhor nao?)
+            void executar();
     };
 }

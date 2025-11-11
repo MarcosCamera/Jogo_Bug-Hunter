@@ -19,6 +19,8 @@ Plataforma::~Plataforma(){}
 
 void Plataforma::executar(){}
 
+void Plataforma::salvar(){}
+
 void Plataforma::obstaculizar(Personagens::Jogador* p)
 {
    if(p){

@@ -32,6 +32,9 @@
 * This usa um ponteiro do objeto?
 * Sobrecarga de função: posso fazer uma função que recebe um ponteiro inimigo e a mesma função mas que recebe ponteiro jogador?
 
+** ostream buffer: o que é?
+** void salvarDataBuffer: o que é?
+
 
 ## Ideias (após a implementação da fase 1):
 * Inimigo fácil abelha: seu ferrão será sesacoplado de seu corpo, assim como a formiga, mas apenas em um grau.
@@ -53,3 +56,9 @@
 * As posições das entidades podem ser pseudo aleatórias? Aleatório mas em posições específicas?
 * Ordem de delete: gerenciador grafico -> classes herdadas ...
 * Fazer força normal. Pular em plataforma tipo folha faz o impulso vertical empurrar o jogador para cima e a folha para baixo.
+* Fazer morte de entidades.
+
+            //toda entidade tem gravidade, mas algumas tem força externa agindo sobre e equilibram. 
+            //implementar funçao contraForça. para algumas plataformas, ha uma força quando um objeto pisa sobre
+            //todas funções de movimento estão em ente, pois alguns Obstáculos também possuem movimento
+            //devo implementar em personagem?

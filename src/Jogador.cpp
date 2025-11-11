@@ -18,7 +18,14 @@ Jogador::Jogador():Personagem():Entidade(5, 10, ...), pontos {}
 */
 
 
-Jogador::~Jogador() {} //dar delete aqui (???)
+Jogador::~Jogador() 
+{
+	if (pFig)
+	{
+		delete pFig;
+		pFig = NULL;
+	}
+}
 
 
 void Jogador::danificarInim(Inimigo* pIn)

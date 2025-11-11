@@ -3,8 +3,12 @@
 #include <iostream>
 #include "Entidade.hpp"
 
-namespace Entidades::Personagens{
-    class Personagem : public Entidade{
+namespace Entidades::Personagens
+{
+    class Inimigo;
+    class Jogador;
+    class Personagem : public Entidade
+    {
         protected:
             int num_vidas;
             float forca;
@@ -15,8 +19,8 @@ namespace Entidades::Personagens{
 
             void salvarDataBuffer(); //pra que serve???
 
+            virtual void mover() = 0;
             virtual void executar() = 0;
             virtual void salvar() = 0;
-            virtual void mover() = 0;
     };
 }
