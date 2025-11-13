@@ -1,5 +1,6 @@
 #include "Formiga.hpp"
 #include "Gerenciador_Grafico.hpp"
+#include "Jogador.hpp" // Certifique-se de incluir o cabeçalho completo de Jogador
 
 using namespace Entidades::Personagens;
 using namespace std;
@@ -21,7 +22,7 @@ Formiga::~Formiga()
 }
 
 
-void Formiga::verificaAlcance(*pJog)
+void Formiga::verificaAlcance(Jogador *pJog) //em gerenciador de eventos
 {
     if (!pJog)
     {
@@ -29,8 +30,8 @@ void Formiga::verificaAlcance(*pJog)
         return;
     }
 
-    float x = pos.x - pJog->pos.x;
-    float y = pos.y - pJog->pos.y;
+    float x = pos.x - pJog->getPos().x;
+    float y = pos.y - pJog->getPos().y;
     if (sqrt(x * x + y * y) <= raio && !nivel_maldade)
     {
         nivel_maldade++;
@@ -38,9 +39,9 @@ void Formiga::verificaAlcance(*pJog)
 }
 
 
-void Formiga::danificar(Jogador*pJog)
+void Formiga::danificar(Jogador* pJog)
 {
-    pJog->num_vidas -= forca;
+    pJog->setVida(forca);
 }
 
 
@@ -50,11 +51,11 @@ void Formiga::mover() //pode fazer sobrecarga para o caso em que nao houver joga
     {
         if (!nivel_maldade)
         {
-            if (direcao && vel < velMovMax)
+            if (direcao && vel.x < velMovMax)
             {
                 acel.x = velMovMax / 4;
             }
-            else if (!direcao && vel > -velMovMax)
+            else if (!direcao && vel.x > -velMovMax)
             {
                 acel.x = -velMovMax / 4;
             }
@@ -69,7 +70,8 @@ void Formiga::mover() //pode fazer sobrecarga para o caso em que nao houver joga
         acel.y = gravidade;
     }
 
-    vel += acel * (nivel_maldade + 1);
+    vel.x += acel.x * (nivel_maldade + 1);
+    vel.y += acel.y * (nivel_maldade + 1);
     pFig->move(vel);
 }
 
@@ -82,6 +84,6 @@ void Formiga::salva()
 
 void Formiga::executar()
 {
-    verificaAlcance(*pJog);
-    mover();
+    //verificaAlcance(Jogador *pJog); nao funciona porque nao passa por parametro na funçao
+    mover();                        //solução: ponteiro de jogadores. A fase deve começar com ambos jogadores ou um só
 }

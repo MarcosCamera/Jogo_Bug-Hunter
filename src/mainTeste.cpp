@@ -1,6 +1,6 @@
 #include "Ente.hpp"
-#include "Gerenciador_Colisoes"
-#include "Gerenciador_Grafico"
+#include "Gerenciador_Colisoes.hpp"
+#include "Gerenciador_Grafico.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>

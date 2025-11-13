@@ -4,13 +4,15 @@
 
 
 
-namespace Entidades::Personagens
+namespace Entidades
 {
-    class Formiga;
-    class Grilo;
-    class LouvaDeus;
-    class Inimigo : public Personagem
+    namespace Personagens
     {
+        class Formiga;
+        class Grilo;
+        class LouvaDeus;
+        class Inimigo : public Personagem
+        {
         protected:
             int nivel_maldade;
 
@@ -22,5 +24,6 @@ namespace Entidades::Personagens
             virtual void mover() = 0;
             virtual void salva() = 0;
             virtual void executar() = 0;
-    };
+        };
+    }
 }

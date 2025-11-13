@@ -25,6 +25,8 @@ namespace Entidades
             //Entidade(const std::string& caminhoSprite, sf::Vector2f posicao); //sobrecarga construtora
             virtual ~Entidade();
 
+            sf::Vector2f getPos()const;
+            void setPos(sf::Vector2f novaPos);
             void acelerar(); //incluir resistencia do ar
             void atualizaVel();
             virtual void executar() = 0;

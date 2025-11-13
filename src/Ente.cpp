@@ -19,6 +19,11 @@ Ente::~Ente()
 {
 }
 
+sf::Sprite* Ente::getFig()
+{
+    return pFig;
+}
+
 void Ente::desenhar()
 {
     if(pGG)

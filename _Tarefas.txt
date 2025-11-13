@@ -31,6 +31,7 @@
 * Fazer mais de um tipo de inimigo fácil (abelha por exemplo) e vários Médios também.
 * This usa um ponteiro do objeto?
 * Sobrecarga de função: posso fazer uma função que recebe um ponteiro inimigo e a mesma função mas que recebe ponteiro jogador?
+* Namespace: seria using namespace Entdidades e namespace Personagens{} ou ambos como using namespace ou ambos como namespace?
 
 ** ostream buffer: o que é?
 ** void salvarDataBuffer: o que é?
@@ -58,6 +59,8 @@
 * Ordem de delete: gerenciador grafico -> classes herdadas ...
 * Fazer força normal. Pular em plataforma tipo folha faz o impulso vertical empurrar o jogador para cima e a folha para baixo.
 * Fazer morte de entidades.
+* Para aleatorizar, guararemos posições em uma lista de posições possíveis que é passada para inimigos e obstáculos.
+* Agradecimentos aos monitores e ao Sérgio pela orientação.
 
             //toda entidade tem gravidade, mas algumas tem força externa agindo sobre e equilibram. 
             //implementar funçao contraForça. para algumas plataformas, ha uma força quando um objeto pisa sobre

@@ -20,7 +20,7 @@ Gerenciador_Grafico::~Gerenciador_Grafico()
 }
 
 
-static sf::RenderWindow Gerenciador_Grafico::getWindow()
+sf::RenderWindow& Gerenciadores::Gerenciador_Grafico::getWindow()
 {
     return window;
 }
@@ -38,25 +38,25 @@ Gerenciador_Grafico* Gerenciadores::Gerenciador_Grafico::getInstancia()
 
 void Gerenciador_Grafico::mostrar()
 {
-    window->display();
+    window.display();
 }
 
 
 void Gerenciador_Grafico::limparJanela()
 {
-      window->clear(sf::Color::Black);
+      window.clear(sf::Color::Black);
 }
 
 
 bool Gerenciador_Grafico::abertaJanela()
 {
-    return window->isOpen();
+    return window.isOpen();
 }
 
 
 void Gerenciador_Grafico::fecharJanela()
 {
-    window->close();
+    window.close();
 }
 
 
@@ -64,7 +64,7 @@ void Gerenciador_Grafico::desenharEnte(Ente* pE)
 {
     if (pE) 
     {
-        if(pE->getFigura())
-            window->draw(*(pE->pFig));
+        if(pE->getFig())
+            window.draw(*(pE->getFig()));
     }
 }

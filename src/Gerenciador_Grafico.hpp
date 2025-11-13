@@ -14,7 +14,7 @@ namespace Gerenciadores
     public:
         Gerenciador_Grafico();    
         ~Gerenciador_Grafico();
-        static sf::RenderWindow* getWindow();//pq static?
+        sf::RenderWindow& getWindow(); //estava static e sem o & //porque esta assim?
         static Gerenciador_Grafico* getInstancia();
         void mostrar();
         void limparJanela();
@@ -24,3 +24,4 @@ namespace Gerenciadores
         //criar executar para limpar, desenhar e mostrar. nesse caso, pE (Ente) é uma lista
     };
 }
+

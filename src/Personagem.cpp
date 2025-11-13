@@ -1,10 +1,26 @@
 #include "Personagem.hpp"
-using namespace Entidades;
-using namespace Personagens;
+namespace Entidades
+{
+	namespace Personagens
+	{
 
-Personagem::Personagem():Entidade(), num_vidas(0), forca(0){}
+		Personagem::Personagem() :Entidade(), num_vidas(0), forca(0) {}
 
-Personagem::~Personagem(){}
+		Personagem::~Personagem() {}
 
-void Personagem::salvarDataBuffer(){}//...
-//...
+		void Personagem::setVida(int f)
+		{
+			num_vidas -= f;
+		}
+
+		int Personagem::getVida()const
+		{
+			return num_vidas;
+		}
+
+		int Personagem::getForca()const
+		{
+			return forca;
+		}
+	}
+}

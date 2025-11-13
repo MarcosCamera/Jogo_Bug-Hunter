@@ -6,10 +6,12 @@
 #include <ctime>
 #include <list>
 
-namespace Entidades::Personagens
+namespace Entidades
 {
-    class Jogador : public Personagem
+    namespace Personagens
     {
+        class Jogador : public Personagem
+        {
         protected:
             int pontos; //falta usar pontuação e morrer
 
@@ -17,7 +19,8 @@ namespace Entidades::Personagens
             Jogador();
             ~Jogador();
 
-            void danificarInim(Inimigo* pIn); 
+            //void setText() //no executar. //usar string para diferentes texturas de animações.
+            void danificarInim(Inimigo* pIn);
             // fazer danificar estrutura, ou o danificar ser geral e usar sobrecarga ou cast?
             // danificar estrutura pelo projétil
             void colidir(Inimigo* pIn);
@@ -25,5 +28,6 @@ namespace Entidades::Personagens
             void mover();
             void executar();
             void salvar();
-    };
+        };
+    }
 }

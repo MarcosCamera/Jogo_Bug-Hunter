@@ -17,7 +17,7 @@ class Ente
   
       static int  cont_id; //contar cada ente criado. deve estar antes de id?(ordem de inicialização na construtora)
       int id;
-      static Gerenciadores::Gerenciador_Grafico* pGG; //da acesso a todas os entes ao mesmo gerenciador grafico
+      static Gerenciadores::Gerenciador_Grafico* pGG; //da acesso a todos os entes ao mesmo gerenciador grafico
       sf::Sprite* pFig; 
       sf::Texture text;
 
@@ -25,7 +25,9 @@ class Ente
     public:
       Ente();
       virtual ~Ente();
-      virtual void executar()=0;
+
+      sf::Sprite* getFig();
       void desenhar();
+      virtual void executar()=0;
       void static setpGG(Gerenciadores :: Gerenciador_Grafico* pG);
 };

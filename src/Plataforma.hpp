@@ -2,20 +2,23 @@
 #include "Jogador.hpp"
 #pragma once
 
-namespace Entidades::Obstaculos
+namespace Entidades
 {
-    class Plataforma:public Obstaculo
+    namespace Obstaculos
     {
+        class Plataforma: public Obstaculo
+        {
         protected:
-           int altura;
-            
-         public:
-          Plataforma();
-          //Plataforma(const std::string& caminhoSprite, sf::Vector2f position);
-          ~Plataforma();
+            int altura;
 
-          void executar();
-          void salvar();
-          void obstaculizar(Personagens::Jogador* p);
-    };
+        public:
+            Plataforma();
+            //Plataforma(const std::string& caminhoSprite, sf::Vector2f position);
+            ~Plataforma();
+
+            void obstaculizar(Personagens::Jogador* p);
+            void salvar();
+            void executar();
+        };
+    }
 }

@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Jogador.hpp"
-#include "Inim_Facil.hpp"
+#include "Formiga.hpp"
 #include "ListaEntidades.hpp"
 #include "Fase.hpp"
 #include "Gerenciador_Grafico.hpp"
@@ -11,7 +11,7 @@ class Jogo{
    private:
     Gerenciadores::Gerenciador_Grafico* pGrafico;
     Entidades::Personagens::Jogador* j1;
-    Entidades::Personagens::Inim_Facil* i1;
+    Entidades::Personagens::Formiga* i1;
     
 
    public:
