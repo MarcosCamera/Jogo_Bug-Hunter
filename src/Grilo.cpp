@@ -31,7 +31,7 @@ namespace Entidades
 				else
 					vel.x = -velMovMax/3;
 				vel.y = -velMovMax;
-				//força normal para cima
+				//forï¿½a normal para cima
 			}
 			else
 			{
@@ -48,7 +48,7 @@ namespace Entidades
 
 		}
 
-		void executar()
+		void Grilo::executar()
 		{
 
 		}

@@ -2,8 +2,8 @@
 #include <SFML/Graphics.hpp>
 #include "Jogador.hpp"
 #include "Formiga.hpp"
-#include "ListaEntidades.hpp"
-#include "Fase.hpp"
+//#include "ListaEntidades.hpp"  // TODO: Arquivo não existe ainda
+//#include "Fase.hpp"  // TODO: Arquivo não existe ainda
 #include "Gerenciador_Grafico.hpp"
 
 

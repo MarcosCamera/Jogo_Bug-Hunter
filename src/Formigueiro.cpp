@@ -36,7 +36,7 @@ namespace Entidades
 
         void Formigueiro::obstaculizar(Personagens::Jogador* p)
         {
-            if (p && !getDano()) {
+            if (p && !danoso) {
                 Vector2f novaPos = p->getPos();
                 FloatRect intersec;
                 if (p->getFig()->getGlobalBounds().intersects(this->getFig()->getGlobalBounds(), intersec))

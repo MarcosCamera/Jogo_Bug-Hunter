@@ -1,7 +1,7 @@
 #include "Jogo.hpp"
 
 Jogo::Jogo():j1(new Entidades::Personagens::Jogador()),
-    i1(new Entidades::Personagens::Inim_Facil()),
+    i1(new Entidades::Personagens::Formiga()),
     pGrafico(Gerenciadores::Gerenciador_Grafico::getInstancia())
 {
     
@@ -29,7 +29,7 @@ void Jogo::executar()
     {
         
         sf::Event event;
-        while (pGrafico->getWindow()->pollEvent(event))
+        while (pGrafico->getWindow().pollEvent(event))
         {
         
             if (event.type == sf::Event::Closed)

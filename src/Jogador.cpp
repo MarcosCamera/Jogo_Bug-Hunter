@@ -1,5 +1,5 @@
 #include "Jogador.hpp"
-#include "inimigo.hpp"
+#include "Inimigo.hpp"
 #include "Gerenciador_Grafico.hpp"
 #include <iostream>
 using namespace std;
