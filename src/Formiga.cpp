@@ -1,6 +1,7 @@
 #include "Formiga.hpp"
 #include "Gerenciador_Grafico.hpp"
 #include "Jogador.hpp" // Certifique-se de incluir o cabeçalho completo de Jogador
+#include <cmath>
 using namespace std;
 
 namespace Entidades

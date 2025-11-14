@@ -34,7 +34,7 @@ void Gerenciador_Colisoes::incluirInimigo(Inimigo* pi)
     cout << "Gerenciador_Colisoes::incluirInim(Inimigo* pi) -> ponteiro nulo" << endl;
 }
 
-void Gerenciador_Colisoes::incluirObstaculo(Obstaculo* po)
+void Gerenciador_Colisoes::incluirObstaculo(Entidades::Obstaculos::Obstaculo* po)
 {
   if(po)
     LOs.push_back(po);
@@ -73,21 +73,21 @@ const bool Gerenciador_Colisoes::verificarColisao(Entidades::Entidade* p1, Entid
 
 void Gerenciador_Colisoes::tratarColisoesJogsObstacs()
 {
-    list<Obstaculo*>::iterator it;
+    list<Entidades::Obstaculos::Obstaculo*>::iterator it;
     if(!pJog1)
     {
         cout << "GerenciadorColisoes::tratarColisoesJogsObstacs() -> pJog1 NULL" << endl;
         return;
     }
 
-    pJog1->setChao(false); //vai dar true na funçao obstaculizar se estiver pisando em obstaculo.
+    pJog1->setChao(false); //vai dar true na funï¿½ao obstaculizar se estiver pisando em obstaculo.
     for(it = LOs.begin(); it != LOs.end(); it++)
     {
-        Obstaculo* pObst = *it;
+        Entidades::Obstaculos::Obstaculo* pObst = *it;
         //Entidades::Entidade aux = static_cast <Entidades::Entidade*> (pObst);
         if (pObst && verificarColisao(static_cast<Entidades::Entidade*>(pJog1), static_cast<Entidades::Entidade*>(pObst))) //static_cast <Entidade*> pObst ??
         {
-            pObst->obstaculizar(pJog1); //tratar em obstaculizar os obstaculos de dano também. obstaculizar deve 
+            pObst->obstaculizar(pJog1); //tratar em obstaculizar os obstaculos de dano tambï¿½m. obstaculizar deve 
         }                               //ser implementada em cada tipo de obstaculo diferentemente.
     }
 }
@@ -105,10 +105,6 @@ void Gerenciador_Colisoes::tratarColisoesJogsInimigs()
 
     for(it = LIs.begin(); it != LIs.end(); it++)
     {
-        if (!it)
-        {
-            cout << "Ponteiro Nulo" << endl;
-        }
         Inimigo* pInim = *it;
 
         if(pInim && verificarColisao(pJog1, pInim))
@@ -120,41 +116,49 @@ void Gerenciador_Colisoes::tratarColisoesJogsInimigs()
 
 void Gerenciador_Colisoes::tratarColisoesJogsProjeteis()
 {
+    // TODO: Implementar quando a classe Projetil estiver completa
+    /*
     set<Projetil*>::iterator it;
 
     if (!pJog1)
     {
         cout << "GerenciadorColisoes::coliJogsProjeteis() -> pJog1 NULL" << endl;
+        return;
     }
 
-    for (it = LPs.begin(); it != LIs.end(); it++)
+    for (it = LPs.begin(); it != LPs.end(); it++)
     {
         Projetil* pProj = *it;
 
-        if (pProj && verificarColisao(pJog1, pProj))
+        if (pProj && verificarColisao(pJog1, static_cast<Entidades::Entidade*>(pProj)))
         {
-            pProj->danificarJogador(pJog);//ainda nao implementada em Projetil. 
-            //setar ativo para false 
+            pProj->danificarJogador(pJog1);//ainda nao implementada em Projetil. 
+            //setar bool ativo para false 
         }
     }
+    */
 }
 
 void Gerenciador_Colisoes::tratarColisoesInimigsObstacs()
 {
     vector<Inimigo*>::iterator itIn;
-    list<Obstaculo*>::iterator itObs;
+    list<Entidades::Obstaculos::Obstaculo*>::iterator itObs;
 
     for (itIn = LIs.begin(); itIn != LIs.end(); itIn++)
     {
         Inimigo* pInim = *itIn;
+        if (pInim) {
+            pInim->setChao(false);
 
-        for (itObs = LOs.begin(); itObs != LOs.end(); itObs++)
-        {
-            Obstaculo* Obst = *itObs;
-
-            if (pInim && pObst && verificarColisao(pInim, pObst)
+            for (itObs = LOs.begin(); itObs != LOs.end(); itObs++)
             {
-                pObst->obstaculizar() //o obstaculizar personagem ou obstaculizar inimigos e jogadores (2 funçoes)?
+                Entidades::Obstaculos::Obstaculo* pObst = *itObs;
+
+                if (pObst && verificarColisao(static_cast<Entidades::Entidade*>(pInim), static_cast<Entidades::Entidade*>(pObst)))
+                {
+                    // Agora funciona porque obstaculizar aceita Personagem* e Inimigo herda de Personagem
+                    pObst->obstaculizar(static_cast<Personagens::Personagem*>(pInim));
+                }
             }
         }
     }
@@ -162,6 +166,8 @@ void Gerenciador_Colisoes::tratarColisoesInimigsObstacs()
 
 void Gerenciador_Colisoes::tratarColisoesInimigsProjeteis() //apenas para quando a aranha tiver projetil
 {
+    // TODO: Implementar quando a classe Projetil estiver completa
+    /*
     vector<Inimigo*>::iterator itIn;
     set<Projetil*>::iterator itPj;
 
@@ -173,17 +179,20 @@ void Gerenciador_Colisoes::tratarColisoesInimigsProjeteis() //apenas para quando
         {
             Projetil* pProj = *itPj;
 
-            if (pInim && pProj && verificarColisao(pInim, pProj)
+            if (pInim && pProj && verificarColisao(static_cast<Entidades::Entidade*>(pInim), static_cast<Entidades::Entidade*>(pProj)))
             {
                 //setar bool ativo para false 
             }
         }
 
     }
+    */
 }
 
 void Gerenciador_Colisoes::tratarColisoesObstacsProjeteis()
 {
+    // TODO: Implementar quando a classe Projetil estiver completa
+    /*
     list<Obstaculo*>::iterator itObs;
     set<Projetil*>::iterator itPj;
 
@@ -194,13 +203,14 @@ void Gerenciador_Colisoes::tratarColisoesObstacsProjeteis()
         for (itPj = LPs.begin(); itPj != LPs.end(); itPj++)
         {
             Projetil* pProj = *itPj;
-            if (pObst && pProj && verificarColisao(pObst, pProj))
+            if (pObst && pProj && verificarColisao(static_cast<Entidades::Entidade*>(pObst), static_cast<Entidades::Entidade*>(pProj)))
             {
                 //setar bool ativo para false se for de inimigo
                 //se projetil for de aranha, o projetil fica estatico e muda a sprite
             }
         }
     }
+    */
 }
 
 void Gerenciador_Colisoes::executar() 

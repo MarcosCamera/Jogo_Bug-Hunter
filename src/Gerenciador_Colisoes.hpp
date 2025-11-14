@@ -16,7 +16,7 @@ namespace Gerenciadores
     {
         private:
             vector<Inimigo*> LIs;
-            list<Obstaculo*> LOs;
+            list<Entidades::Obstaculos::Obstaculo*> LOs;
             set<Projetil*> LPs;
             Jogador* pJog1;
         
@@ -36,10 +36,10 @@ namespace Gerenciadores
 
         public:
             void incluirInimigo(Inimigo* pi);
-            void incluirObstaculo(Obstaculo* po);
+            void incluirObstaculo(Entidades::Obstaculos::Obstaculo* po);
             void incluirProjetil(Projetil* pj);
             void setJogador(Jogador* pJ);
-            /*void incluirEntidade()*/   //fazer para incluir qualquer tipo de entidade e chamar as funçoes "tratar colisoes" (ou melhor nao?)
+            /*void incluirEntidade()*/   //fazer para incluir qualquer tipo de entidade e chamar as funï¿½oes "tratar colisoes" (ou melhor nao?)
             void executar();
     };
 }

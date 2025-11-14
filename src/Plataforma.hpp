@@ -1,5 +1,5 @@
 #include "Obstaculo.hpp"
-#include "Jogador.hpp"
+#include "Personagem.hpp"
 #pragma once
 
 namespace Entidades
@@ -16,7 +16,7 @@ namespace Entidades
             //Plataforma(const std::string& caminhoSprite, sf::Vector2f position);
             ~Plataforma();
 
-            void obstaculizar(Personagens::Jogador* p);
+            void obstaculizar(Personagens::Personagem* p);
             void salvar();
             void executar();
         };

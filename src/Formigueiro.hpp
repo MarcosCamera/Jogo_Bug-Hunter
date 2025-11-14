@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Obstaculo.hpp"
-#include "Jogador.hpp"
+#include "Personagem.hpp"
 
 /* obstáculo imóvel e que não causa dano ao jogador*/
 namespace Entidades
@@ -20,8 +20,9 @@ namespace Entidades
 
             void setLargura(float l);
             float getLargura();
-            void obstaculizar(Personagens::Jogador* p);
+            void obstaculizar(Personagens::Personagem* p);
             void executar();
+            void salvar();
         };
     }
 }
