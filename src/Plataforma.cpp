@@ -8,7 +8,7 @@ namespace Entidades
     {
         Plataforma::Plataforma() :Obstaculo(), altura()
         {
-            pFig->setPosition(0, 500); //setar posiçao padrao na fase.
+            pFig->setPosition(0, 500); //setar posiï¿½ao padrao na fase.
         }
 
         /*Plataforma::Plataforma(const std::string& caminhoSprite, sf::Vector2f posicao) :Obstaculo(caminhoSprite, posicao), altura(0)
@@ -33,20 +33,20 @@ namespace Entidades
 
         void Plataforma::salvar() {}
 
-        void Plataforma::obstaculizar(Personagens::Jogador* p)
+        void Plataforma::obstaculizar(Personagens::Personagem* p)
         {
             if (p) {
                 sf::FloatRect intersec;
-                sf::FloatRect jogadorBounds = p->getFig()->getGlobalBounds();
+                sf::FloatRect personagemBounds = p->getFig()->getGlobalBounds();
                 sf::FloatRect obstaculoBounds = this->getFig()->getGlobalBounds();
 
-                if (jogadorBounds.intersects(obstaculoBounds, intersec))
+                if (personagemBounds.intersects(obstaculoBounds, intersec))
                 {
                     sf::Vector2f novaPos = p->getPos();
                     if (intersec.width < intersec.height)
                     {
 
-                        if (jogadorBounds.left < obstaculoBounds.left)
+                        if (personagemBounds.left < obstaculoBounds.left)
                         {
                             novaPos.x -= intersec.width;
                         }
@@ -57,9 +57,10 @@ namespace Entidades
                     }
                     else
                     {
-                        if (jogadorBounds.top < obstaculoBounds.top)
+                        if (personagemBounds.top < obstaculoBounds.top)
                         {
                             novaPos.y -= intersec.height;
+                            p->setChao(true); // Se colidiu pela parte de cima, estï¿½ no chï¿½o
                         }
                         else
                         {

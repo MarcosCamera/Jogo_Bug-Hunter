@@ -34,7 +34,7 @@ namespace Entidades
 
         void Formigueiro::executar() {}
 
-        void Formigueiro::obstaculizar(Personagens::Jogador* p)
+        void Formigueiro::obstaculizar(Personagens::Personagem* p)
         {
             if (p && !danoso) {
                 Vector2f novaPos = p->getPos();
@@ -58,6 +58,7 @@ namespace Entidades
                         if (p->getFig()->getGlobalBounds().top < this->getFig()->getGlobalBounds().top)
                         {
                             novaPos.y -= intersec.height;
+                            p->setChao(true); // Se colidiu pela parte de cima, est� no ch�o
                         }
                         else
                         {
@@ -80,6 +81,11 @@ namespace Entidades
         float Formigueiro::getLargura()
         {
             return largura;
+        }
+
+        void Formigueiro::salvar()
+        {
+            // TODO: Implementar salvamento do formigueiro
         }
     }
 }

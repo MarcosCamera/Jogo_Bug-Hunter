@@ -141,29 +141,27 @@ void Gerenciador_Colisoes::tratarColisoesJogsProjeteis()
 
 void Gerenciador_Colisoes::tratarColisoesInimigsObstacs()
 {
-    // TODO: Implementar quando obstaculizar() suportar Personagens gen�ricos ou Inimigos
-    // A fun��o obstaculizar atualmente s� aceita Jogador*, mas Inimigo n�o � um Jogador
-    /*
     vector<Inimigo*>::iterator itIn;
     list<Entidades::Obstaculos::Obstaculo*>::iterator itObs;
 
     for (itIn = LIs.begin(); itIn != LIs.end(); itIn++)
     {
         Inimigo* pInim = *itIn;
-        pInim->setChao(false);
+        if (pInim) {
+            pInim->setChao(false);
 
-        for (itObs = LOs.begin(); itObs != LOs.end(); itObs++)
-        {
-            Entidades::Obstaculos::Obstaculo* pObst = *itObs;
-
-            if (pInim && pObst && verificarColisao(static_cast<Entidades::Entidade*>(pInim), static_cast<Entidades::Entidade*>(pObst)))
+            for (itObs = LOs.begin(); itObs != LOs.end(); itObs++)
             {
-                // N�o � poss�vel fazer cast de Inimigo* para Jogador*
-                // pObst->obstaculizar(static_cast<Personagens::Jogador*>(pInim));
+                Entidades::Obstaculos::Obstaculo* pObst = *itObs;
+
+                if (pObst && verificarColisao(static_cast<Entidades::Entidade*>(pInim), static_cast<Entidades::Entidade*>(pObst)))
+                {
+                    // Agora funciona porque obstaculizar aceita Personagem* e Inimigo herda de Personagem
+                    pObst->obstaculizar(static_cast<Personagens::Personagem*>(pInim));
+                }
             }
         }
     }
-    */
 }
 
 void Gerenciador_Colisoes::tratarColisoesInimigsProjeteis() //apenas para quando a aranha tiver projetil

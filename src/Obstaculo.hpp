@@ -2,7 +2,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Entidade.hpp"
-#include "Jogador.hpp"
+#include "Personagem.hpp"
 
 namespace Entidades
 {
@@ -20,10 +20,10 @@ namespace Entidades
             //Obstaculo(const std::string& caminhoSprite, sf::Vector2f posicao);
             virtual ~Obstaculo();
 
-            virtual void obstaculizar(Personagens::Jogador* p) = 0;
+            virtual void obstaculizar(Personagens::Personagem* p) = 0;
             virtual void executar() = 0;
             virtual void salvar() = 0;
-            //virtual void setDano(bool dano) = 0; por que seria necessário?
+            //virtual void setDano(bool dano) = 0; por que seria necessï¿½rio?
             //virtual bool getDano() = 0;
         };
     }
