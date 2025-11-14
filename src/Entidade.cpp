@@ -53,14 +53,14 @@ namespace Entidades
 
     void Entidade::acelerar() //incluir todas acelerações
     {
-        acel.y = (gravidade * !chao) - vel.y * arrasto; //ou tudo * !chao?
-        //talvez use so atributo arrasto como um numero conveniente para desacelerar
+        acel.y = (gravidade * !chao) - (normal * chao) - (vel.y * arrasto);
+        
         if (vel.x > velMovMax)
             acel.x = - vel.x * arrasto;
-        //acel.x com resistencia e nao com um numero aleatório
+        //acel.x com resistencia
     }
 
-    void Entidade::atualizaVel()
+    void Entidade::atualizaVel() //ou apenas vel = vel + acel; ?
     {
         if (vel.x < velMovMax)
         {

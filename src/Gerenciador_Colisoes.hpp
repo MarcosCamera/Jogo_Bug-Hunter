@@ -7,18 +7,16 @@
 #include "Obstaculo.hpp"
 
 using namespace std;
-using namespace Entidades::Personagens;
-using namespace Entidades;
 
 namespace Gerenciadores
 {
     class Gerenciador_Colisoes
     {
         private:
-            vector<Inimigo*> LIs;
-            list<Obstaculo*> LOs;
-            set<Projetil*> LPs;
-            Jogador* pJog1;
+            vector<Entidades::Personagens::Inimigo*> LIs;
+            list<Entidades::Obstaculos::Obstaculo*> LOs;
+            set<Entidades::Projetil*> LPs;
+            Entidades::Personagens::Jogador* pJog1;
         
         public:
             Gerenciador_Colisoes();
@@ -35,10 +33,10 @@ namespace Gerenciadores
             //InimigsInimigs
 
         public:
-            void incluirInimigo(Inimigo* pi);
-            void incluirObstaculo(Obstaculo* po);
-            void incluirProjetil(Projetil* pj);
-            void setJogador(Jogador* pJ);
+            void incluirInimigo(Entidades::Personagens::Inimigo* pi);
+            void incluirObstaculo(Entidades::Obstaculos::Obstaculo* po);
+            void incluirProjetil(Entidades::Projetil* pj);
+            void setJogador(Entidades::Personagens::Jogador* pJ);
             /*void incluirEntidade()*/   //fazer para incluir qualquer tipo de entidade e chamar as funçoes "tratar colisoes" (ou melhor nao?)
             void executar();
     };

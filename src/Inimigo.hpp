@@ -19,6 +19,8 @@ namespace Entidades
         public:
             Inimigo();
             virtual ~Inimigo();
+            void operator++();  //nivel_maldade++
+
             void salvarDataBuffer(); //usar
             virtual void danificar(Jogador* p) = 0;
             virtual void mover() = 0;

@@ -13,7 +13,8 @@ namespace Entidades
         {
         protected:
             int num_vidas;
-            int forca;
+            int impacto;
+            int timer; //para voltar a realizar alguma ação
 
         public:
             Personagem();

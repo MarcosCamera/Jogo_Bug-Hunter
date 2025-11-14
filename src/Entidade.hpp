@@ -9,6 +9,7 @@ namespace Entidades
     class Projetil;
     class Obstaculo;
     class Parede;
+
     class Entidade:public Ente
     {
         protected:
@@ -16,8 +17,9 @@ namespace Entidades
             sf::Vector2f vel;
             sf::Vector2f acel; //faço um vetor aceleracao???
             const float gravidade;
+            float normal; //força normal que anula gravidade
             const float arrasto;
-            const float velMovMax; //cada ente terá uma velocidade maxima para a qual pode acelerar atraves de mover
+            const float velMovMax; //maxima velocidade para cada direção
             bool direcao; //true se for pra direita e false se for pra esquerda. TRATAR EM OBSTACULIZAR
             bool chao; //se está pisando em algo
             //ostream buffer; //para que serve???

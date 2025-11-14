@@ -17,29 +17,36 @@ namespace Entidades
 			}
 		}
 
+
 		void Grilo::danificar(Jogador* pJog) //deve ser diferente para cada inimigo
 		{
-			pJog->setVida(forca);
+			pJog->setVida(impacto);
+			if(nivel_maldade < 2) //salto aumenta conforme o nivel de maldade
+				operator++();
 		}
 
-		void Grilo::mover() //usar timer
+		void Grilo::mover() //usar timer para nao saltar instantaneamente
 		{
-			if (chao)
+			if (chao && timer >= 10)
 			{
 				if (direcao)
-					vel.x = velMovMax/3;
+					vel.x = velMovMax;
 				else
-					vel.x = -velMovMax/3;
-				vel.y = -velMovMax;
-				//força normal para cima
+					vel.x = -velMovMax;
+				vel.y = - tamanhoSalto * (nivel_maldade + 1);
+				
+				normal = - gravidade + vel.y; //força normal para cima
+				timer = 0;
 			}
 			else
 			{
-				acel.y = gravidade;
+				normal = 0;
 			}
+			timer++;
 
-			vel.x += acel.x * (nivel_maldade + 1);
-			vel.y += acel.y * (nivel_maldade + 1);
+			acelerar();
+			atualizaVel(); //antes ou depois das acelerações? Testar com ambas formas.
+
 			pFig->move(vel);
 		}
 

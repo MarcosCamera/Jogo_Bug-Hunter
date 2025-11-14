@@ -10,7 +10,7 @@ namespace Entidades
         Formiga::Formiga() :Inimigo(), raio(0)
         {
             pFig->setPosition(250, 300); //setar posiçao padrao na fase.
-            forca = 1;
+            impacto = 1;
             num_vidas = 10;
         }
 
@@ -20,23 +20,6 @@ namespace Entidades
             {
                 delete pFig;
                 pFig = NULL;
-            }
-        }
-
-
-        void Formiga::verificaAlcance(Jogador* pJog) //em gerenciador de eventos
-        {
-            if (!pJog)
-            {
-                cout << "Jogador não encontrado" << endl;
-                return;
-            }
-
-            float x = pos.x - pJog->getPos().x;
-            float y = pos.y - pJog->getPos().y;
-            if (sqrt(x * x + y * y) <= raio && !nivel_maldade)
-            {
-                nivel_maldade++;
             }
         }
 
@@ -51,10 +34,26 @@ namespace Entidades
             }
         }
 
+        void Formiga::verificaAlcance(Jogador* pJog) //em gerenciador de eventos
+        {
+            if (!pJog)
+            {
+                cout << "Jogador não encontrado" << endl;
+                return;
+            }
+
+            float x = pos.x - pJog->getPos().x;
+            float y = pos.y - pJog->getPos().y;
+            if (sqrt(x * x + y * y) <= raio && !nivel_maldade)
+            {
+                operator++;
+            }
+            seguir(pJog);
+        }
 
         void Formiga::danificar(Jogador* pJog)
         {
-            pJog->setVida(forca);
+            pJog->setVida(impacto);
         }
 
 
@@ -62,6 +61,8 @@ namespace Entidades
         {
             if (chao)
             {
+                normal = - gravidade;
+
                 if (direcao && vel.x < velMovMax)
                 {
                     acel.x = velMovMax / 4;
@@ -71,14 +72,19 @@ namespace Entidades
                     acel.x = -velMovMax / 4;
                 }
                     //direção do jogador //gerenciador eventos
+                //vel.y = 0;
             }
             else
             {
-                acel.y = gravidade;
+                normal = 0;
             }
-
+            acelerar();
+            atualizaVel();
+            // qual ordem de inicialização de velocidades?
             vel.x += acel.x * (nivel_maldade + 1);
             vel.y += acel.y * (nivel_maldade + 1);
+
+
             pFig->move(vel);
         }
 
@@ -89,10 +95,10 @@ namespace Entidades
         }
 
 
-        void Formiga::executar()
+        void Formiga::executar() //no gerenciador de eventos: executar(pJog1, pJog2);
         {
-            //seguir() tambem
-            //verificaAlcance(Jogador *pJog); nao funciona porque nao passa por parametro na funçao
+            verificaAlcance(pJog1);
+            //verificaAlcance(pJog2);
             mover();                        //solução: ponteiro de jogadores. A fase deve começar com ambos jogadores ou um só
         }
     }

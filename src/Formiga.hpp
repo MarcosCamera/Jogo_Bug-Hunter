@@ -14,6 +14,7 @@ namespace Entidades
                         //pCabeca //a cabeça será separada do corpo e terá movimento próprio, seguindo o jogador.
                         //float velFuria; //será? 
             //Jogador* pJog //conhece jogador
+            Jogador* pJog1; //para que não seja necessário, gerenciador de eventos. Colocar a associação no UML
 
         public:
             Formiga();
