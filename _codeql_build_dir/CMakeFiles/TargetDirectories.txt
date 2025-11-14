@@ -1,3 +1,0 @@
-/home/runner/work/Jogo_Bug-Hunter/Jogo_Bug-Hunter/_codeql_build_dir/CMakeFiles/jogo.dir
-/home/runner/work/Jogo_Bug-Hunter/Jogo_Bug-Hunter/_codeql_build_dir/CMakeFiles/edit_cache.dir
-/home/runner/work/Jogo_Bug-Hunter/Jogo_Bug-Hunter/_codeql_build_dir/CMakeFiles/rebuild_cache.dir
