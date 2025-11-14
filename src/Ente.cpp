@@ -7,6 +7,7 @@ Gerenciadores::Gerenciador_Grafico* Ente::pGG(Gerenciadores::Gerenciador_Grafico
 
 Ente::Ente() :id(cont_id++), pFig(new sf::Sprite()) //new deve ser aqui mesmo?
 {
+    //usar setTexture no lugar:
     string caminho = "Texturas/imagem" + to_string(id) + ".png";
     if (!text.loadFromFile(caminho))
         throw "nao abriu imagem";
@@ -17,6 +18,14 @@ Ente::Ente() :id(cont_id++), pFig(new sf::Sprite()) //new deve ser aqui mesmo?
 
 Ente::~Ente() 
 {
+}
+
+void Ente::setTexture(string caminho, sf::Vector2f scale)
+{
+    if (!text.loadFromFile(caminho))
+        throw "nao abriu imagem";
+    pFig->setTexture(text);
+    pFig->setScale(scale);
 }
 
 sf::Sprite* Ente::getFig()

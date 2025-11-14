@@ -1,9 +1,13 @@
 #include "Inimigo.hpp"
 
-using namespace Entidades;
-using namespace Personagens;
+namespace Entidades
+{
+	namespace Personagens
+	{
 
-Inimigo::Inimigo():nivel_maldade(0){}
-Inimigo:: ~Inimigo(){}
+		Inimigo::Inimigo() :nivel_maldade(0) {}
+		Inimigo:: ~Inimigo() {}
 
-void Inimigo::salvarDataBuffer(){}//...?
+		void Inimigo::salvarDataBuffer() {}//...?
+	}
+}

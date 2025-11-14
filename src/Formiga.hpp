@@ -19,10 +19,11 @@ namespace Entidades
             Formiga();
             ~Formiga();
 
+            void seguir(Jogador* pJog);
             void verificaAlcance(Jogador* pJog);
             void danificar(Jogador* pJog);
             void mover();
-            void salva();
+            void salvar();
             void executar();
         };
     }

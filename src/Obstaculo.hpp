@@ -8,6 +8,10 @@ namespace Entidades
 {
     namespace Obstaculos
     {
+        class Plataforma;
+        class PlantaCarnivora;
+        class Formigueiro;
+
         class Obstaculo : public Entidade {
         protected:
             bool danoso;
@@ -19,8 +23,8 @@ namespace Entidades
             virtual void obstaculizar(Personagens::Jogador* p) = 0;
             virtual void executar() = 0;
             virtual void salvar() = 0;
-            virtual void setDano(bool dano) = 0;
-            virtual bool getDano() = 0;
+            //virtual void setDano(bool dano) = 0; por que seria necessário?
+            //virtual bool getDano() = 0;
         };
     }
 }

@@ -27,6 +27,7 @@ class Ente
       virtual ~Ente();
 
       sf::Sprite* getFig();
+      void setTexture(std::string caminho, sf::Vector2f scale);
       void desenhar();
       virtual void executar()=0;
       void static setpGG(Gerenciadores :: Gerenciador_Grafico* pG);

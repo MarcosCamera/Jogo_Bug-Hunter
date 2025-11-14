@@ -1,20 +1,23 @@
 #pragma once
 #include "Inimigo.hpp"
 
-namespace Entidades::Personagens
+namespace Entidades
 {
-    class Grilo : public Inimigo
+    namespace Personagens
     {
-    private:
-        int tamanhoSalto; //depende de nivel_maldade
-                          //nivel_maldade aumenta se danificar jogador  
-    public:
-        Grilo();
-        ~Grilo();
+        class Grilo : public Inimigo
+        {
+        private:
+            int tamanhoSalto; //depende de nivel_maldade
+            //nivel_maldade aumenta se danificar jogador  
+        public:
+            Grilo();
+            ~Grilo();
 
-        void danificar(Jogador* pJog);
-        void mover();
-        void salva();
-        void executar();
-    };
+            void danificar(Jogador* pJog);
+            void mover();
+            void salvar();
+            void executar();
+        };
+    }
 }

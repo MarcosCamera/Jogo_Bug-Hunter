@@ -1,11 +1,18 @@
 #include "Ente.hpp"
 #include "Gerenciador_Colisoes.hpp"
 #include "Gerenciador_Grafico.hpp"
+#include "Formiga.hpp" // Adicionado para garantir tipo completo
+#include "Jogador.hpp"
+#include "Plataforma.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
+using namespace Gerenciadores;
+using namespace Entidades::Personagens;
+using namespace Entidades::Obstaculos;
+using namespace sf;
 
 int main()
 {
@@ -16,16 +23,28 @@ int main()
 	Formiga form;
 	Plataforma plat;
 
-	plat.pFig->setPosition(0, 500);
-	plat.setSize(800.f, 2.f);
+	Ente* eJog = &jog; //ta certo? ao inves de fazer static cast???
+	Ente* eForm = &form;
+	Ente* ePlat = &plat;
 
-	while (window.isOpen())
+	jog.setTexture("Textura/imagem1", sf::Vector2f(0.03f, 0.03f));
+	form.setTexture("Textura/imagem2", sf::Vector2f(0.03f, 0.03f));
+	plat.setTexture("Textura/imagem3", sf::Vector2f(1.f, 200.f));
+
+	plat.getFig()->setPosition(0, 500);
+	plat.getFig()->setScale(1.f, 200.f);
+
+	colis.setJogador(&jog);
+	colis.incluirInimigo(&form);
+	colis.incluirObstaculo(&plat);
+
+	while (graf.abertaJanela())
 	{
 		Event event;
-		while (window.pollEvent(event))
+		while (graf.getWindow().pollEvent(event))
 		{
 			if (event.type == Event::Closed)
-				window.close();
+				graf.fecharJanela();
 		}
 
 		/*UPDATE*/
@@ -34,14 +53,15 @@ int main()
 		form.executar();
 		plat.executar();
 
+		colis.executar();
 
 
 		/*DRAW*/
-		window.clear(Color::White);
-		window.draw(jog.getSprite());
-		window.draw(form.getSprite());
-		window.draw(plat.getSprite())
-		window.display();
+		graf.getWindow().clear(Color::White);
+		graf.desenharEnte(eJog);
+		graf.desenharEnte(ePlat);
+		graf.desenharEnte(eForm);
+		graf.getWindow().display();
 	}
 	return 0;
 }

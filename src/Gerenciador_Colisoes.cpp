@@ -55,18 +55,18 @@ void Gerenciador_Colisoes :: setJogador(Jogador* pJ)
   pJog1 = pJ;
 }
 
-const bool Gerenciador_Colisoes::verificarColisao(Entidade* p1, Entidade* p2) const
+const bool Gerenciador_Colisoes::verificarColisao(Entidades::Entidade* p1, Entidades::Entidade* p2) const
 {
     if(p1 && p2)
     { 
-        sf::FloatRect caixa1 = p1->getGlobalBounds(); 
-        sf::FloatRect caixa2 = p2->getGlobalBounds();
+        sf::FloatRect caixa1 = p1->getFig()->getGlobalBounds();
+        sf::FloatRect caixa2 = p2->getFig()->getGlobalBounds();
         return caixa1.intersects(caixa2);
     }
 
     else {
-      cout<<"Gerenciador_Colisoes::verificarColisao(p1,p2) -> p1 ou p2, ou ambos NULL"<<endl;
-      return false;
+        cout<<"Gerenciador_Colisoes::verificarColisao(p1,p2) -> p1 ou p2, ou ambos NULL"<<endl;
+        return false;
     }
 }
 
@@ -76,16 +76,16 @@ void Gerenciador_Colisoes::tratarColisoesJogsObstacs()
     list<Obstaculo*>::iterator it;
     if(!pJog1)
     {
-      cout << "GerenciadorColisoes::tratarColisoesJogsObstacs() -> pJog1 NULL" << endl;
+        cout << "GerenciadorColisoes::tratarColisoesJogsObstacs() -> pJog1 NULL" << endl;
         return;
     }
 
-    pJog1->chao = false; //vai dar true na funçao obstaculizar se estiver pisando em obstaculo.
+    pJog1->setChao(false); //vai dar true na funçao obstaculizar se estiver pisando em obstaculo.
     for(it = LOs.begin(); it != LOs.end(); it++)
     {
         Obstaculo* pObst = *it;
-
-        if (pObst && verificarColisao(pJog1, pObst))
+        //Entidades::Entidade aux = static_cast <Entidades::Entidade*> (pObst);
+        if (pObst && verificarColisao(static_cast<Entidades::Entidade*>(pJog1), static_cast<Entidades::Entidade*>(pObst))) //static_cast <Entidade*> pObst ??
         {
             pObst->obstaculizar(pJog1); //tratar em obstaculizar os obstaculos de dano também. obstaculizar deve 
         }                               //ser implementada em cada tipo de obstaculo diferentemente.
@@ -146,11 +146,11 @@ void Gerenciador_Colisoes::tratarColisoesInimigsObstacs()
 
     for (itIn = LIs.begin(); itIn != LIs.end(); itIn++)
     {
-        Inimigo* pInim = itIn;
+        Inimigo* pInim = *itIn;
 
         for (itObs = LOs.begin(); itObs != LOs.end(); itObs++)
         {
-            Obstaculo* Obst = itIn;
+            Obstaculo* Obst = *itObs;
 
             if (pInim && pObst && verificarColisao(pInim, pObst)
             {
@@ -167,11 +167,11 @@ void Gerenciador_Colisoes::tratarColisoesInimigsProjeteis() //apenas para quando
 
     for (itIn = LIs.begin(); itIn != LIs.end(); itIn++)
     {
-        Inimigo* pInim = itIn;
+        Inimigo* pInim = *itIn;
 
         for (itPj = LPs.begin(); itPj != LPs.end(); itPj++)
         {
-            Projetil* pProj = itPj;
+            Projetil* pProj = *itPj;
 
             if (pInim && pProj && verificarColisao(pInim, pProj)
             {
@@ -189,11 +189,11 @@ void Gerenciador_Colisoes::tratarColisoesObstacsProjeteis()
 
     for (itObs = LOs.begin(); itObs != LOs.end(); itObs++)
     {
-        Obstaculo* pObst = itObs;
+        Obstaculo* pObst = *itObs;
 
         for (itPj = LPs.begin(); itPj != LPs.end(); itPj++)
         {
-            Projetil* pProj = itPj;
+            Projetil* pProj = *itPj;
             if (pObst && pProj && verificarColisao(pObst, pProj))
             {
                 //setar bool ativo para false se for de inimigo

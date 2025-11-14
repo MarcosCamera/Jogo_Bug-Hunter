@@ -22,7 +22,7 @@ namespace Entidades
             void salvarDataBuffer(); //usar
             virtual void danificar(Jogador* p) = 0;
             virtual void mover() = 0;
-            virtual void salva() = 0;
+            virtual void salvar() = 0;
             virtual void executar() = 0;
         };
     }

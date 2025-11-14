@@ -6,7 +6,6 @@ namespace Entidades
 {
     namespace Obstaculos
     {
-
         Plataforma::Plataforma() :Obstaculo(), altura()
         {
             pFig->setPosition(0, 500); //setar posiçao padrao na fase.

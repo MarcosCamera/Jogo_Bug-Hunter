@@ -31,6 +31,16 @@ namespace Entidades
     {
     }
 
+    void Entidade::setChao(bool c)
+    {
+        chao = c;
+    }
+
+    bool Entidade::getChao()
+    {
+        return chao;
+    }
+
     sf::Vector2f Entidade::getPos()const
     {
         return pos;

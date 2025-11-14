@@ -5,8 +5,10 @@
 
 namespace Entidades
 {
-    class Personagem;
+    class Personagem; //está correto fazer assim?
     class Projetil;
+    class Obstaculo;
+    class Parede;
     class Entidade:public Ente
     {
         protected:
@@ -25,6 +27,8 @@ namespace Entidades
             //Entidade(const std::string& caminhoSprite, sf::Vector2f posicao); //sobrecarga construtora
             virtual ~Entidade();
 
+            void setChao(bool c);
+            bool getChao();
             sf::Vector2f getPos()const;
             void setPos(sf::Vector2f novaPos);
             void acelerar(); //incluir resistencia do ar

@@ -23,7 +23,14 @@ namespace Entidades
 
         }*/
 
-        Formigueiro::~Formigueiro() {}
+        Formigueiro::~Formigueiro() 
+        {
+            if (pFig)
+            {
+                delete pFig;
+                pFig = NULL;
+            }
+        }
 
         void Formigueiro::executar() {}
 

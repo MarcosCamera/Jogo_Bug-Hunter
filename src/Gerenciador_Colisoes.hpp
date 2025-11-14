@@ -8,7 +8,6 @@
 
 using namespace std;
 using namespace Entidades::Personagens;
-using namespace Entidades::Obstaculos;
 using namespace Entidades;
 
 namespace Gerenciadores
@@ -26,7 +25,7 @@ namespace Gerenciadores
             ~Gerenciador_Colisoes();
 
         private:
-            const bool verificarColisao(Entidade* pe1, Entidade* pe2) const;
+            const bool verificarColisao(Entidades::Entidade* pe1, Entidades::Entidade* pe2) const;
             void tratarColisoesJogsObstacs();
             void tratarColisoesJogsInimigs(); 
             void tratarColisoesJogsProjeteis();

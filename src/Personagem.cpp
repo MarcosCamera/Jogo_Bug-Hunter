@@ -1,4 +1,5 @@
 #include "Personagem.hpp"
+
 namespace Entidades
 {
 	namespace Personagens
