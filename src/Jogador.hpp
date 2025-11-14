@@ -1,26 +1,33 @@
 #pragma once
 #include "Personagem.hpp"
-#include <iostream>
+#include <iostream>  //precisa desses includes que foram adicionados nas primitivas???
 #include <SFML/Graphics.hpp>
 #include <cstdlib>
 #include <ctime>
 #include <list>
 
-namespace Entidades::Personagens{
-    class Jogador : public Personagem{
+namespace Entidades
+{
+    namespace Personagens
+    {
+        class Jogador : public Personagem
+        {
         protected:
-            int pontos;
+            int pontos; //falta usar pontuação e morrer
 
         public:
             Jogador();
             ~Jogador();
 
-            /*tipo?*/ colidir(Inimigo* pIn);
+            //void setText() //no executar. //usar string para diferentes texturas de animações.
+            void danificarInim(Inimigo* pIn);
+            // fazer danificar estrutura, ou o danificar ser geral e usar sobrecarga ou cast?
+            // danificar estrutura pelo projétil
+            void colidir(Inimigo* pIn);
+            void controlar();
+            void mover();
             void executar();
             void salvar();
-            void mover();
-    
-
-
-    };
+        };
+    }
 }

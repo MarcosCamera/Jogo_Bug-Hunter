@@ -1,0 +1,68 @@
+## Falta:
+* Documentar UML (e imprimir)
+* Documentar Google Docs (e imprimir)
+* Inim_Medio
+* Chefao
+* sf::Texture textura; vai onde?
+
+## Terminar:
+* Inim_Facil
+* Implementar mecanicas de aceleração e velocidade de jogador em inimigos (talvez faça em gerenciador de eventos)
+
+## Consertar:
+* Desacoplar movimentos de Personagem's.
+* Desacoplar colisões: fazer função knockBack, etc.
+
+## Refazer:
+* Tratar "direcao" de Entidade's em obstaculizar de Obstaculo.
+* 
+
+## Lembrar:
+* Inicializar corretamente as construtoras das classes derivadas
+* Escrever cout's para cada teste (else)
+* Testar ponteiros
+* Aterrar ponteiros
+* Inicializar atributos e ponteiros
+* Passar ponteiros implicitamente
+* Dar delete nas classes herdadas
+
+## Dúvidas:
+* Implementar andar na parede?
+* Fazer mais de um tipo de inimigo fácil (abelha por exemplo) e vários Médios também.
+* This usa um ponteiro do objeto?
+* Sobrecarga de função: posso fazer uma função que recebe um ponteiro inimigo e a mesma função mas que recebe ponteiro jogador?
+* Namespace: seria using namespace Entdidades e namespace Personagens{} ou ambos como using namespace ou ambos como namespace?
+
+** ostream buffer: o que é?
+** void salvarDataBuffer: o que é?
+** BiblioGrafica obj: o que é?
+
+
+## Ideias (após a implementação da fase 1):
+* Inimigo fácil abelha: seu ferrão será sesacoplado de seu corpo, assim como a formiga, mas apenas em um grau.
+  limitado. Voará em direção ao jogador em uma investida suicida. Dará muito dano, mas morrerá em seguida. 
+* Fazer sobrecarga de construtora que tenha alguma utilidade.
+* Teias atiradas grudam nas estruturas. Se um inimigo encostar, o projetil desaparece e o inimigo fica paralizado por um tempo.
+* Usar throw ao inves de cout para debugar
+* Gerenciador Eventos: movimento ar; movimento terra; movimento inim 1 chao; etc (talvez usar static cast)
+* KnockBack após dano sobre jogador.
+* Sistema de pontuação: se estiver com vida alta completa, pontos de eliminar inimigo vai para a pontuaçao, se nao, divide entre vida e pontuação.
+* Usar o id para mexer nas texturas.
+* Usar id para printar erros e descobrir qual classe nao funciona corretamente
+* Em direção, ao invés de bool talvez fosse melhor usar int dir = 1 ou -1?
+* Setar aceleração para 0 quando vel for max.
+* Fazer vel max, aceleração e afins serem todos multiplos entre si
+* Fazer inimigo e obstáculos que arremessam jogador e ataque de jogador que arremessa inimigo
+* Fazer movimento do inimigo seguir jogador (só a formiga, não a abelha)
+* Ao invés de formiga, pode ser cupim, para que tenha na segunda fase também.
+* As posições das entidades podem ser pseudo aleatórias? Aleatório mas em posições específicas?
+* Ordem de delete: gerenciador grafico -> classes herdadas ...
+* Fazer força normal. Pular em plataforma tipo folha faz o impulso vertical empurrar o jogador para cima e a folha para baixo.
+* Fazer morte de entidades.
+* Para aleatorizar, guararemos posições em uma lista de posições possíveis que é passada para inimigos e obstáculos.
+* Agradecimentos aos monitores e ao Sérgio pela orientação.
+
+            //toda entidade tem gravidade, mas algumas tem força externa agindo sobre e equilibram. 
+            //implementar funçao contraForça. para algumas plataformas, ha uma força quando um objeto pisa sobre
+            //todas funções de movimento estão em ente, pois alguns Obstáculos também possuem movimento
+            //devo implementar em personagem?

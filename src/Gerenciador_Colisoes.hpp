@@ -8,7 +8,6 @@
 
 using namespace std;
 using namespace Entidades::Personagens;
-using namespace Entidades::Obstaculos;
 using namespace Entidades;
 
 namespace Gerenciadores
@@ -16,30 +15,31 @@ namespace Gerenciadores
     class Gerenciador_Colisoes
     {
         private:
-         vector<Inimigo*> LIs;
-         list<Obstaculo*> LOs;
-         set<Projetil*> LPs;
-         Jogador* pJog1;
+            vector<Inimigo*> LIs;
+            list<Obstaculo*> LOs;
+            set<Projetil*> LPs;
+            Jogador* pJog1;
         
-         public:
-           Gerenciador_Colisoes();
-           ~Gerenciador_Colisoes();
-
-           void incluirInimigo(Inimigo* pi);
-           void incluirObstaculo(Obstaculo* po);
-           void incluirProjetil(Projetil* pj);
-           void setJogador(Jogador* pJ);
-           //void incluirEntidade()   //fazer para incluir qualquer tipo de entidade e chamar as funçoes "tratar colisoes" (ou melhor nao)
-           void executar();
+        public:
+            Gerenciador_Colisoes();
+            ~Gerenciador_Colisoes();
 
         private:
-         const bool verificarColisao(Entidade* pe1, Entidade* pe2) const;
-         
-         void tratarColisoesJogsObstacs();
-         void tratarColisoesJogsInimigs(); 
-         void tratarColisoesJogsProjeteis();
-         void tratarColisoesInimigsObstacs(); //nao estava no UML padrao
-         void tratarColisoesInimigsObstacs(); //nao estava no UML padrao
+            const bool verificarColisao(Entidades::Entidade* pe1, Entidades::Entidade* pe2) const;
+            void tratarColisoesJogsObstacs();
+            void tratarColisoesJogsInimigs(); 
+            void tratarColisoesJogsProjeteis();
+            void tratarColisoesInimigsObstacs(); //nao estava no UML padrao
+            void tratarColisoesInimigsProjeteis(); //nao estava no UML padrao
+            void tratarColisoesObstacsProjeteis(); //nao estava no UML padrao
+            //InimigsInimigs
 
+        public:
+            void incluirInimigo(Inimigo* pi);
+            void incluirObstaculo(Obstaculo* po);
+            void incluirProjetil(Projetil* pj);
+            void setJogador(Jogador* pJ);
+            /*void incluirEntidade()*/   //fazer para incluir qualquer tipo de entidade e chamar as funçoes "tratar colisoes" (ou melhor nao?)
+            void executar();
     };
 }

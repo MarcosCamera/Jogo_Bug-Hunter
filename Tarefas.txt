@@ -1,0 +1,44 @@
+## Falta:
+* Documentar UML (e imprimir)
+* Inim_Medio
+* Chefao
+*
+
+## Terminar:
+* Inim_Facil
+*
+
+## Consertar:
+* Verificar os includes.
+* 
+
+## Refazer:
+* 
+* 
+
+## Lembrar:
+* Inicializar corretamente as construtoras das classes derivadas.
+* Escrever cout's para cada teste (else).
+* Testar ponteiros.
+* Aterrar ponteiros.
+* Inicializar atributos e ponteiros.
+* 
+
+## Dúvidas: 
+* É necessário o atributo posição em "Entidade"? Talvez apenas para a função salvar.
+* Implementar andar na parede?
+* Fazer mais de um tipo de inimigo fácil (abelha por exemplo) e vários Médios também.
+* O Inim_Facil será implementado para as duas fases, como nos requisitos. Posso eu colocar então um Inim_Facil
+  de um tipo (formiga) em uma delas e outro tipo (abelha) na outra fase.
+
+## Ideias (após a implementação da fase 1):
+* Inimigo fácil abelha: seu ferrão será sesacoplado de seu corpo, assim como a formiga, mas apenas em um grau 
+  limitado. Voará em direção ao jogador em uma investida suicida. Dará muito dano, mas morrerá em seguida. 
+* se proximo ao formigueiro, inimigo formiga tem nivel de maldade maior e portanto maior dano e velocidade
+  aumenta o nivel se nao houver formigas por perto (printar na tela: berserk mode).
+* Criar FaseTeste para testes de mecânicas.
+* Planta carnívora ser Obstaculo e Inimigo (herança dupla).
+* Abelha move aleatoriamente num quadrado (limite) e quem se move é o quadrado. Não exatamente aleatório,
+  pois podem ocorrer colisões indesejadas, mas a velocidade ser muito alta em direção aleatória.
+* Animação de Ente's: vetor com vários sprites de mesmo tamanho. Ex.: 10 imagens: vetor de 10 posições e cont++.
+  Para o movimento, essas imagens têm o mesmo contador do botão de movimento?

@@ -1,0 +1,41 @@
+## Entidade:
+* Cada entidade tem atributos como posição, velocidade.
+
+## Jogador:
+* Cada jogador será um aracnídeo (aranha/escorpião), em que a aranha atira teia e
+  o escorpião, veneno. A teia paraliza e dá dano leve e o veneno dá dano contínuo por um tempo.
+* 
+
+## Inim_Facil:
+* Insetos de colônia: Formiga e Abelha.
+* Carregam uma orgão afiado (pinça/ferrão) que segue direção do jogador dão dano ao colidir.
+* Diferentes níveis de maldade implicam em diferentes movimentações e danos. Aumentam conforme o jogador
+  se aproxima ou o inimigo estiver sozinho, ou sua colônia (formigueiro/colméia) for destruída.
+
+## Inim_Formiga:
+* 
+* Movimentação: maldade(0): anda na direção horizontal até colidir com um obstáculo e mudar de posição.
+				maldade(1): segue a direção horizontal do jogador ao entrar em seu alcance e aumenta velocidade.
+				maldade(2): aumenta a velocidade.
+
+## Inim_Abelha:
+* 
+* Movimentação: maldade(0): voa em direção às flores e em direção à colmeia com destinos aleatórios.
+			    maldade(1): voa parada e dá investidas em direção ao jogador.
+				maldade(2): voa e vibra em movimento circular.
+
+## Inim_Medio:
+* 
+* 
+
+## Chefao:
+* 
+* 
+
+## Fase 1:
+* Fase horizontal no cenário de um jardim ampliado. 
+* 
+
+## Fase 2:
+* Fase vertical no cenário de uma árvore, passando pelo tronco, pela casca internamente e chegando em suas folhas.
+* 
