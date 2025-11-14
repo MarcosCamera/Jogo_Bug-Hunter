@@ -1,0 +1,40 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/jogo.dir/link.d"
+  "CMakeFiles/jogo.dir/src/Ente.cpp.o"
+  "CMakeFiles/jogo.dir/src/Ente.cpp.o.d"
+  "CMakeFiles/jogo.dir/src/Entidade.cpp.o"
+  "CMakeFiles/jogo.dir/src/Entidade.cpp.o.d"
+  "CMakeFiles/jogo.dir/src/Formiga.cpp.o"
+  "CMakeFiles/jogo.dir/src/Formiga.cpp.o.d"
+  "CMakeFiles/jogo.dir/src/Formigueiro.cpp.o"
+  "CMakeFiles/jogo.dir/src/Formigueiro.cpp.o.d"
+  "CMakeFiles/jogo.dir/src/Gerenciador_Colisoes.cpp.o"
+  "CMakeFiles/jogo.dir/src/Gerenciador_Colisoes.cpp.o.d"
+  "CMakeFiles/jogo.dir/src/Gerenciador_Grafico.cpp.o"
+  "CMakeFiles/jogo.dir/src/Gerenciador_Grafico.cpp.o.d"
+  "CMakeFiles/jogo.dir/src/Grilo.cpp.o"
+  "CMakeFiles/jogo.dir/src/Grilo.cpp.o.d"
+  "CMakeFiles/jogo.dir/src/Inimigo.cpp.o"
+  "CMakeFiles/jogo.dir/src/Inimigo.cpp.o.d"
+  "CMakeFiles/jogo.dir/src/Jogador.cpp.o"
+  "CMakeFiles/jogo.dir/src/Jogador.cpp.o.d"
+  "CMakeFiles/jogo.dir/src/Jogo.cpp.o"
+  "CMakeFiles/jogo.dir/src/Jogo.cpp.o.d"
+  "CMakeFiles/jogo.dir/src/Obstaculo.cpp.o"
+  "CMakeFiles/jogo.dir/src/Obstaculo.cpp.o.d"
+  "CMakeFiles/jogo.dir/src/Parede.cpp.o"
+  "CMakeFiles/jogo.dir/src/Parede.cpp.o.d"
+  "CMakeFiles/jogo.dir/src/Personagem.cpp.o"
+  "CMakeFiles/jogo.dir/src/Personagem.cpp.o.d"
+  "CMakeFiles/jogo.dir/src/Plataforma.cpp.o"
+  "CMakeFiles/jogo.dir/src/Plataforma.cpp.o.d"
+  "CMakeFiles/jogo.dir/src/main.cpp.o"
+  "CMakeFiles/jogo.dir/src/main.cpp.o.d"
+  "jogo"
+  "jogo.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/jogo.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
