@@ -1,162 +1,126 @@
-#include <fstream> 
-#include <iostream> 
-#include "Fase.hpp"
-#include "nlohmann/json.hpp"
 
+#include "Fase.hpp"
+#include <iostream> 
+#include "Jogador.hpp"
+#include "Inim_Facil.hpp"
+#include "Plataforma.hpp"
+#include "Ente.hpp" 
 using namespace Fases;
 using namespace std;
-using namespace Entidades;
-using namespace Listas; 
-using namespace Personagens;
+using namespace Entidades; 
+using namespace Entidades::Personagens; 
+using namespace Entidades::Obstaculos; 
+using namespace Listas;
 using namespace Gerenciadores;
-using namespace nlohmann;
 
-using Iterador = Listas::Lista<Entidades::Entidade>::Iterador<Entidades::Entidade>;
-
-Fase::Fase(std::string mapJson, Gerenciadores::Gerenciador_Colisoes &gc) :
-    Ente(),
-    gC(gc)
+Fase::Fase(Gerenciadores::Gerenciador_Grafico* pGG, Gerenciadores::Gerenciador_Colisoes& gC):
+    Ente(), gC(gC), pGG(pGG), lista_ents(), pJog1(NULL), maxInim(0), minInim(0)
 {
-    criarCenario(mapJson);
-    criarMapa(mapJson);
+    
+    Ente::setpGG(pGG); 
 }
 
 Fase::~Fase()
 {
-    lista_ents.limpar();
+   lista_ents.limpar();
 }
 
 void Fase::executar()
 {
-    lista_ents.percorrer(); 
-
-    gC.executar();
-    Gerenciadores::Gerenciador_Grafico* pGG = Gerenciadores::Gerenciador_Grafico::getInstancia();
-    pGG->desenharCenario();
-    if (pGG)
+   
+    
+    Lista<Entidade>* pLista = lista_ents.getLista();
+    if (!pLista) return;
+    Lista<Entidade>::Iterador<Entidade> it = pLista->getIterador();
+    
+    while (!it.end())
     {
-        Iterador it = lista_ents.getLista()->getIterador();
-        while (!it.end())
+        Entidade* pEnt = it.getElemento();
+        if (pEnt)
         {
-            Entidades::Entidade* pEnt = it.getElemento();
-            if (pEnt)
-            {
-                pGG->desenharEnte(pEnt);
-            }
-            it.proximo();
+            pEnt->executar();
+            pEnt->desenhar();
         }
+        it.proximo();
     }
 }
 
-void Fase::criarInimFaceis(int minInim, int maxInim, sf::Vector2f pos)
-{
-    int num_inim = minInim + rand() % (maxInim - minInim + 1);
-    for(int i =0; i< num_inim;i++)
-    {
-      Entidades::Personagens::Inim_Facil* pInim = new Entidades::Personagens::Inim_Facil("Textures/formiga2.png", pos);
-      lista_ents.incluir(static_cast<Entidade*>(pInim));//static cast!!
-      gC.incluirInimigo(pInim);
-    }
-}
-
-void Fase::criarPlataformas(sf::Vector2f pos)
-{
-    Entidades::Obstaculos::Plataforma* pPlat = new Entidades::Obstaculos::Plataforma("Textures/plataformas.png", pos, sf::Vector2f(200.0f, 50.0f));
-    lista_ents.incluir(static_cast<Entidade*>(pPlat));//static cast!!
-    gC.incluirObstaculo(pPlat);
-    
-}
-
-void Fase::criarJogador(sf::Vector2f pos)
-{
-   Entidades::Personagens::Jogador* pJog1 = new Entidades::Personagens::Jogador("Textures/aranha.png", pos);
-    lista_ents.incluir(static_cast<Entidade*>(pJog1));
-}
-
-void Fase::criarCenario(const std::string& caminho)
-{
-    std::string caminhoTextura = caminho.substr(0, caminho.find_last_of(".")) + ".png";
-    
-    
-    Gerenciadores::Gerenciador_Grafico* pGG = Gerenciadores::Gerenciador_Grafico::getInstancia();
-    if (pGG)
-    {
-        pGG->carregarCenario(caminhoTextura);
-    }
-
-}
-
-void Fase::criarMapa(const std::string& caminhoJson)
-{
-    
-    std::ifstream arquivo(caminhoJson);
+json Fase::lerArquivoJSON(const std::string& caminho) {
+    ifstream arquivo(caminho);
     if (!arquivo.is_open()) {
-        std::cerr << "Fase::CriarMapa() -> erro ao carregar o arquivo " << caminhoJson << std::endl;
-        return;
+        cerr << "nao foi possivel abrir o arquivo JSON: " << caminho << endl;
+        throw std::runtime_error("Nao foi possivel abrir o arquivo JSON: " + caminho);
     }
-
-    nlohmann::json mapaJson;
-    try 
-    {
-        arquivo >> mapaJson;
-    } 
-    catch (std::exception& e) 
-    {
-        std::cerr << "Fase::criarMapa() -> erro" << e.what() << std::endl;
-        arquivo.close();
-        return;
-    }
+    json j;
+    arquivo >> j;
     arquivo.close();
-    const int larguraTiles = mapaJson["tilewidth"];  
-    const int alturaTiles = mapaJson["tileheight"]; 
-    const int larguraMapa = mapaJson["width"];   
+    return j;
+}
 
-    for (const auto& camada : mapaJson["layers"])
-    {
-        if (camada["name"] != "Tile Layer 1" || camada["data"].empty()) { 
-            continue;
+vector<vector<vector<int>>> Fase::extrairCamadas(const json& mapa) {
+    int altura = mapa["height"];
+    int largura = mapa["width"];
+    int numLayers = mapa["layers"].size();
+    vector<vector<vector<int>>> camadas;
+
+    for (int k = 0; k < numLayers; k++) {
+        const auto& layer = mapa["layers"][k];
+        
+        if(layer["type"] != "tilelayer") {
+            continue; 
         }
 
-        const auto& data = camada["data"];//está tudo na mesma camada!!
+        const auto& data = layer["data"];
         
-        for (int i = 0; i < data.size(); ++i)
-        {
-            int id = data[i];
-            if (id == 0) continue; 
-
-            int coluna = i % larguraMapa;
-            int linha = i / larguraMapa;
-            float x = static_cast<float>(coluna * larguraTiles);
-            float y = static_cast<float>(linha * alturaTiles);
-            sf::Vector2f pos(x, y);
-
-            if ((id >= 276 && id < 1004)) 
-            {
-                int mult = 1;
-                while (coluna + mult < larguraMapa && (i + mult) < data.size() && data[i + mult] == id)
-                {
-                    mult++;
-                }
-
-                sf::Vector2f tamanho(static_cast<float>(larguraTiles * mult), static_cast<float>(alturaTiles));
-                Entidades::Obstaculos::Plataforma* pPlat = new Entidades::Obstaculos::Plataforma("Textures/tiles.png", pos, tamanho);
-                lista_ents.incluir(static_cast<Entidade*>(pPlat));
-                gC.incluirObstaculo(pPlat);
-                i += mult - 1; 
+        vector<vector<int>> camada2D(altura, vector<int>(largura));
+        for (int i = 0; i < altura; i++) {
+            for (int j = 0; j < largura; j++) {
+                camada2D[i][j] = data[i * largura + j];
             }
-            // --
-            else if (id >= 1004 && id < 1020) 
-            {
-                criarInimFaceis(minInim, maxInim, pos);
-            }
-            else if (id >= 1020 && id < 2098)
-            {
-                
-                criarJogador(pos);
-            }
-            
-
-        } 
-
-    }     
+        }
+        camadas.push_back(camada2D);
+    }
+    return camadas;
 }
+
+
+void Fase::criarFormigas(float posX, float posY) 
+{
+    
+    Inim_Facil* pInim = new Inim_Facil(sf::Vector2f(posX, posY));
+    if(pJog1) {
+       pInim->setJogador(pJog1); 
+    }
+
+    lista_ents.incluir(static_cast<Entidade*>(pInim));
+    gC.incluirInimigo(pInim); 
+}
+
+void Fase::criarPlataforma(float posX, float posY, int id_tile) 
+{
+    
+    Entidades::Obstaculos::Plataforma* pPlat = new Entidades::Obstaculos::Plataforma(sf::Vector2f(posX, posY), id_tile); 
+    lista_ents.incluir(static_cast<Entidade*>(pPlat));
+    gC.incluirObstaculo(pPlat); 
+    
+}
+
+void Fase::criarJogador(float posX, float posY) 
+{
+    
+    if(pJog1) {
+        pJog1->getCorpo().setPosition(sf::Vector2f(posX, posY)); 
+    }
+    else {
+        pJog1 = new Jogador(sf::Vector2f(posX, posY)); 
+        lista_ents.incluir(static_cast<Entidade*>(pJog1));
+        gC.setJogador(pJog1); 
+    }
+}
+/*void Fase::criarCenario()
+{
+   
+
+
+}*/
+
