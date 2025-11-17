@@ -14,6 +14,7 @@ namespace Entidades
             pFig->setPosition(250, 300); //setar posiçao padrao na fase.
             impacto = 1;
             num_vidas = 10;
+            velMovMax = 1;
         }
 
         Formiga::~Formiga()
@@ -65,11 +66,11 @@ namespace Entidades
             {
                 if (direcao && vel.x < velMovMax)
                 {
-                    acel.x = velMovMax / 4;
+                    acel.x = velMovMax / 10;
                 }
                 else if (!direcao && vel.x > -velMovMax)
                 {
-                    acel.x = -velMovMax / 4;
+                    acel.x = -velMovMax / 10;
                 }
                     //direção do jogador //gerenciador eventos
                 //vel.y = 0;

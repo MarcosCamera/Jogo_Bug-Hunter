@@ -41,6 +41,11 @@ namespace Entidades
         return chao;
     }
 
+    void Entidade::mudaDir()
+    {
+        direcao = !direcao;
+    }
+
     bool Entidade::getDir()const
     {
         return direcao;
@@ -57,12 +62,22 @@ namespace Entidades
         pFig->setPosition(novaPos);
     }
 
+    sf::Vector2f Entidade::getVel()const
+    {
+        return vel;
+    }
+    void Entidade::setVel(sf::Vector2f novaVel)
+    {
+        vel = novaVel;
+    }
+
     void Entidade::acelerar() //incluir todas acelerações
     {
+        /*
         if (chao)
             normal = -gravidade;
         else
-            normal = 0;
+            normal = 0;*/
 
         acel.y = (gravidade * !chao); // -(normal * chao) - (vel.y * arrasto); //arrasto como 0 para teste
                                                                                //na finalização, nao usa chao, 
@@ -75,8 +90,17 @@ namespace Entidades
 
     void Entidade::atualizaVel() //ou apenas vel = vel + acel; ?
     {
-        vel += acel;
+        if ((vel.x > 0 && direcao) || (vel.x < 0 && !direcao))
+        {
+            vel.x = 0;
+            acel.x = 0;
+        }
 
+        vel += acel;
+        if (chao)
+        {
+            vel.y = 0;
+        }
         /*
         if (vel.x < velMovMax)
         {
@@ -93,5 +117,6 @@ namespace Entidades
     void Entidade::atualizaPos()
     {
         pos += vel; //aqui verifica colisoes
+        pFig->setPosition(pos);
     }
 }

@@ -22,7 +22,8 @@ namespace Entidades
             float velMovMax; //maxima velocidade para cada direção //deveria ser const?
             bool direcao; //true se for pra direita e false se for pra esquerda. TRATAR EM OBSTACULIZAR
             bool chao; //se está pisando em algo
-            //ostream buffer; //para que serve???
+            //bool vivo//
+            //sf::RectangleShape tamanhoVida;
 
         public:
             Entidade();
@@ -31,9 +32,12 @@ namespace Entidades
 
             void setChao(bool c);
             bool getChao()const;
+            void mudaDir();
             bool getDir()const;
             sf::Vector2f getPos()const;
             void setPos(sf::Vector2f novaPos);
+            sf::Vector2f getVel()const;
+            void setVel(sf::Vector2f novaVel);
             void acelerar(); //incluir resistencia do ar
             void atualizaVel();
             void atualizaPos();

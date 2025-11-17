@@ -71,7 +71,6 @@ namespace Gerenciadores
         }
     }
 
-
     void Gerenciador_Colisoes::tratarColisoesJogsObstacs()
     {
         list<Entidades::Obstaculos::Obstaculo*>::iterator it;
@@ -95,7 +94,6 @@ namespace Gerenciadores
             }
         }
     }
-
 
     void Gerenciador_Colisoes::tratarColisoesJogsInimigs()
     {
@@ -156,6 +154,7 @@ namespace Gerenciadores
         {
             Entidades::Personagens::Inimigo* pInim = *itIn;
 
+            pInim->setChao(false); //obstaculizar set verdadeiro depois
             for (itObs = LOs.begin(); itObs != LOs.end(); itObs++)
             {
                 Entidades::Obstaculos::Obstaculo* pObst = *itObs;

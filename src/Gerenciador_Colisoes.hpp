@@ -32,6 +32,10 @@ namespace Gerenciadores
             void tratarColisoesInimigsProjeteis(); //nao estava no UML padrao
             void tratarColisoesObstacsProjeteis(); //nao estava no UML padrao
             //InimigsInimigs
+            //JogsParedes
+            //InimigosParedes
+            //ProjeteisParedes
+            //ObstaculosParedes
 
         public:
             void incluirInimigo(Entidades::Personagens::Inimigo* pi);

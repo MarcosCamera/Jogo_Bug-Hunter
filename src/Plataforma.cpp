@@ -29,21 +29,22 @@ namespace Entidades
             }
         }
 
-        void Plataforma::obstaculizar(Entidades::Entidade* p)
+        void Plataforma::obstaculizar(Personagens::Personagem* p)
         {
             if (p) 
             {
                 sf::FloatRect intersec;
-                sf::FloatRect jogadorBounds = p->getFig()->getGlobalBounds();  //chamar de entidadeBounds
+                sf::FloatRect personagemBounds = p->getFig()->getGlobalBounds();
                 sf::FloatRect obstaculoBounds = this->getFig()->getGlobalBounds();
 
-                if (jogadorBounds.intersects(obstaculoBounds, intersec))
+                if (personagemBounds.intersects(obstaculoBounds, intersec))
                 {
                     sf::Vector2f novaPos = p->getPos();
-                    if (intersec.width < intersec.height)
+                    if (intersec.width < intersec.height) //colisao horizontal
                     {
+                        p->mudaDir(); //talvez nao seja necessario o if seguinte?
 
-                        if (jogadorBounds.left < obstaculoBounds.left)
+                        if (personagemBounds.left < obstaculoBounds.left)
                         {
                             novaPos.x -= intersec.width;
                         }
@@ -52,10 +53,10 @@ namespace Entidades
                             novaPos.x += intersec.width;
                         }
                     }
-                    else
+                    else //colisao vertical
                     {
                         p->setChao(true); //para o gerenciador de colisões
-                        if (jogadorBounds.top < obstaculoBounds.top)
+                        if (personagemBounds.top < obstaculoBounds.top)
                         {
                             novaPos.y -= intersec.height;
                         }

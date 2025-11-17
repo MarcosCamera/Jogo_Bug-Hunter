@@ -16,7 +16,7 @@ namespace Entidades
             //Plataforma(const std::string& caminhoSprite, sf::Vector2f position);
             ~Plataforma();
 
-            void obstaculizar(Entidades::Entidade* p);
+            void obstaculizar(Personagens::Personagem* p);
             void salvar();
             void executar();
         };

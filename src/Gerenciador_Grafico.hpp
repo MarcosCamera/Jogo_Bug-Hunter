@@ -21,6 +21,8 @@ namespace Gerenciadores
         bool abertaJanela();
         void fecharJanela();
         void desenharEnte(Ente* pE);
+        void desenharRect(sf::RectangleShape r);//funçao temporaria para teste
+
         //criar executar para limpar, desenhar e mostrar. nesse caso, pE (Ente) é uma lista
     };
 }

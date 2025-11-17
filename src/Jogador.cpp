@@ -12,7 +12,7 @@ namespace Entidades
 			pFig->setPosition(10, 300); //setar posiçao padrao na fase.
 			impacto = 1;
 			num_vidas = 10;
-			velMovMax = 1;
+			velMovMax = 2;
 		}
 		//para jogador2, posiçao relativa ao jogador 1, ou ambos aparecem ao mesmo tempo.
 
@@ -30,26 +30,71 @@ namespace Entidades
 			}
 		}
 
-
 		void Jogador::danificarInim(Inimigo* pIn)
 		{
 			pIn->perdeVida(impacto);
 		}
 
-
 		void Jogador::colidir(Inimigo* pIn)
 		{
+			/*
 			float alturaJog = getFig()->getGlobalBounds().height;
-
-			if (pos.y + 0.9 * alturaJog < pIn->getPos().y) //para o caso de o jogador passar pelo inimigo
-				//ao invés de 0.9, o que poderia ser?
+			float alturaInim = pIn->getFig()->getGlobalBounds().height;
+			
+			if (pos.y + alturaJog < pIn->getPos().y + alturaInim)
 			{
 				danificarInim(pIn);
-				vel.y = -0.9f * vel.y; // 0.9 relativo a perda de energia. Pode se tornar atributo?
+				vel.y = -vel.y; // * 0.9 relativo a perda de energia?
+			}*/
+			
+			sf::FloatRect intersec;
+			sf::FloatRect inimigoBounds = pIn->getFig()->getGlobalBounds();
+			sf::FloatRect jogadorBounds = this->getFig()->getGlobalBounds();
+
+			if (inimigoBounds.intersects(jogadorBounds, intersec))
+			{
+				sf::Vector2f novaPos = pIn->getPos();
+				if (intersec.width < intersec.height) //colisao horizontal
+				{
+					pIn->mudaDir(); //talvez nao seja necessario o if seguinte?
+
+					if (inimigoBounds.left < jogadorBounds.left) //inimigo esquerda
+					{
+						pIn->danificar(this);
+						novaPos.x -= intersec.width;
+					}
+					else //inimigo direita
+					{
+						pIn->danificar(this);
+						novaPos.x += intersec.width;
+					}
+				}
+				else //colisao vertical
+				{
+					if (inimigoBounds.top < jogadorBounds.top) //inimigo em cima
+					{
+						pIn->danificar(this);
+						novaPos.y -= intersec.height;
+						pIn->setVel(sf::Vector2f(pIn->getVel().x, -pIn->getVel().y));
+					}
+					else //inimigo embaixo
+					{
+						danificarInim(pIn);
+						novaPos.y += intersec.height;
+						vel.y = -vel.y;
+					}
+				}
+
+				pIn->setPos(novaPos);
+			}
+
+			if (pIn->getPos().x > getPos().x)
+			{
+				vel = (sf::Vector2f(-pIn->getImpacto(), -pIn->getImpacto()/2));
 			}
 			else
 			{
-				pIn->danificar(this); //ta certo???
+				vel = (sf::Vector2f(-pIn->getImpacto(), pIn->getImpacto() / 2));
 			}
 		}
 
@@ -59,7 +104,7 @@ namespace Entidades
 
 		void Jogador::controlar()
 		{
-			int keyTimeMax = 1; // delay para mover novamente //faço como atributo(???)
+			//int keyTimeMax = 1; // delay para mover novamente //faço como atributo(???)
 			//posição mouse //para debugar
 			/* sf::Vector2i posMouse = sf::Mouse::getPosition(*pGG->getWindow());
 			setPos(static_cast<float>(posMouse.x), static_cast<float>(posMouse.y));*/
@@ -71,22 +116,21 @@ namespace Entidades
 			//.move(velocidade); um dos dois.
 			//implementar o mesmo para outras entidades.
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && vel.x > (-velMovMax) )
-				//&& timer >= keyTimeMax)
 			{
-				vel.x -= velMovMax / 10; //há uma aceleração
-				//timer = 0;
+				vel.x -= velMovMax;
+				direcao = false;
 			}
+
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && vel.x < velMovMax )
-				//&& timer >= keyTimeMax)
 			{
-				vel.x += velMovMax / 10;
-				//timer = 0;
+				vel.x += velMovMax;
+				direcao = true;
 			}
+			
+
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && chao )
-				//&& timer >= keyTimeMax)
 			{
-				vel.y -= 2*velMovMax; //fazer como velocidade de pulo depois
-				//timer = 0;
+				vel.y -= 5 * velMovMax;
 			}
 			/*
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && vel.y < velMovMax)
@@ -97,16 +141,21 @@ namespace Entidades
 			}
 			*/
 			//timer++;
+			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::A) && !sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+			{
+				vel.x = 0;
+			}
+
+			//if(jog2) //para jogador 2
 		}
-		//é possivel implementar tambem sem haver uma velocidade maxima mas com a desaceleraçao naturalmente limitando
+			//é possivel implementar tambem sem haver uma velocidade maxima mas com a desaceleraçao naturalmente limitando
 
 
 		void Jogador::mover()
 		{
-
 			acelerar();
-			controlar();
 			atualizaVel(); //antes ou depois das acelerações? Testar com ambas formas.
+			controlar();
 			atualizaPos();
 		}
 

@@ -68,3 +68,8 @@ void Gerenciador_Grafico::desenharEnte(Ente* pE)
             window.draw(*(pE->getFig()));
     }
 }
+
+void Gerenciador_Grafico::desenharRect(sf::RectangleShape r)
+{
+    window.draw(r);
+}

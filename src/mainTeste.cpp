@@ -21,22 +21,35 @@ int main()
 
 	Jogador jog;
 	Formiga form(&jog);
-	Plataforma plat;
+	Plataforma plat1;
+	Plataforma plat2;
+	Plataforma plat3;
 
 	Ente* eJog = &jog; //ta certo? ao inves de fazer static cast???
 	Ente* eForm = &form;
-	Ente* ePlat = &plat;
+	Ente* ePlat1 = &plat1;
+	Ente* ePlat2 = &plat2;
+	Ente* ePlat3 = &plat3;
 
 	jog.setTexture("Texturas/aranha.png", sf::Vector2f(0.03f, 0.03f));
 	form.setTexture("Texturas/formiga.png", sf::Vector2f(0.03f, 0.03f));
-	plat.setTexture("Texturas/plataforma.png", sf::Vector2f(10.f, 10.f));
+	plat1.setTexture("Texturas/plataforma.png", sf::Vector2f(100.f, 100.f));
+	plat2.setTexture("Texturas/plataforma.png", sf::Vector2f(1.f, 1.f));
+	plat3.setTexture("Texturas/plataforma.png", sf::Vector2f(1.f, 1.f));
+	//sf::RectangleShape r(Vector2f(jog.getFig()->getGlobalBounds().width, jog.getFig()->getGlobalBounds().height));
+	//r.setFillColor(Color::Blue);
 
-	plat.getFig()->setPosition(0, 500);
-	form.getFig()->setPosition(80, 450);
+	plat1.setPos(sf::Vector2f(0, 500));
+	plat2.setPos(sf::Vector2f(0, 480));
+	plat3.setPos(sf::Vector2f(400, 480));
+	form.setPos(sf::Vector2f(200, 450));
+	
 
 	colis.setJogador(&jog);
 	colis.incluirInimigo(&form);
-	colis.incluirObstaculo(&plat);
+	colis.incluirObstaculo(&plat1);
+	colis.incluirObstaculo(&plat2);
+	colis.incluirObstaculo(&plat3);
 
 	while (graf.abertaJanela())
 	{
@@ -51,16 +64,21 @@ int main()
 
 		jog.executar();
 		form.executar();
-		plat.executar();
+		plat1.executar();
+		plat2.executar();
+		plat3.executar();
 
 		colis.executar();
-
+		//r.setPosition(Vector2f(jog.getPos().x, jog.getPos().y));
 
 		/*DRAW*/
 		graf.getWindow().clear(Color::White);
 		graf.desenharEnte(eJog);
-		graf.desenharEnte(ePlat);
 		graf.desenharEnte(eForm);
+		graf.desenharEnte(ePlat1);
+		graf.desenharEnte(ePlat2);
+		graf.desenharEnte(ePlat3);
+		//graf.desenharRect(r);
 		graf.getWindow().display();
 	}
 	return 0;
