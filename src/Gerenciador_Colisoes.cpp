@@ -1,7 +1,5 @@
 #include "Gerenciador_Colisoes.hpp"
 #include <iostream>
-//#include "Obstaculo.hpp" //corrigir namespaces depois
-#include "Obstaculo.hpp"
 
 using namespace std;
 using namespace sf;
@@ -90,7 +88,7 @@ namespace Gerenciadores
             {
                 Entidades::Obstaculos::Obstaculo* pObst = *it;
                 
-                if (pObst && verificarColisao(pJog1, pObst))
+                if (pObst && verificarColisao(pJog1, pObst)) // nao esta redundante?? ele verifica colisao aqui e em obstaculizar
                 {
                     pObst->obstaculizar(pJog1); //tratar em obstaculizar os obstaculos de dano também. obstaculizar deve 
                 }                               //ser implementada em cada tipo de obstaculo diferentemente.
@@ -140,10 +138,10 @@ namespace Gerenciadores
             {
                 Entidades::Projetil* pProj = *it;
 
-                if (pProj && verificarColisao(pJog1, pProj))
+                if (pProj && !pProj->getAliado() && verificarColisao(pJog1, pProj))
                 {
-                    pProj->danificarJogador(pJog1);//ainda nao implementada em Projetil. 
-                    //setar ativo para false 
+                    pProj->danificarPersonagem(static_cast<Entidades::Personagens::Personagem*>(pJog1)); 
+                    pProj->desativar();
                 }
             }
         }
@@ -183,9 +181,10 @@ namespace Gerenciadores
             {
                 Entidades::Projetil* pProj = *itPj;
 
-                if (pInim && pProj && verificarColisao(pInim, pProj))
+                if (pInim && pProj && pProj->getAliado() && verificarColisao(pInim, pProj))
                 {
-                    //setar bool ativo para false 
+                    pProj->danificarPersonagem(static_cast<Entidades::Personagens::Personagem*>(pInim));
+                    pProj->desativar();
                 }
             }
 
@@ -206,6 +205,7 @@ namespace Gerenciadores
                 Entidades::Projetil* pProj = *itPj;
                 if (pObst && pProj && verificarColisao(pObst, pProj))
                 {
+                    pProj->desativar();
                     //setar bool ativo para false se for de inimigo
                     //se projetil for de aranha, o projetil fica estatico e muda a sprite
                 }

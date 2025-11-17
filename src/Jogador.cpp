@@ -1,5 +1,4 @@
 #include "Jogador.hpp"
-#include "inimigo.hpp"
 #include "Gerenciador_Grafico.hpp"
 #include <iostream>
 using namespace std;
@@ -13,7 +12,7 @@ namespace Entidades
 			pFig->setPosition(10, 300); //setar posiçao padrao na fase.
 			impacto = 1;
 			num_vidas = 10;
-
+			velMovMax = 1;
 		}
 		//para jogador2, posiçao relativa ao jogador 1, ou ambos aparecem ao mesmo tempo.
 
@@ -34,7 +33,7 @@ namespace Entidades
 
 		void Jogador::danificarInim(Inimigo* pIn)
 		{
-			pIn->setVida(impacto);
+			pIn->perdeVida(impacto);
 		}
 
 
@@ -46,7 +45,7 @@ namespace Entidades
 				//ao invés de 0.9, o que poderia ser?
 			{
 				danificarInim(pIn);
-				vel.y = -0.9 * vel.y; // 0.9 relativo a perda de energia. Pode se tornar atributo?
+				vel.y = -0.9f * vel.y; // 0.9 relativo a perda de energia. Pode se tornar atributo?
 			}
 			else
 			{
@@ -60,7 +59,7 @@ namespace Entidades
 
 		void Jogador::controlar()
 		{
-			int keyTimeMax = 10; // delay para mover novamente //faço como atributo(???)
+			int keyTimeMax = 1; // delay para mover novamente //faço como atributo(???)
 			//posição mouse //para debugar
 			/* sf::Vector2i posMouse = sf::Mouse::getPosition(*pGG->getWindow());
 			setPos(static_cast<float>(posMouse.x), static_cast<float>(posMouse.y));*/
@@ -71,39 +70,44 @@ namespace Entidades
 			//posiçao = posiçao + velocidade; // talvez esse seja melhor para padronizar. Teria que fazer um setPosicao.
 			//.move(velocidade); um dos dois.
 			//implementar o mesmo para outras entidades.
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && timer >= keyTimeMax && vel.x < (-velMovMax))
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && vel.x > (-velMovMax) )
+				//&& timer >= keyTimeMax)
 			{
 				vel.x -= velMovMax / 10; //há uma aceleração
-				timer = 0;
+				//timer = 0;
 			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && timer >= keyTimeMax && vel.x < velMovMax)
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && vel.x < velMovMax )
+				//&& timer >= keyTimeMax)
 			{
 				vel.x += velMovMax / 10;
-				timer = 0;
+				//timer = 0;
 			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && timer >= keyTimeMax && vel.y < (-velMovMax))
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && chao )
+				//&& timer >= keyTimeMax)
 			{
-				vel.y -= velMovMax / 10; //fazer como velocidade de pulo depois
-				timer = 0;
+				vel.y -= 2*velMovMax; //fazer como velocidade de pulo depois
+				//timer = 0;
 			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && timer >= keyTimeMax && vel.y < velMovMax)
+			/*
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && vel.y < velMovMax)
+				//&& timer >= keyTimeMax)
 			{
 				vel.y += velMovMax / 10; //na pratica so a gravidade acelera
-				timer = 0;
+				//timer = 0;
 			}
-			timer++;
+			*/
+			//timer++;
 		}
-		//é possivel implementar tambem sem haver uma velocidade maxima, mas a desaceleraçao naturalmente limita
+		//é possivel implementar tambem sem haver uma velocidade maxima mas com a desaceleraçao naturalmente limitando
 
 
 		void Jogador::mover()
 		{
 
-			controlar();
 			acelerar();
+			controlar();
 			atualizaVel(); //antes ou depois das acelerações? Testar com ambas formas.
-
-			pFig->move(vel);
+			atualizaPos();
 		}
 
 

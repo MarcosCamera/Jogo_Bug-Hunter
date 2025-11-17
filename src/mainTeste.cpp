@@ -20,19 +20,19 @@ int main()
 	Gerenciador_Colisoes colis;
 
 	Jogador jog;
-	Formiga form;
+	Formiga form(&jog);
 	Plataforma plat;
 
 	Ente* eJog = &jog; //ta certo? ao inves de fazer static cast???
 	Ente* eForm = &form;
 	Ente* ePlat = &plat;
 
-	jog.setTexture("Textura/imagem1", sf::Vector2f(0.03f, 0.03f));
-	form.setTexture("Textura/imagem2", sf::Vector2f(0.03f, 0.03f));
-	plat.setTexture("Textura/imagem3", sf::Vector2f(1.f, 200.f));
+	jog.setTexture("Texturas/aranha.png", sf::Vector2f(0.03f, 0.03f));
+	form.setTexture("Texturas/formiga.png", sf::Vector2f(0.03f, 0.03f));
+	plat.setTexture("Texturas/plataforma.png", sf::Vector2f(10.f, 10.f));
 
 	plat.getFig()->setPosition(0, 500);
-	plat.getFig()->setScale(1.f, 200.f);
+	form.getFig()->setPosition(80, 450);
 
 	colis.setJogador(&jog);
 	colis.incluirInimigo(&form);

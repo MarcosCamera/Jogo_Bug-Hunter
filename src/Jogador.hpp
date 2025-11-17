@@ -1,5 +1,6 @@
 #pragma once
 #include "Personagem.hpp"
+#include "Inimigo.hpp"
 #include <iostream>  //precisa desses includes que foram adicionados nas primitivas???
 #include <SFML/Graphics.hpp>
 #include <cstdlib>

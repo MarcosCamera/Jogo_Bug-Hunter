@@ -29,15 +29,12 @@ namespace Entidades
             }
         }
 
-        void Plataforma::executar() {}
-
-        void Plataforma::salvar() {}
-
-        void Plataforma::obstaculizar(Personagens::Jogador* p)
+        void Plataforma::obstaculizar(Entidades::Entidade* p)
         {
-            if (p) {
+            if (p) 
+            {
                 sf::FloatRect intersec;
-                sf::FloatRect jogadorBounds = p->getFig()->getGlobalBounds();
+                sf::FloatRect jogadorBounds = p->getFig()->getGlobalBounds();  //chamar de entidadeBounds
                 sf::FloatRect obstaculoBounds = this->getFig()->getGlobalBounds();
 
                 if (jogadorBounds.intersects(obstaculoBounds, intersec))
@@ -57,6 +54,7 @@ namespace Entidades
                     }
                     else
                     {
+                        p->setChao(true); //para o gerenciador de colisões
                         if (jogadorBounds.top < obstaculoBounds.top)
                         {
                             novaPos.y -= intersec.height;
@@ -71,5 +69,9 @@ namespace Entidades
                 }
             }
         }
+
+        void Plataforma::salvar() {}
+
+        void Plataforma::executar() {}
     }
 }

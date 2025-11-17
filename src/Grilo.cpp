@@ -20,7 +20,7 @@ namespace Entidades
 
 		void Grilo::danificar(Jogador* pJog) //deve ser diferente para cada inimigo
 		{
-			pJog->setVida(impacto);
+			pJog->perdeVida(impacto);
 			if(nivel_maldade < 2) //salto aumenta conforme o nivel de maldade
 				operator++();
 		}
@@ -33,7 +33,7 @@ namespace Entidades
 					vel.x = velMovMax;
 				else
 					vel.x = -velMovMax;
-				vel.y = - tamanhoSalto * (nivel_maldade + 1);
+				vel.y = -static_cast<float>(tamanhoSalto) * static_cast<float>(nivel_maldade + 1);
 				
 				normal = - gravidade + vel.y; //força normal para cima
 				timer = 0;
@@ -46,8 +46,7 @@ namespace Entidades
 
 			acelerar();
 			atualizaVel(); //antes ou depois das acelerações? Testar com ambas formas.
-
-			pFig->move(vel);
+			atualizaPos();
 		}
 
 		void Grilo::salvar()
@@ -55,9 +54,9 @@ namespace Entidades
 
 		}
 
-		void executar()
+		void Grilo::executar()
 		{
-
+			mover();
 		}
 	}
 }

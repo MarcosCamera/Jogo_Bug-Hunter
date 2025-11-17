@@ -16,10 +16,10 @@ namespace Entidades
             sf::Vector2f pos;
             sf::Vector2f vel;
             sf::Vector2f acel; //faço um vetor aceleracao???
-            const float gravidade;
+            const float gravidade; //fazer velocidade terminal
             float normal; //força normal que anula gravidade
             const float arrasto;
-            const float velMovMax; //maxima velocidade para cada direção
+            float velMovMax; //maxima velocidade para cada direção //deveria ser const?
             bool direcao; //true se for pra direita e false se for pra esquerda. TRATAR EM OBSTACULIZAR
             bool chao; //se está pisando em algo
             //ostream buffer; //para que serve???
@@ -30,11 +30,13 @@ namespace Entidades
             virtual ~Entidade();
 
             void setChao(bool c);
-            bool getChao();
+            bool getChao()const;
+            bool getDir()const;
             sf::Vector2f getPos()const;
             void setPos(sf::Vector2f novaPos);
             void acelerar(); //incluir resistencia do ar
             void atualizaVel();
+            void atualizaPos();
             virtual void executar() = 0;
             virtual void salvar() = 0;
     };

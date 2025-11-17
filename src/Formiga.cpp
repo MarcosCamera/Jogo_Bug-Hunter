@@ -1,14 +1,16 @@
 #include "Formiga.hpp"
 #include "Gerenciador_Grafico.hpp"
 #include "Jogador.hpp" // Certifique-se de incluir o cabeçalho completo de Jogador
+#include <cmath>
 using namespace std;
 
 namespace Entidades
 {
     namespace Personagens
     {
-        Formiga::Formiga() :Inimigo(), raio(0)
+        Formiga::Formiga(Jogador* pJ) :Inimigo(), raio(0.5), pJog1(NULL)
         {
+            pJog1 = pJ;
             pFig->setPosition(250, 300); //setar posiçao padrao na fase.
             impacto = 1;
             num_vidas = 10;
@@ -44,16 +46,16 @@ namespace Entidades
 
             float x = pos.x - pJog->getPos().x;
             float y = pos.y - pJog->getPos().y;
-            if (sqrt(x * x + y * y) <= raio && !nivel_maldade)
+            if (sqrt(x * x + y * y) <= raio && !nivel_maldade) //corrigir para o centro da sprite
             {
-                operator++;
+                operator++();
             }
             seguir(pJog);
         }
 
         void Formiga::danificar(Jogador* pJog)
         {
-            pJog->setVida(impacto);
+            pJog->perdeVida(impacto);
         }
 
 
@@ -61,8 +63,6 @@ namespace Entidades
         {
             if (chao)
             {
-                normal = - gravidade;
-
                 if (direcao && vel.x < velMovMax)
                 {
                     acel.x = velMovMax / 4;
@@ -74,18 +74,14 @@ namespace Entidades
                     //direção do jogador //gerenciador eventos
                 //vel.y = 0;
             }
-            else
-            {
-                normal = 0;
-            }
+
             acelerar();
             atualizaVel();
             // qual ordem de inicialização de velocidades?
             vel.x += acel.x * (nivel_maldade + 1);
             vel.y += acel.y * (nivel_maldade + 1);
 
-
-            pFig->move(vel);
+            atualizaPos();
         }
 
 

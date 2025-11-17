@@ -14,15 +14,16 @@ namespace Entidades
         protected:
             int num_vidas;
             int impacto;
-            int timer; //para voltar a realizar alguma ação
+            int timer; //para voltar a realizar alguma ação. //fazer static e função estatica em algum lugar
+            bool disparar;
 
         public:
             Personagem();
             virtual ~Personagem();
 
-            void setVida(int f); //fazer como operator--
+            void perdeVida(int i); //fazer como operator-- ?
             int getVida()const;
-            int getForca()const;
+            int getImpacto()const;
 
             virtual void mover() = 0;
             virtual void executar() = 0;

@@ -5,7 +5,7 @@ using namespace std;
 namespace Entidades 
 {
     Entidade::Entidade() :
-        Ente(), pos(0, 0), vel(0, 0), acel(0, 0), gravidade(10), arrasto(1), velMovMax(10), direcao(true), chao(false)
+        Ente(), pos(0, 0), vel(0, 0), acel(0, 0), gravidade(0.5), arrasto(0.5), velMovMax(1), direcao(true), chao(false), normal(0)
     {
 
     }
@@ -36,9 +36,14 @@ namespace Entidades
         chao = c;
     }
 
-    bool Entidade::getChao()
+    bool Entidade::getChao()const
     {
         return chao;
+    }
+
+    bool Entidade::getDir()const
+    {
+        return direcao;
     }
 
     sf::Vector2f Entidade::getPos()const
@@ -49,27 +54,44 @@ namespace Entidades
     void Entidade::setPos(sf::Vector2f novaPos)
     {
         pos = novaPos;
+        pFig->setPosition(novaPos);
     }
 
     void Entidade::acelerar() //incluir todas acelerações
     {
-        acel.y = (gravidade * !chao) - (normal * chao) - (vel.y * arrasto);
-        
-        if (vel.x > velMovMax)
-            acel.x = - vel.x * arrasto;
+        if (chao)
+            normal = -gravidade;
+        else
+            normal = 0;
+
+        acel.y = (gravidade * !chao); // -(normal * chao) - (vel.y * arrasto); //arrasto como 0 para teste
+                                                                               //na finalização, nao usa chao, 
+        /*                                                                     //a gravidade e normal se anulam.
+        if (vel.x > velMovMax)                                              
+            acel.x += - vel.x * arrasto;
         //acel.x com resistencia
+        */
     }
 
     void Entidade::atualizaVel() //ou apenas vel = vel + acel; ?
     {
+        vel += acel;
+
+        /*
         if (vel.x < velMovMax)
         {
-            if (vel.x + acel.x > velMovMax) {
+            if (vel.x + acel.x > velMovMax) 
+            {
                 vel.x = velMovMax;
                 vel.y += acel.y;
             }
             else
-                vel += acel;
+                vel.x += acel.x;
         }
+        */
+    }
+    void Entidade::atualizaPos()
+    {
+        pos += vel; //aqui verifica colisoes
     }
 }

@@ -11,11 +11,13 @@ namespace Entidades
             short int forca; //depende de nivel_maldade
                              // nivel de maldade varia com o timer
                              // aumenta dano e tamanho de projetil conforme diminui a vida
+            short int voo;
         public:
             LouvaDeus();
             ~LouvaDeus();
 
             void danificar(Jogador* pJog);
+            void atirar();
             void mover();
             void salvar();
             void executar();

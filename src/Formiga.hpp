@@ -17,7 +17,7 @@ namespace Entidades
             Jogador* pJog1; //para que não seja necessário, gerenciador de eventos. Colocar a associação no UML
 
         public:
-            Formiga();
+            Formiga(Jogador* pJ);
             ~Formiga();
 
             void seguir(Jogador* pJog);

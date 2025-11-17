@@ -5,6 +5,7 @@
 #include "Inimigo.hpp"
 #include "Jogador.hpp"
 #include "Obstaculo.hpp"
+#include "Projetil.hpp"
 
 using namespace std;
 

@@ -8,7 +8,7 @@ Gerenciador_Grafico* Gerenciadores::Gerenciador_Grafico::instancia(NULL);
 
 
 Gerenciador_Grafico::Gerenciador_Grafico():
-window(sf::RenderWindow(sf::VideoMode(800, 800), "BUG - HUNTER", sf::Style::Default))
+window(sf::VideoMode(800, 800), "BUG - HUNTER", sf::Style::Default)
 {
     window.setFramerateLimit(60); //ver testes.cpp como limite de fps, etc.
 }

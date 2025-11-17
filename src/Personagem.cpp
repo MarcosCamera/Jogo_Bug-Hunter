@@ -5,13 +5,13 @@ namespace Entidades
 	namespace Personagens
 	{
 
-		Personagem::Personagem() :Entidade(), num_vidas(0), impacto(0) {}
+		Personagem::Personagem() :Entidade(), num_vidas(0), impacto(0), disparar(false) {}
 
 		Personagem::~Personagem() {}
 
-		void Personagem::setVida(int f)
+		void Personagem::perdeVida(int i)
 		{
-			num_vidas -= f;
+			num_vidas -= i;
 		}
 
 		int Personagem::getVida()const
@@ -19,9 +19,9 @@ namespace Entidades
 			return num_vidas;
 		}
 
-		int Personagem::getForca()const
+		int Personagem::getImpacto()const
 		{
-			return forca;
+			return impacto;
 		}
 	}
 }

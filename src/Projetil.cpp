@@ -2,9 +2,11 @@
 
 namespace Entidades
 {
-	Projetil::Projetil(): Entidade(), ativo(true)
+	Projetil::Projetil(Personagens::Personagem* pAt): Entidade(), ativo(true), aliado(false)
 	{
-		
+		pAtirador = pAt;
+		direcao = pAtirador->getDir();
+		// da problema ter ponteiro de atirador se ele for eliminado?
 	}
 
 	Projetil::~Projetil()
@@ -16,7 +18,39 @@ namespace Entidades
 		}
 	}
 
-	Projetil::salvar(){}
+	bool Projetil::getAliado()const
+	{
+		return aliado;
+	}
 
-	Projetil::executar(){}
+	void Projetil::desativar()
+	{
+		ativo = false;
+	}
+
+	void Projetil::danificarPersonagem(Personagens::Personagem* pVitima)
+	{
+		if (ativo)
+		{
+			pVitima->perdeVida(pAtirador->getImpacto());
+			ativo = false;
+		}
+	}
+
+	void Projetil::mover()
+	{
+		if (direcao)
+		{
+			vel.x = velMovMax;
+		}
+		else
+			vel.x = -velMovMax;
+		vel.y = -velMovMax/10;
+
+		acelerar();
+	}
+
+	void Projetil::salvar(){}
+
+	void Projetil::executar(){}
 }

@@ -21,7 +21,7 @@ namespace Entidades
             //Obstaculo(const std::string& caminhoSprite, sf::Vector2f posicao);
             virtual ~Obstaculo();
 
-            virtual void obstaculizar(Entidade* pE) = 0; //pode ser entidade???
+            virtual void obstaculizar(Entidades::Entidade* pE) = 0; //pode ser entidade??? no UML ta como jogador!!!
             virtual void executar() = 0;
             virtual void salvar() = 0;
             //virtual void setDano(bool dano) = 0; por que seria necessário?
