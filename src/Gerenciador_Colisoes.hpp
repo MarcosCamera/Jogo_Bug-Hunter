@@ -4,6 +4,7 @@
 #include "Inimigo.hpp"
 #include "Jogador.hpp"
 #include "Obstaculo.hpp"
+#include "Parede.hpp"
 
 using namespace std;
 using namespace Entidades::Personagens;
@@ -18,6 +19,9 @@ namespace Gerenciadores
          vector<Inimigo*>  LIs;
          list<Obstaculo*> LOs;
          Jogador* pJog1;
+          Parede* pParedeChao;
+         
+
         
          public:
            Gerenciador_Colisoes();
@@ -26,6 +30,7 @@ namespace Gerenciadores
            void incluirInimigo(Inimigo* pi);
            void incluirObstaculo(Obstaculo* po);
            void setJogador(Jogador* pJ);
+           void setParede(Parede* pP);
            void executar();
 
         private:
@@ -34,6 +39,7 @@ namespace Gerenciadores
          void tratarColisoesJogsObstacs();
          void tratarColisoesJogsInimigs();
          void tratarColisoesInimigsObstacs();
+         void tratarColisoesParedeEntidades();
 
 
 
