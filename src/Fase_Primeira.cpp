@@ -4,14 +4,25 @@
 #include "Obstaculo.hpp"
 #include <cstdlib> 
 #include <ctime>
+#include <iostream>     
+#include <vector>       
+#include <algorithm>    
+
+using std::cout;
+using std::endl;
+using std::vector;
+
 
 Fases::Fase_Primeira::Fase_Primeira(Gerenciadores::Gerenciador_Grafico* pGG, Gerenciadores::Gerenciador_Colisoes& gC, std::string caminho) :
     Fase(pGG, gC), 
-    max(10),    
-    min(3)
+    maxFormigueiro(7),    
+    minFormigueiro(3),
+    maxGrilo(7),
+    minGrilo(3)
 {
     srand(static_cast<unsigned>(time(NULL)));
     carregarFase(caminho); 
+
     criarCenario();
 }
 
@@ -19,12 +30,11 @@ Fases::Fase_Primeira::~Fase_Primeira() { }
 
 void Fases::Fase_Primeira::carregarFase(const std::string& caminho)
 { 
-    formigaSpawnPoints.clear();
-    griloSpawnPoints.clear();
-    formigueiroSpawnPoints.clear();
+    
     
     json mapa = lerArquivoJSON(caminho);
-    vector<vector<vector<int>>> camadas = extrairCamadas(mapa);
+
+    vector<vector<vector<int>>> camadas = extrairCamadas(mapa); 
     gerarFase(camadas);
 }
 
@@ -48,34 +58,32 @@ void Fases::Fase_Primeira::gerarFase(vector<vector<vector<int>>> mapa)
 
                 switch(id_tile)
                 {
+                    
                     case 17: 
                     case 18:
                     case 19:
                     case 34:
-                        criarPlataforma(posX, posY, id_tile);
+                        criarPlataforma();
                         break;
                     case 309: 
                         cout<<"ok3"<<endl;
-                        criarJogador(posX, posY); 
+                        criarJogador(); 
                         break;
 
                     
-                    case 333: 
-                    case 334:
-                        formigaSpawnPoints.push_back(sf::Vector2f(posX, posY));
+                    case 332: 
+                        criarFormigas();
                         break;
                     case 9:   
-                        griloSpawnPoints.push_back(sf::Vector2f(posX, posY));
+                        criarInimMedios();
                         break;
-                    case 279: 
-                        formigueiroSpawnPoints.push_back(sf::Vector2f(posX, posY));
-                        break;
+                    case 440: 
+                        criarObstMedios();
 
-                    
+                        break;
 
                     default:
                         break;
-                
                 }
             }
         }
@@ -83,71 +91,98 @@ void Fases::Fase_Primeira::gerarFase(vector<vector<vector<int>>> mapa)
 }
 
 
+void Fases::Fase_Primeira::criarInimMedios() {
+     int numInim = minInim + (rand() % (maxInim - minInim + 1));
+     float y = pParedeChao->getPos().y;
+     
 
-void Fases::Fase_Primeira::criarInimMedios(float posX, float posY) {
-    Entidades::Personagens::Grilo* pInim = new Entidades::Personagens::Grilo(sf::Vector2f(posX, posY));
+    for(int i = 0; i < numInim ; i++)
+    {
+         float x = 100.f + static_cast<float>(rand() % static_cast<int>(larguraNivel - 200.f));
+
+    
+    Entidades::Personagens::Grilo* pInim = new Entidades::Personagens::Grilo(sf::Vector2f(x,y));
+    if(pInim)
+    {
+           float altura_inimigo = pInim->getCorpo().getSize().y;
+           float y_corrigido = y-altura_inimigo ;
+           pInim->getCorpo().setPosition(x, y_corrigido);
+
+    }
     if(pJog1) {
        pInim->setJogador(pJog1); 
-           
-
     }
 
     lista_ents.incluir(static_cast<Entidade*>(pInim));
     gC.incluirInimigo(pInim);
+   }
 }
 
-void Fases::Fase_Primeira::criarObstMedios(float posX, float posY, int id_tile) {
-    Entidades::Obstaculos::Formigueiro* pEsp = new Entidades::Obstaculos::Formigueiro(sf::Vector2f(posX, posY));
-    lista_ents.incluir(static_cast<Entidade*>(pEsp));
-    gC.incluirObstaculo(pEsp);
+void Fases::Fase_Primeira::criarObstMedios() {
+    
+    if (!pParedeChao) return;
+    
+    const float groundY = pParedeChao->getPos().y; 
+    
+    const float alturaSprite = 50.0f; 
+    
+    const float obstaculoY = groundY - alturaSprite; 
+    
+    int numObstaculos = minPlat + rand() % (maxPlat - minPlat + 1);
+    
+    const float ESPACAMENTO_MINIMO = 150.0f; 
+
+    std::vector<float> availablePositions;
+    
+    for (float x = 100.f; x < larguraNivel - 100.f; x += 50.f) {
+      availablePositions.push_back(x);
+    }
+
+    for (size_t i = availablePositions.size() - 1; i > 0; --i) {
+      int j = std::rand() % (i + 1); 
+      float temp = availablePositions[i];
+      availablePositions[i] = availablePositions[j];
+      availablePositions[j] = temp;
+    }
+
+    std::vector<float> usedPositions;
+    int createdObstaculos = 0;
+
+    for (size_t i = 0; i < availablePositions.size() && createdObstaculos < numObstaculos; i++) {
+        float x = availablePositions[i];
+        bool positionValid = true;
+
+        for (std::vector<float>::iterator it = usedPositions.begin(); it != usedPositions.end(); ++it) {
+          if (fabs(x - *it) < ESPACAMENTO_MINIMO) {
+            positionValid = false;
+            break; 
+          }
+        }
+
+        if (positionValid) {
+          
+          Entidades::Obstaculos::Plataforma *pPlat = 
+                new Entidades::Obstaculos::Plataforma(sf::Vector2f(x, obstaculoY), 440);
+          
+          lista_ents.incluir(static_cast<Entidades::Entidade*>(pPlat));
+          gC.incluirObstaculo(pPlat);
+          
+          usedPositions.push_back(x); 
+          createdObstaculos++;
+        }
+    }
 }
 
 void Fases::Fase_Primeira::criarInimigos()
-{
-   
-    if (!formigaSpawnPoints.empty()) {
-        std::random_shuffle(formigaSpawnPoints.begin(), formigaSpawnPoints.end());
-        int numFormigas = min + (rand() % (max - min + 1)); 
-        if (numFormigas > formigaSpawnPoints.size()) {
-            numFormigas = formigaSpawnPoints.size();
-        }
-
-        for (int i = 0; i < numFormigas; i++) {
-            sf::Vector2f pos = formigaSpawnPoints[i];
-            criarFormigas(pos.x, pos.y);
-        }
-    }
-
-    if (!griloSpawnPoints.empty()) {
-        std::random_shuffle(griloSpawnPoints.begin(), griloSpawnPoints.end());
-        int numGrilos = min + (rand() % (max - min + 1)); 
-        
-        if (numGrilos > griloSpawnPoints.size()) {
-            numGrilos = griloSpawnPoints.size();
-        }
-
-        for (int i = 0; i < numGrilos; i++) {
-            sf::Vector2f pos = griloSpawnPoints[i];
-            criarInimMedios(pos.x, pos.y);
-        }
-    }
-
+{  
+   criarFormigas();
+   criarInimMedios();
 
 }
 
 void Fases::Fase_Primeira::criarObstaculos()
 {
-   if (!formigueiroSpawnPoints.empty()) {
-        std::random_shuffle(formigueiroSpawnPoints.begin(), formigueiroSpawnPoints.end());
-        int numObstaculos = min + (rand() % (max - min + 1));
-
-        if (numObstaculos > formigueiroSpawnPoints.size()) {
-            numObstaculos = formigueiroSpawnPoints.size();
-        }
-
-        for (int i = 0; i < numObstaculos; i++) {
-            sf::Vector2f pos = formigueiroSpawnPoints[i];
-            criarObstMedios(pos.x, pos.y, 279); // 279 é id do formigueiro
-        }
-    }
+    criarPlataforma();
+    criarObstMedios();
+    
 }
