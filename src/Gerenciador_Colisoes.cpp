@@ -42,6 +42,11 @@ void Gerenciador_Colisoes :: setJogador(Jogador* pJ)
   pJog1 = pJ;
 }
 
+void Gerenciador_Colisoes :: setParede(Parede* pP)
+{
+    pParedeChao = pP;
+}
+
 const bool Gerenciador_Colisoes::verificarColisao(Entidade* p1, Entidade* p2) const
 {
     if(p1 && p2)
@@ -56,3 +61,120 @@ const bool Gerenciador_Colisoes::verificarColisao(Entidade* p1, Entidade* p2) co
       return false;
     }
 }
+
+
+void Gerenciador_Colisoes::tratarColisoesJogsObstacs()
+{
+    list<Obstaculo*>::iterator it;
+    if(!pJog1)
+    {
+      cout << "GerenciadorColisoes::tratarColisoesJogsObstacs() -> pJog1 NULL" << endl;
+        return;
+    }
+    for(it = LOs.begin(); it != LOs.end(); it++)
+    {
+        Obstaculo* pObst = *it;
+
+        if (pObst && verificarColisao(pJog1, pObst))
+        {
+            pObst->obstaculizar(pJog1);
+        }
+    }
+
+
+}
+
+
+void Gerenciador_Colisoes::tratarColisoesJogsInimigs()
+{
+   vector<Inimigo*>::iterator it;
+
+    if(!pJog1){
+        cout << "GerenciadorColisoes::coliJogInimigo() -> pJog1 NULL" << endl;
+        return;
+    }
+
+    for(it = LIs.begin(); it != LIs.end(); it++)
+    {
+      Inimigo* pInim = *it;
+
+      if(pInim && verificarColisao(pJog1, pInim))
+      {
+         pJog1->colidir(pInim);
+      }
+    }
+    
+}
+
+void Gerenciador_Colisoes::tratarColisoesInimigsObstacs()
+{
+   
+    vector<Inimigo*>::iterator itInimigo;
+    list<Obstaculo*>::iterator itObstaculo;
+
+    for (itInimigo = LIs.begin(); itInimigo != LIs.end(); itInimigo++)
+    {
+        Inimigo* pInim = *itInimigo; 
+        for (itObstaculo = LOs.begin(); itObstaculo != LOs.end(); itObstaculo++)
+        {
+            Obstaculo* pObst = *itObstaculo; 
+            if (pInim && pObst && verificarColisao(pInim, pObst))
+            {
+                
+                pObst->obstaculizar(pInim);
+            }
+        }
+    }
+}
+
+void Gerenciadores::Gerenciador_Colisoes::tratarColisoesParedeEntidades()
+{
+    if (!pParedeChao)
+    {
+        return; 
+    }
+
+    
+    if (pJog1) 
+    {
+    
+        if (verificarColisao(pJog1, pParedeChao))
+        {
+            
+           // pParedeChao->tratarColisao(static_cast<Personagens::Personagem*>(pJog1)); nao está implementada Parede::tratarColisao() 
+        }
+        else
+        {
+             
+             pJog1->setChao(false);
+        }
+    }
+
+    for (auto it = LIs.begin(); it != LIs.end(); ++it)
+    {
+        Personagens::Inimigo* pInimigo = *it;
+
+        if (pInimigo) 
+        {
+            if (verificarColisao(pInimigo, pParedeChao))
+            {
+              //  pParedeChao->tratarColisao(static_cast<Personagens::Personagem*>(pInimigo));
+            }
+            else
+            {
+                 
+                 pInimigo->setChao(false);
+            }
+        }
+    }
+}
+void Gerenciador_Colisoes::executar() {
+
+ 
+    tratarColisoesJogsObstacs();
+    tratarColisoesJogsInimigs();
+    tratarColisoesInimigsObstacs();
+    tratarColisoesParedeEntidades()
+}
+
+
