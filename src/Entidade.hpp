@@ -6,21 +6,31 @@
 namespace Entidades{
 class Entidade : public Ente{
    protected:
+      bool chao;
       sf::Vector2f vel;
-      sf::Vector2f pos;
-      sf::Texture textura;
+       sf::Vector2f acel;
+       bool direcao;
+      const float gravidade;
+      const float velMovMax;
+      const float arrasto;
+      float normal;
+      
 
     public:
-      Entidade();
-      Entidade(const std::string& caminhoSprite, sf::Vector2f posicao);//sobrecarga construtora
+
+      Entidade(sf::Vector2f posicao);
       virtual ~Entidade();
 
       virtual void executar() = 0;
       void setVel(sf::Vector2f velocidade);
-      void setPos(sf::Vector2f posicao);
+      
 
       sf::Vector2f getVel() const;
       sf::Vector2f getPos() const;
-      void colidirParede();
+      void acelerar(); 
+      void atualizaVel();
+
+       void setChao(bool c);
+      
   };
 }
