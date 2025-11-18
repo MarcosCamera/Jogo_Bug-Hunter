@@ -51,7 +51,11 @@ namespace Fases
         virtual void gerarFase(vector<vector<vector<int>>> mapa) = 0;
         json lerArquivoJSON(const std::string& caminho);
         vector<vector<vector<int>>> extrairCamadas(const json& mapa);
-        //void criarCenario();
+        
+        void criarCenario(); 
+        virtual void criarInimigos() = 0;
+        virtual void criarObstaculos() = 0;
+
         void criarFormigas(float x, float y);
         void criarPlataforma(float x, float y,int id_tile);
         void criarJogador(float x, float y);
@@ -59,3 +63,4 @@ namespace Fases
 };
 
 } 
+
