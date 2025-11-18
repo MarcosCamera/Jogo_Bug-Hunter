@@ -5,13 +5,20 @@
 #include "ListaEntidades.hpp"
 #include "Fase.hpp"
 #include "Gerenciador_Grafico.hpp"
+#include "Formigueiro.hpp"
+#include "Plataforma.hpp"
 
+using namespace Gerenciadores;
+using namespace Entidades::Personagens;
+using namespace Entidades::Obstaculos;
 
 class Jogo{
    private:
-    Gerenciadores::Gerenciador_Grafico* pGrafico;
-    Entidades::Personagens::Jogador* j1;
-    Entidades::Personagens::Inim_Facil* i1;
+    Fases::Fase* pF1;
+    Gerenciador_Grafico* pGrafico;
+    Gerenciador_Colisoes pColisoes;
+    Fases::Fase* pFaseAtual;
+    
     
 
    public:
