@@ -6,18 +6,15 @@ using namespace std;
 int Ente::cont_id(0);
 Gerenciadores::Gerenciador_Grafico* Ente::pGG(Gerenciadores::Gerenciador_Grafico::getInstancia());
 
-Ente::Ente():id(cont_id++), pFig(new sf::Sprite())
+Ente::Ente():id(cont_id++), corpo((sf::Vector2f(200.f, 200.f)))
+
 {
-    
+
 }
 
 Ente::~Ente()
 {
-    if(pFig)
-    {
-        delete pFig;
-        pFig = NULL;
-    }
+   
 
 }
 
@@ -35,15 +32,18 @@ void  Ente::setpGG(Gerenciadores::Gerenciador_Grafico* pG)
     pGG = pG;
 }
 
-sf::Sprite* Ente::getFigura() 
+sf::RectangleShape& Ente::getCorpo() 
 { 
-    return pFig; 
+    return corpo; 
 }
 
-/*void Ente::setCor(const sf:: Color &cor)
-{
-    if(pFig)
-      pFig->setFillColor(cor);
+
+// Em Ente.cpp
+void Ente::setTexture(string caminho)
+{   if (!text.loadFromFile(caminho))
+        throw std::runtime_error("erro ao carregar imagem: " + caminho); 
     else
-     cout<<"pFig NULL"<<endl;
-}*/
+       corpo.setTexture(&text);
+
+ 
+}
