@@ -12,17 +12,16 @@ class Ente
       int id;
       static Gerenciadores :: Gerenciador_Grafico* pGG;//da acesso a todas os entes ao mesmo gerenciador grafico
       static int  cont_id;//contar cada ente criado
-      sf::Sprite* pFig;
+      sf::RectangleShape corpo;
+
+      sf::Texture text; 
     public:
       Ente();
       virtual ~Ente();
       virtual void executar()=0;
       void desenhar();
-
+      void setTexture(std::string caminho);
       void static setpGG(Gerenciadores :: Gerenciador_Grafico* pG);
-      sf::Sprite* getFigura();
-      //void setCor(const sf::Color &cor);
-
-      
+      sf::RectangleShape& getCorpo();
 
 };
