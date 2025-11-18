@@ -10,6 +10,7 @@
 #include "Jogador.hpp"
 #include "Inimigo.hpp"
 #include "Menu.hpp"
+#include "Parede.hpp"
 #include <vector>
 #include <fstream>
 #include "nlohmann/json.hpp"
@@ -30,10 +31,13 @@ namespace Fases
         Gerenciadores::Gerenciador_Grafico* pGG;
         Listas::ListaEntidades lista_ents;
         Entidades::Personagens::Jogador* pJog1;
+        Entidades::Parede* pParedeChao;
+
         int maxInim;
         int minInim;
-        sf::Texture*  texFundo;
-        sf::Sprite spriteFundo;
+        int maxPlat;
+        int minPlat;
+        
 
 
     public:
@@ -46,6 +50,8 @@ namespace Fases
 
 
     protected:
+        float larguraNivel;
+        float alturaNivel;
 
         virtual void carregarFase(const std::string& caminho) = 0;
         virtual void gerarFase(vector<vector<vector<int>>> mapa) = 0;
@@ -55,10 +61,11 @@ namespace Fases
         void criarCenario(); 
         virtual void criarInimigos() = 0;
         virtual void criarObstaculos() = 0;
-
-        void criarFormigas(float x, float y);
-        void criarPlataforma(float x, float y,int id_tile);
-        void criarJogador(float x, float y);
+        
+        void criarParede();
+        void criarFormigas();
+        void criarPlataforma();
+        void criarJogador();
 
 };
 
