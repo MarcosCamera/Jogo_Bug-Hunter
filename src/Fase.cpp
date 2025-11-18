@@ -28,6 +28,8 @@ Fase::~Fase()
 void Fase::executar()
 {
    
+    criarCenario();
+    
     
     Lista<Entidade>* pLista = lista_ents.getLista();
     if (!pLista) return;
@@ -43,6 +45,8 @@ void Fase::executar()
         }
         it.proximo();
     }
+
+    std::cout << "Posicao X: "<< pJog1->getPos().x << "Posicao Y: " << pJog1->getPos().y << "\n";
 }
 
 json Fase::lerArquivoJSON(const std::string& caminho) {
@@ -117,10 +121,13 @@ void Fase::criarJogador(float posX, float posY)
         gC.setJogador(pJog1); 
     }
 }
-/*void Fase::criarCenario()
+void Fase::criarCenario()
 {
    
+    //criarchao;
+    criarObstaculos();
+    criarInimigos();
 
+}
 
-}*/
 
