@@ -1,51 +1,72 @@
 #include "Jogo.hpp"
+#include "Gerenciador_Grafico.hpp"
+#include "Gerenciador_Colisoes.hpp"
 
-Jogo::Jogo():j1(new Entidades::Personagens::Jogador()),
-    i1(new Entidades::Personagens::Inim_Facil()),
-    pGrafico(Gerenciadores::Gerenciador_Grafico::getInstancia())
+#include "Fase_Primeira.hpp" 
+
+
+using namespace Gerenciadores;
+using namespace Entidades::Personagens;
+using namespace Entidades::Obstaculos;
+using namespace std;
+
+
+Jogo::Jogo():
+    pGrafico(Gerenciador_Grafico::getInstancia()), 
+    pColisoes(),      
+    pF1(NULL),     
+    pFaseAtual(NULL)
 {
+    Ente::setpGG(pGrafico);
+    try {
+        
+        pF1 = new Fases::Fase_Primeira(pGrafico, pColisoes, "../src/mapa2.json");
+        pFaseAtual = pF1;
+    }
+    catch (const std::exception& e) {
+        std::cerr << "ERRO CRITICO AO INICIAR JOGO: " << e.what() << std::endl;
+        pFaseAtual = NULL;
+    }
     
-   executar();
+
 }
 
 Jogo::~Jogo()
 {
-    if (j1) {
-        delete j1;
-        j1 = nullptr;
+    
+    if (pF1) {
+        delete pF1;
+        pF1 = NULL;
     }
-    if (i1) {
-        delete i1;
-        i1 = nullptr;
-    }
-   
+    pFaseAtual = NULL;
+
 }
 
 void Jogo::executar()
 {
-    
-    
+            
+
+    if (!pFaseAtual) {
+        std::cout << "Jogo::executar() -> nenhuma fase carregada" << std::endl;
+        return;
+    }
+
     while (pGrafico->abertaJanela())
     {
         
         sf::Event event;
         while (pGrafico->getWindow()->pollEvent(event))
         {
-        
             if (event.type == sf::Event::Closed)
                 pGrafico->fecharJanela();
         }
         
-        if(i1 && j1){
-        j1->executar();
-        i1->executar();
-        }
-
+    
         pGrafico->limparJanela();
-        if(i1 && j1){
-        pGrafico->desenharEnte(j1);
-        pGrafico->desenharEnte(i1);
-        }
+        
+        pFaseAtual->executar(); 
+    
+        pColisoes.executar();
         
         pGrafico->mostrar();
     }
