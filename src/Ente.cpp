@@ -1,24 +1,35 @@
 #include "Ente.hpp"
 #include "Gerenciador_Grafico.hpp"
-#include <iostream>
 using namespace std;
 
 int Ente::cont_id(0);
 Gerenciadores::Gerenciador_Grafico* Ente::pGG(Gerenciadores::Gerenciador_Grafico::getInstancia());
 
-Ente::Ente():id(cont_id++), pFig(new sf::Sprite())
+Ente::Ente() :id(cont_id++), pFig(new sf::Sprite()) //new deve ser aqui mesmo?
 {
-    
+    //usar setTexture no lugar:
+    /*string caminho = "Texturas/imagem" + to_string(id) + ".png";
+    if (!text.loadFromFile(caminho))
+        throw "nao abriu imagem";
+
+    pFig->setTexture(text);
+    pFig->setScale(0.03f, 0.03f); //tratar em gerenciador grafico
+    */
 }
 
-Ente::~Ente()
-{
-    if(pFig)
-    {
-        delete pFig;
-        pFig = NULL;
-    }
+Ente::~Ente() {}
 
+void Ente::setTexture(string caminho, sf::Vector2f scale)
+{
+    if (!text.loadFromFile(caminho))
+        throw "nao abriu imagem";
+    pFig->setTexture(text);
+    pFig->setScale(scale);
+}
+
+sf::Sprite* Ente::getFig()
+{
+    return pFig;
 }
 
 void Ente::desenhar()
@@ -29,21 +40,7 @@ void Ente::desenhar()
        cout<<"pGG NULL"<<endl;
 }
 
-
 void  Ente::setpGG(Gerenciadores::Gerenciador_Grafico* pG)
 {
     pGG = pG;
 }
-
-sf::Sprite* Ente::getFigura() 
-{ 
-    return pFig; 
-}
-
-/*void Ente::setCor(const sf:: Color &cor)
-{
-    if(pFig)
-      pFig->setFillColor(cor);
-    else
-     cout<<"pFig NULL"<<endl;
-}*/

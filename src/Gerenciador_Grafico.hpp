@@ -5,21 +5,24 @@ class Ente;
 
 namespace Gerenciadores
 {
-    class Gerenciador_Grafico{
+    class Gerenciador_Grafico
+    {
     private:
-       static Gerenciador_Grafico* instancia;    //pra que serve?
-       Gerenciador_Grafico();    //por que private?
-       sf::RenderWindow * window;
+        static Gerenciador_Grafico* instancia;
+        sf::RenderWindow window;
 
     public:
-      
-       ~Gerenciador_Grafico();
-       void desenharEnte(Ente* pE);
-       void limparJanela();
-       void mostrar();
-       bool abertaJanela();
-       void fecharJanela();
-       sf::RenderWindow* getWindow();
-       static Gerenciador_Grafico* getInstancia();
-};
+        Gerenciador_Grafico();    
+        ~Gerenciador_Grafico();
+        sf::RenderWindow& getWindow(); //estava static e sem o & //porque esta assim?
+        static Gerenciador_Grafico* getInstancia();
+        void mostrar();
+        void limparJanela();
+        bool abertaJanela();
+        void fecharJanela();
+        void desenharEnte(Ente* pE);
+
+        //criar executar para limpar, desenhar e mostrar. nesse caso, pE (Ente) é uma lista
+    };
 }
+

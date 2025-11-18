@@ -3,18 +3,33 @@
 #include <iostream>
 #include "Entidade.hpp"
 
-namespace Entidades::Personagens{
-    class Personagem : public Entidade{
+namespace Entidades 
+{
+    namespace Personagens
+    {
+        class Inimigo;
+        class Jogador;
+        class Personagem : public Entidade
+        {
         protected:
             int num_vidas;
+            int impacto;
+            int timer; //para voltar a realizar alguma ação. //fazer static e função estatica em algum lugar
+            bool disparar;
+
         public:
             Personagem();
             virtual ~Personagem();
 
-            void salvarDataBuffer();
+            //quicar ~bounce
+            //empurrao ~knockback
 
-            virtual void executar() = 0;
-            virtual void salvar() = 0;
+            void perdeVida(int i); //fazer como operator-- ?
+            int getVida()const;
+            int getImpacto()const;
+
             virtual void mover() = 0;
-    };
+            virtual void executar() = 0;
+        };
+    }
 }

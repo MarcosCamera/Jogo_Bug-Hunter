@@ -1,21 +1,23 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Jogador.hpp"
-#include "Inim_Facil.hpp"
+#include "Formiga.hpp"
 #include "ListaEntidades.hpp"
 #include "Fase.hpp"
 #include "Gerenciador_Grafico.hpp"
+#include "Formigueiro.hpp"
+#include "Folha.hpp"
 
-
-class Jogo{
-   private:
+class Jogo
+{
+private:
+    Fases::Fase* pF1;
     Gerenciadores::Gerenciador_Grafico* pGrafico;
-    Entidades::Personagens::Jogador* j1;
-    Entidades::Personagens::Inim_Facil* i1;
-    
+    Gerenciadores::Gerenciador_Colisoes pColisoes;
+    Fases::Fase* pFaseAtual;
 
-   public:
-     Jogo();
-     ~Jogo();
-     void executar();
+public:
+    Jogo();
+    ~Jogo();
+    void executar();
 };

@@ -1,8 +1,16 @@
 #include "Inimigo.hpp"
-#include <SFML/Graphics.hpp>
 
+namespace Entidades
+{
+	namespace Personagens
+	{
 
+		Inimigo::Inimigo() :nivel_maldade(0){}
+		Inimigo:: ~Inimigo() {}
 
-Entidades::Personagens::Inimigo::Inimigo():nivel_maldade(0){}
-Entidades::Personagens::Inimigo:: ~Inimigo(){}
-
+		void Inimigo::operator++()
+		{
+			nivel_maldade++;
+		}
+	}
+}
