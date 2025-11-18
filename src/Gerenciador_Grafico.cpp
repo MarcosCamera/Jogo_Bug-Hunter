@@ -13,7 +13,7 @@ Gerenciador_Grafico* Gerenciadores::Gerenciador_Grafico::instancia(NULL);
 
 
 Gerenciador_Grafico::Gerenciador_Grafico():
-window(new sf::RenderWindow(sf::VideoMode(800, 600), "Jogo"))
+window(new sf::RenderWindow(sf::VideoMode(800, 608), "Jogo"))
 {
      
      fundo.scale(1.5f, 1.5f);
