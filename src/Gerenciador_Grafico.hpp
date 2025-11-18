@@ -7,9 +7,13 @@ namespace Gerenciadores
 {
     class Gerenciador_Grafico{
     private:
-       static Gerenciador_Grafico* instancia;    //pra que serve?
-       Gerenciador_Grafico();    //por que private?
+       sf::Sprite fundo;
+       static Gerenciador_Grafico* instancia;
+       Gerenciador_Grafico();
        sf::RenderWindow * window;
+       sf::Clock relogio; 
+   
+
 
     public:
       
@@ -21,5 +25,8 @@ namespace Gerenciadores
        void fecharJanela();
        sf::RenderWindow* getWindow();
        static Gerenciador_Grafico* getInstancia();
+      void desenharCenario();
+      float getDeltaTime(); 
+
 };
 }
