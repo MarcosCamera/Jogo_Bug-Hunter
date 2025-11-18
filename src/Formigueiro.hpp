@@ -10,12 +10,11 @@ namespace Entidades::Obstaculos
             float largura;
             
          public:
-          Formigueiro();
-          Formigueiro(const std::string& caminhoSprite, sf::Vector2f posicao);
+          Formigueiro(sf::Vector2f posicao);
           ~Formigueiro();
           
            void executar();
-           void obstaculizar(Personagens::Jogador* p);
+           void obstaculizar(Personagens::Personagem* p);
            void setLargura(float l);
            float getLargura();
     };
