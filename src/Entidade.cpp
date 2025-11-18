@@ -3,27 +3,13 @@
 using namespace std;
 using namespace Entidades;
 
-Entidade::Entidade():Ente(), vel(), pos(), textura()
+
+Entidade::Entidade(sf::Vector2f posicao) :Ente(), vel(), acel(), gravidade(10), normal(10), chao(false), arrasto(1), velMovMax(10), direcao(true)
 {
-
-}
-
-Entidade::Entidade(const std::string& caminhoSprite, sf::Vector2f posicao) :Ente(), vel(), pos(), textura()
-{
+      sf::FloatRect bounds = corpo.getGlobalBounds();
+      corpo.setPosition(posicao); 
+       
     
-     if (!textura.loadFromFile(caminhoSprite))
-    {
-        cout << "não foi possivel carregar a sprite: " << caminhoSprite << endl;
-    }
-
-    if (this->pFig) { 
-        pFig->setTexture(textura);
-        //pFig->setOrigin(textura.getSize().x / 2.f, textura.getSize().y / 2.f);
-    }
-
-    
-    
-    setPos(posicao);
 }
 
 Entidade::~Entidade()
@@ -37,16 +23,7 @@ void Entidade::setVel(sf::Vector2f velocidade)
 
 }
 
-void Entidade::setPos(sf::Vector2f posicao)
-{
-   pos = posicao;
 
-   if (pFig) {
-      pFig->setPosition(pos);
-   }
-   else
-    cout<<"Entidade::setPos(posicao) -> pFig NULO"<<endl;
-}
 
 sf::Vector2f Entidade::getVel() const
 {
@@ -55,34 +32,31 @@ sf::Vector2f Entidade::getVel() const
 
 sf::Vector2f Entidade::getPos() const
 {
-    return pos;
+    return this->corpo.getPosition();
 }
 
-void Entidade::colidirParede()
+ void Entidade::acelerar() //incluir todas acelerações
+    {
+        acel.y = (gravidade * !chao)  - (vel.y * arrasto);
+        
+        if (vel.x > velMovMax)
+            acel.x = - vel.x * arrasto;
+        //acel.x com resistencia
+    }
+
+    void Entidade::atualizaVel() //ou apenas vel = vel + acel; ?
+    {
+        if (vel.x < velMovMax)
+        {
+            if (vel.x + acel.x > velMovMax) {
+                vel.x = velMovMax;
+                vel.y += acel.y;
+            }
+            else
+                vel += acel;
+        }
+    }
+ void Entidade::setChao(bool c)
 {
-    sf::Vector2f posFinal = getPos();
-    sf::FloatRect bounds = getGlobalBounds(); 
-
-    const float LARGURA_JANELA = 800.0f;
-    const float ALTURA_JANELA = 800.0f;
-    
-    if (bounds.left < 0.0f)
-    {
-        posFinal.x -= bounds.left; 
-    }
-    else if (bounds.left + bounds.width > LARGURA_JANELA)
-    {
-        posFinal.x = LARGURA_JANELA - bounds.width; 
-    }
-    
-
-    if (bounds.top < 0.0f)
-    {
-        posFinal.y -= bounds.top;
-    }
-    else if (bounds.top + bounds.height > ALTURA_JANELA)
-    {
-        posFinal.y = ALTURA_JANELA - bounds.height;
-    }
-    setPos(posFinal);
+        chao = c;
 }
