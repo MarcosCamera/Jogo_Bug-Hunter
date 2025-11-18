@@ -8,8 +8,11 @@ namespace Fases
     class Fase_Primeira : public Fase
     {
         private:
-          const int maxIni;
-          const int minIni;
+          const int max;
+          const int min;
+          std::vector<sf::Vector2f> formigaSpawnPoints;
+          std::vector<sf::Vector2f> griloSpawnPoints;
+          std::vector<sf::Vector2f> formigueiroSpawnPoints;
         
         protected:
           void criarInimMedios(float posX, float posY);
@@ -21,5 +24,7 @@ namespace Fases
            
            void carregarFase(const std::string& caminho) override;
            void gerarFase(vector<vector<vector<int>>> mapa) override;
+           void criarInimigos();
+           void criarObstaculos();
     };
 }
