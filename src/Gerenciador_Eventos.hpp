@@ -1,5 +1,5 @@
 #pragma once
-#include "ListaEntidades"
+#include "ListaEntidades.hpp"
 
 //includes
 
@@ -9,6 +9,13 @@ namespace Gerenciadores
 	{
 	private:
 		Lista<Entidade>* pLista;
+		int posicaoJogadores;
+		int posicaoFormigas;
+		int posicaoGrilos;
+		int posicaoLouvaDeus;
+		int posicaoFolhas;
+		int posicaoFormigueiros;
+		int posicaoPlantaCarnivora;
 		//listas de entidades
 	public:
 		Gerenciador_Eventos(Lista<Entidade>* p);
@@ -16,8 +23,9 @@ namespace Gerenciadores
 
 		void percorreLista();
 		void verificaEntidade(); //exclui
-		void verificaDisparo();
-		void verificaAlcance(); //formigas
+		void verificaDisparo();	 //LouvaDeus
+		void verificaAlcance();  //formigas
+		void atualizaMaldade();  //formigas
 		void executar(); 
 	};
 }

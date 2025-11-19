@@ -12,5 +12,10 @@ namespace Entidades
 		{
 			nivel_maldade++;
 		}
+
+		void Inimigo::operator--()
+		{
+			nivel_maldade--;
+		}
 	}
 }

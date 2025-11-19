@@ -25,6 +25,11 @@ void Gerenciador_Eventos::verificaDisparo()
 	}
 }
 
+void Gerenciador_Eventos::atualizaMaldade()
+{
+
+}
+
 void Gerenciador_Eventos::executar()
 {
 

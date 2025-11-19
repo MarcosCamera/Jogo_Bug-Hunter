@@ -20,6 +20,8 @@ using json = nlohmann::json;
 using namespace std;
 namespace Fases
 {
+    class Fase_Primeira;
+
     class Fase : public Ente
     {
     protected:

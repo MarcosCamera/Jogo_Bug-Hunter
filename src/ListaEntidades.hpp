@@ -4,7 +4,6 @@
 #include "Gerenciador_Grafico.hpp"
 #include <iostream>
 #include "Gerenciador_Colisoes.hpp"
-#include "Fase_Primeira.hpp" 
 
 namespace Entidades //está correto?
 {

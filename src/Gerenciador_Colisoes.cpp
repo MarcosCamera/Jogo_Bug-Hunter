@@ -7,6 +7,7 @@ using namespace sf;
 namespace Gerenciadores
 {
     //fazer jogador 2;
+    //tratar multiplas colisões;
 
     Gerenciador_Colisoes::Gerenciador_Colisoes() :
         LIs(),

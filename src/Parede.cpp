@@ -27,27 +27,27 @@ namespace Entidades
             if (personagemBounds.intersects(obstaculoBounds, intersec))
             {
                 sf::Vector2f novaPos = p->getPos();
-                if (intersec.width < intersec.height) //colisao horizontal
+                if (intersec.width < intersec.height)                   //colisao horizontal
                 {
-                    p->mudaDir(); //talvez nao seja necessario o if seguinte?
-
-                    if (personagemBounds.left < obstaculoBounds.left)
+                    if (personagemBounds.left < obstaculoBounds.left)   //na esquerda
                     {
                         novaPos.x -= intersec.width;
                     }
-                    else
+                    else                                                //na direita
                     {
                         novaPos.x += intersec.width;
                     }
+                    p->mudaDir(); //talvez nao seja necessario o if seguinte?
+
                 }
-                else //colisao vertical
+                else                                                    //colisao vertical
                 {
-                    p->setChao(true); //para o gerenciador de colisões
-                    if (personagemBounds.top < obstaculoBounds.top) //em cima
+                    if (personagemBounds.top < obstaculoBounds.top)     //em cima
                     {
+                        p->setChao(true); //para o gerenciador de colisões
                         novaPos.y -= intersec.height;
                     }
-                    else //embaixo
+                    else                                                //embaixo
                     {
                         novaPos.y += intersec.height;
                     }

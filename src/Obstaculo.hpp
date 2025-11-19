@@ -16,6 +16,8 @@ namespace Entidades
         {
         protected:
             bool danoso;
+            int timer;
+
         public:
             Obstaculo();
             //Obstaculo(const std::string& caminhoSprite, sf::Vector2f posicao);

@@ -20,6 +20,7 @@ namespace Entidades
             Inimigo();
             virtual ~Inimigo();
             void operator++();  //nivel_maldade++
+            void operator--();  //nivel_maldade--
 
             virtual void danificar(Jogador* p) = 0;
             virtual void mover() = 0;

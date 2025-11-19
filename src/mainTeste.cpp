@@ -1,4 +1,4 @@
-#include "Ente.hpp"
+/*#include "Ente.hpp"
 #include "Gerenciador_Colisoes.hpp"
 #include "Gerenciador_Grafico.hpp"
 #include "Formiga.hpp" // Adicionado para garantir tipo completo
@@ -60,7 +60,7 @@ int main()
 				graf.fecharJanela();
 		}
 
-		/*UPDATE*/
+		/*UPDATE*
 
 		colis.executar(); //deve ser primeiro?
 		jog.executar();
@@ -71,7 +71,7 @@ int main()
 
 		//r.setPosition(Vector2f(jog.getPos().x, jog.getPos().y));
 
-		/*DRAW*/
+		/*DRAW*
 		graf.getWindow().clear(Color::White);
 		graf.desenharEnte(eJog);
 		graf.desenharEnte(eForm);
@@ -81,5 +81,14 @@ int main()
 		//graf.desenharRect(r);
 		graf.getWindow().display();
 	}
+	return 0;
+}*/
+
+#include "Jogo.hpp"
+
+int main()
+{
+	Jogo jogo;
+	jogo.executar();
 	return 0;
 }

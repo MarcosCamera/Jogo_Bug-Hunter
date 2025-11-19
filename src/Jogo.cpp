@@ -12,7 +12,7 @@ Jogo::Jogo():
     Ente::setpGG(pGrafico);
     try {
         
-        pF1 = new Fases::Fase_Primeira(pGrafico, pColisoes, "../src/mapa2.json");
+        pF1 = new Fases::Fase_Primeira(pGrafico, pColisoes, "../mapa2.json"); //adaptavel
         pFaseAtual = pF1;
     }
     catch (const std::exception& e) {
@@ -38,7 +38,8 @@ void Jogo::executar()
 {
             
 
-    if (!pFaseAtual) {
+    if (!pFaseAtual) 
+    {
         std::cout << "Jogo::executar() -> nenhuma fase carregada" << std::endl;
         return;
     }

@@ -4,6 +4,7 @@
 #include "Formiga.hpp"
 #include "ListaEntidades.hpp"
 #include "Fase.hpp"
+#include "Fase_Primeira.hpp"
 #include "Gerenciador_Grafico.hpp"
 #include "Formigueiro.hpp"
 #include "Folha.hpp"

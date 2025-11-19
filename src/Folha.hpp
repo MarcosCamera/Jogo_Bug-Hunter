@@ -1,6 +1,6 @@
 #pragma once
 #include "Obstaculo.hpp"
-#include "Jogador.hpp"
+#include "Personagem.hpp"
 
 namespace Entidades
 {
@@ -8,8 +8,10 @@ namespace Entidades
     {
         class Folha : public Obstaculo
         {
-        protected:
+        private:
             int altura;
+            int alturaMax;
+            int alturaMin;
 
         public:
             Folha();
@@ -17,6 +19,9 @@ namespace Entidades
             ~Folha();
 
             void obstaculizar(Personagens::Personagem* p);
+            void crescer();
+            void diminuir();
+            bool delay();
             void executar();
         };
     }
