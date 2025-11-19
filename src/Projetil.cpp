@@ -6,6 +6,7 @@ namespace Entidades
 	{
 		pAtirador = pAt;
 		direcao = pAtirador->getDir();
+		pFig->setPosition(pAt->getPos());
 		// da problema ter ponteiro de atirador se ele for eliminado?
 	}
 

@@ -12,7 +12,7 @@ namespace Entidades
 
         Formigueiro::Formigueiro(sf::Vector2f posicao, int l) : Obstaculo(), largura(1)
         {
-            largura = l;
+            largura = static_cast<float>(l);
 
             if (pFig)
             {
@@ -23,7 +23,7 @@ namespace Entidades
                 cout << "Formigueiro::Formigueiro()-> pFig NULL" << endl;
         }
 
-        Formigueiro::Formigueiro(sf::Vector2f posicao): Obstaculo(), largura(1), timer(0)
+        Formigueiro::Formigueiro(sf::Vector2f posicao): Obstaculo(), largura(1)
         {
             if (pFig)
             {
@@ -97,10 +97,10 @@ namespace Entidades
 
         void Formigueiro::vibrar()
         {
-            if (timer * largura >= 10)
+            if (timer * largura >= 20)
             {
                 pFig->move(1.f, 0.f);
-                if (timer * largura >= 20)
+                if (timer * largura >= 40)
                 {
                     pFig->move(-1.f, 0.f);
                     timer = 0;
@@ -111,7 +111,7 @@ namespace Entidades
 
         void Formigueiro::executar() 
         {
-            vibrar;
+            vibrar();
         }
     }
 }

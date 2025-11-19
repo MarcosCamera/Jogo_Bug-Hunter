@@ -8,7 +8,7 @@ namespace Entidades
     {
         Folha::Folha() :Obstaculo(), altura(0), alturaMax(3), alturaMin(1)
         {
-            altura = pFig->getGlobalBounds().height;
+            altura = static_cast<int>(pFig->getGlobalBounds().height);
             pFig->setPosition(0, 500); //setar posiçao padrao na fase.
         }
 
@@ -59,9 +59,9 @@ namespace Entidades
                         {
                             novaPos.y -= intersec.height;
 
-                            if (delay)
+                            if (delay())
                             {
-                                novaVel.y = - altura;
+                                novaVel.y = static_cast<float>(-altura * 5);
                                 crescer();
                             }
                         }
@@ -69,9 +69,9 @@ namespace Entidades
                         {
                             novaPos.y += intersec.height;
 
-                            if(delay)
+                            if(delay())
                             {
-                                novaVel.y = altura;
+                                novaVel.y = static_cast<float>(altura*5);
                                 diminuir();
                             }
                         }
@@ -88,7 +88,7 @@ namespace Entidades
             if (altura < alturaMax)
             {
                 altura++;
-                pFig->setScale(1, altura);
+                pFig->setScale(1, static_cast<float>(altura));
             }
         }
 
@@ -97,7 +97,7 @@ namespace Entidades
             if (altura > alturaMin)
             {
                 altura--;
-                pFig->setScale(1, altura);
+                pFig->setScale(1, static_cast<float>(altura));
             }
         }
 

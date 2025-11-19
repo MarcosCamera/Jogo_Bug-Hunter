@@ -23,5 +23,15 @@ namespace Entidades
 		{
 			return impacto;
 		}
+
+		void Personagem::setDisparo(bool d)
+		{
+			disparar = d;
+		}
+
+		bool Personagem::getDisparo()const
+		{
+			return disparar;
+		}
 	}
 }

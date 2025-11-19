@@ -27,6 +27,8 @@ namespace Entidades
             void perdeVida(int i); //fazer como operator-- ?
             int getVida()const;
             int getImpacto()const;
+            void setDisparo(bool d);
+            bool getDisparo()const;
 
             virtual void mover() = 0;
             virtual void executar() = 0;

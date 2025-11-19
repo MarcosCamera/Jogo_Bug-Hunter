@@ -13,6 +13,7 @@ namespace Entidades
             pFig->setPosition(250, 300); //setar posiçao padrao na fase.
             impacto = 1;
             num_vidas = 10;
+            velMovMax = 3;
         }
 
         LouvaDeus::~LouvaDeus()
@@ -47,7 +48,7 @@ namespace Entidades
 
         void LouvaDeus::executar()
         {
-            if (timer % 10)
+            if (timer >= 10)
             {
                 voo *= -1;
                 timer = 0;
