@@ -33,12 +33,14 @@ namespace Entidades
 
                 if (personagemBounds.intersects(obstaculoBounds, intersec))
                 {
-                    sf::Vector2f novaPos = p->getPos();
+                    sf::Vector2f novaPosPerson = p->getPos();
+                    sf::Vector2f novaPosPlant = getPos();
+
                     if (intersec.width < intersec.height)                   //colisao horizontal
                     {
                         if (personagemBounds.left < obstaculoBounds.left)   //na esquerda
                         {
-                            novaPos.x -= intersec.width;
+                            novaPosPlant.x += intersec.width;
                             if (orientacao == -1)
                             {
                                 danificarPersonagem(p);
@@ -50,7 +52,7 @@ namespace Entidades
                         }
                         else                                                //na direita
                         {
-                            novaPos.x += intersec.width;
+                            novaPosPlant.x -= intersec.width;
                             if (orientacao == 1)
                             {
                                 danificarPersonagem(p);
@@ -68,7 +70,7 @@ namespace Entidades
                         if (personagemBounds.top < obstaculoBounds.top)     //em cima
                         {
                             p->setChao(true); //para o gerenciador de colisões
-                            novaPos.y -= intersec.height;
+                            novaPosPerson.y -= intersec.height;
 
                             if (!orientacao)
                             {
@@ -77,11 +79,12 @@ namespace Entidades
                         }
                         else                                                //embaixo
                         {
-                            novaPos.y += intersec.height;
+                            novaPosPerson.y += intersec.height;
                         }
                     }
 
-                    p->setPos(novaPos);
+                    p->setPos(novaPosPerson);
+                    setPos(novaPosPlant);
                 }
             }
 		}
@@ -99,7 +102,14 @@ namespace Entidades
         void PlantaCarnivora::esbarrar(short int ori)
         {
             orientacao = ori;
-            //girar!!!!
+           
+            if (ori)  //rotacionar
+            {
+                sf::FloatRect bound = pFig->getLocalBounds();
+                pFig->setOrigin(bound.left + bound.width * 0.5f, bound.top + bound.height * 0.5f);
+                pFig->setRotation(90.f * ori);
+                pFig->setOrigin(bound.left, bound.top);
+            }
         }
 
         void PlantaCarnivora::delay()
