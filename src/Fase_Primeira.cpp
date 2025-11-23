@@ -15,10 +15,10 @@ using namespace Entidades;
 
 Fases::Fase_Primeira::Fase_Primeira(Gerenciadores::Gerenciador_Grafico* pGG, Gerenciadores::Gerenciador_Colisoes& gC, std::string caminho) :
     Fase(pGG, gC), 
-    maxFormigueiro(2),    
-    minFormigueiro(1),
-    maxGrilo(2),
-    minGrilo(1)
+    maxFormigueiros(2),    
+    minFormigueiros(1),
+    maxGrilos(2),
+    minGrilos(1)
 {
     srand(static_cast<unsigned>(time(NULL)));
     carregarFase(caminho); 
@@ -212,6 +212,36 @@ void Fases::Fase_Primeira::criarGrilos() {
 
 }
 
+
+ void Fases::Fase_Primeira:: criarParede(Entidades::Parede* pParede, int id_tile)
+    {
+       
+    
+    if (!pParede || id_tile == 0) return;
+    
+    const int TILE_SIZE = 32;
+    const int TILES_PER_ROW = 16;
+    const int FIRST_GID = 1;
+    
+    int local_id = id_tile - FIRST_GID; 
+
+    int tile_x_index = local_id % TILES_PER_ROW;
+    int tile_y_index = local_id / TILES_PER_ROW;
+    
+    int tile_x_coord = tile_x_index * TILE_SIZE;
+    int tile_y_coord = tile_y_index * TILE_SIZE;
+    
+    sf::IntRect areaTiled(
+        tile_x_coord, 
+        tile_y_coord, 
+        TILE_SIZE,          
+        TILE_SIZE           
+    );
+    
+    pParede->getFig()->setTextureRect(areaTiled);
+    
+    }
+
 void Fases::Fase_Primeira::criarFormigueiros() {
     if(!pParedeChao)
     {
@@ -251,7 +281,7 @@ void Fases::Fase_Primeira::criarInimigos()
 void Fases::Fase_Primeira::criarObstaculos()
 {
     criarFolhas();
-    criarFormigueiro();
+    criarFormigueiros();
     
 }
  void Fases::Fase_Primeira::criarCenario()
