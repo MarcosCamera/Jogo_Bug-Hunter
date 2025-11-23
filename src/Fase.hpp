@@ -58,11 +58,12 @@ namespace Fases
         json lerArquivoJSON(const std::string& caminho);
         vector<vector<vector<int>>> extrairCamadas(const json& mapa);
         
-        void criarCenario(); 
+        virtual void criarCenario()=0; //deixei esta função como virtual pura, pois cada fase terá um cenário diferente
         virtual void criarInimigos() = 0;
         virtual void criarObstaculos() = 0;
         
-        void criarParede();
+        virtual void criarParede(Entidades::Parede* pParede, int id_tile)=0;//mudei os parâmetros passados, tive q fazer isso pq tava não estava pegando os ids certinhos de cada tile
+        virtual void criarEntidades(float posX,float posY, int id_tile) =0;//criei esta função para desacoplar a função gerarFase();
         void criarFormigas();
         void criarPlataforma();
         void criarJogador();
