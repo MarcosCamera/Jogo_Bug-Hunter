@@ -2,10 +2,30 @@
 
 namespace Entidades
 {
-	Parede::Parede() : Entidade(), colidiu(false)
-	{
+    Parede::Parede(sf::Vector2f posicao, int id_tile) : Entidade(),colidiu(false)
+    {
+        chao = true;
+        setPos(posicao);
 
-	}
+        try
+        {
+            setTexture("Textures/chao.png", sf::Vector2f(1.0f, 1.0f));
+            //text.setRepeated(true);
+
+            if (pFig) {
+                pFig->setOrigin(0.f, 0.f);
+            }
+            else {
+                std::cout << "Parede -> pFig NULL" << std::endl;
+            }
+        }
+
+        catch (const std::exception& e)
+        {
+            std::cerr << e.what() << std::endl;
+        }
+    }
+
 
 	Parede::~Parede()
 	{
@@ -31,7 +51,7 @@ namespace Entidades
                 sf::Vector2f novaPos = p->getPos();
                 if (intersec.width < intersec.height)                   //colisao horizontal
                 {
-                    if (entidadeBounds.left < paredeBounds.left)   //na esquerda
+                    if (entidadeBounds.left < paredeBounds.left)        //na esquerda
                     {
                         novaPos.x -= intersec.width;
                     }
@@ -44,7 +64,7 @@ namespace Entidades
                 }
                 else                                                    //colisao vertical
                 {
-                    if (entidadeBounds.top < paredeBounds.top)     //em cima
+                    if (entidadeBounds.top < paredeBounds.top)          //em cima
                     {
                         p->setChao(true); //para o gerenciador de colisões
                         novaPos.y -= intersec.height;
@@ -58,6 +78,13 @@ namespace Entidades
                 p->setPos(novaPos);
             }
         }
+    }
+
+    void Parede::mover()
+    {
+        acelerar();
+        atualizaVel();
+        atualizaPos();
     }
 
     void Parede::executar()

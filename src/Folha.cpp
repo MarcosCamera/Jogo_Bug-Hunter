@@ -83,16 +83,16 @@ namespace Entidades
             }
         }
 
-        void Folha::crescer()
+        void Folha::crescer() //usar delay
         {
-            if (altura < alturaMax)
+            if (altura < alturaMax) //modifica o empuxo tambem
             {
                 altura++;
                 pFig->setScale(1, static_cast<float>(altura));
             }
         }
 
-        void Folha::diminuir()
+        void Folha::diminuir() //usar delay
         {
             if (altura > alturaMin)
             {
@@ -108,6 +108,13 @@ namespace Entidades
                 timer = 0;
                 return true;
             }
+        }
+
+        void Folha::mover() //trabalhar mais
+        {
+            acelerar();
+            atualizaVel();
+            atualizaPos();
         }
 
         void Folha::executar() 

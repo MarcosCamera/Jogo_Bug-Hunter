@@ -22,6 +22,7 @@ namespace Entidades
             void crescer();
             void diminuir();
             bool delay();
+            void mover(); //terminar: folha flutuante
             void executar();
         };
     }

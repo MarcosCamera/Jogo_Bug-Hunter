@@ -20,6 +20,22 @@ namespace Entidades
 			impacto = 1;
 			num_vidas = 10;
 			velMovMax = 2;
+
+			try
+			{
+
+				setTexture("Textures/spider2.png", sf::Vector2f(2.0f, 2.0f));
+				if (pFig) {
+					sf::FloatRect bounds = pFig->getGlobalBounds();
+					pFig->setOrigin(bounds.width / 2.f, bounds.height / 2.f);
+				}
+				else
+					cout << "Jogador -> pFig NULL" << endl;
+			}
+			catch (const std::exception& e)
+			{
+				std::cerr << e.what() << std::endl;
+			}
 		}
 
 

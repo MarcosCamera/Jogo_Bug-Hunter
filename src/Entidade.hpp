@@ -40,6 +40,7 @@ namespace Entidades
             void acelerar(); 
             void atualizaVel(); //sobrecarregar essa função, para não precisar de set!!
             void atualizaPos();
+            virtual void mover() = 0;
             virtual void executar() = 0;
     };
 }

@@ -7,6 +7,7 @@ Jogo::Jogo():
     pGrafico(Gerenciadores::Gerenciador_Grafico::getInstancia()), 
     pColisoes(),      
     pF1(NULL),     
+    pF2(NULL),
     pFaseAtual(NULL)
 {
     Ente::setpGG(pGrafico);

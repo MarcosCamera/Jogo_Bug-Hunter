@@ -14,7 +14,7 @@ namespace Entidades
         class Jogador : public Personagem
         {
         protected:
-            int pontos; //falta usar pontuação e morrer
+            int pontos;
 
         public:
             Jogador();

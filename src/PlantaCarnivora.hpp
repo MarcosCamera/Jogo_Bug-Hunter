@@ -21,6 +21,7 @@ namespace Entidades
             void danificarPersonagem(Personagens::Personagem* p);
             void esbarrar(short int ori);
             void delay();
+            void mover();
             void executar();
         };
     }

@@ -26,6 +26,7 @@ namespace Entidades
             bool getAtividade()const;
             void obstaculizar(Personagens::Personagem* p);
             void vibrar();
+            void mover();
             void executar();
         };
     }

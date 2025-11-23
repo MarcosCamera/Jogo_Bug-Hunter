@@ -73,36 +73,38 @@ namespace Entidades
 
     void Entidade::acelerar() //incluir todas acelerações
     {
-        /*
         if (chao)
             normal = -gravidade;
         else
-            normal = 0;*/
+            normal = 0;
 
-        acel.y = (gravidade * !chao); // -(normal * chao) - (vel.y * arrasto); //arrasto como 0 para teste
+        acel.y = gravidade + normal; // -(vel.y * arrasto); //arrasto como 0 para teste
                                                                                //na finalização, nao usa chao, 
-        /*                                                                     //a gravidade e normal se anulam.
-        if (vel.x > velMovMax)                                              
-            acel.x += - vel.x * arrasto;
-        //acel.x com resistencia
-        */
+                                                                               //a gravidade e normal se anulam.
+        if (vel.x > velMovMax || vel.x < - velMovMax) //acel com resistencia
+            acel.x = - vel.x * arrasto;
+        if (vel.y > velMovMax || vel.y < - velMovMax)
+            acel.y = - vel.y * arrasto;
+        //para evitar bug de variação brusca de velocidades, usar numeros intuitivos e multiplos entre si.
+        //talvez faça uma faixa de velocidade como velMovMax +- 0.3 em que o arrasto nao atue mas nao se pode acelerar mais
     }
 
     void Entidade::atualizaVel() //ou apenas vel = vel + acel; ?
     {
+        /* //por que estava assim?
         if ((vel.x > 0 && direcao) || (vel.x < 0 && !direcao))
         {
             vel.x = 0;
             acel.x = 0;
-        }
+        }*/
 
         vel += acel;
-        if (chao)
+        if (chao && vel.y > 0) //impede que atravesse o chão
         {
             vel.y = 0;
         }
         /*
-        if (vel.x < velMovMax)
+        if (vel.x < velMovMax) // nao é necessario se numeros forem intuitivos
         {
             if (vel.x + acel.x > velMovMax) 
             {

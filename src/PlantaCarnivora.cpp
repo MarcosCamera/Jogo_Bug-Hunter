@@ -9,9 +9,14 @@ namespace Entidades
 			danoso = true;
 		}
 
-		PlantaCarnivora::PlantaCarnivora(sf::Vector2f posicao) : Obstaculo(), danosidade(2)
+		PlantaCarnivora::PlantaCarnivora(sf::Vector2f posicao) : Obstaculo(), danosidade(2), orientacao(0)
 		{
 			danoso = true;
+
+            if (pFig)
+            {
+                pFig->setPosition(posicao);
+            }
 		}
 
 		PlantaCarnivora::~PlantaCarnivora()
@@ -124,6 +129,13 @@ namespace Entidades
             {
                 timer++;
             }
+        }
+
+        void PlantaCarnivora::mover()
+        {
+            acelerar();
+            atualizaVel();
+            atualizaPos();
         }
 
         void PlantaCarnivora::executar()
