@@ -1,10 +1,5 @@
 
 #include "Fase.hpp"
-#include <iostream> 
-#include "Jogador.hpp"
-#include "Inim_Facil.hpp"
-#include "Plataforma.hpp"
-#include "Ente.hpp" 
 using namespace Fases;
 using namespace std;
 using namespace Entidades; 
@@ -14,7 +9,7 @@ using namespace Listas;
 using namespace Gerenciadores;
 
 Fase::Fase(Gerenciadores::Gerenciador_Grafico* pGG, Gerenciadores::Gerenciador_Colisoes& gC):
-    Ente(), gC(gC), pGG(pGG), lista_ents(), pJog1(NULL), pParedeChao(NULL), maxInim(6), minInim(3), maxPlat(4), minPlat(3), larguraNivel(608.0f), alturaNivel(800.0f)
+    Ente(), gC(gC), pGG(pGG), lista_ents(), pJog1(NULL), pParedeChao(NULL), maxFormigas(6), minFormigas(3), maxPlataformas(4), minPlataformas(3), larguraNivel(800.0f), alturaNivel(608.0f)
 {
     
     Ente::setpGG(pGG); 
@@ -106,25 +101,6 @@ vector<vector<vector<int>>> Fase::extrairCamadas(const json& mapa) {
 }
 
 
-void Fase::criarParede()
-{
-    float altura = 100.0f;
-    float pos_y = alturaNivel - altura;
-    const sf::Vector2f dimensoes(larguraNivel, altura);
-    const sf::Vector2f posicao(0.0f, pos_y);
-    if(!pParedeChao)
-    {
-        pParedeChao = new Entidades::Parede(posicao, dimensoes);//qual valor de posição e dimensão posso colocar para plataforma??
-        lista_ents.incluir(static_cast<Entidades::Parede*>(pParedeChao));
-        gC.setParede(pParedeChao); 
-    }
-    
-    else
-    {
-       pParedeChao->getCorpo().setPosition(posicao); 
-
-    }
-}
 
 void Fase::criarFormigas() 
 {
@@ -167,7 +143,7 @@ for(int i =0;i< numFormigas; i++){
         gC.incluirInimigo(pInim);
 }
 
-void Fase::criarPlataforma() 
+void Fase::criarFolhas() 
 {
    /* if (!pParedeChao)   
         return;
@@ -238,6 +214,8 @@ void Fase::criarJogador()
     }
     
 }
+
+
 
 
 
