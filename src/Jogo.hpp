@@ -4,18 +4,23 @@
 #include "Formiga.hpp"
 #include "ListaEntidades.hpp"
 #include "Fase.hpp"
+#include "Fase_Primeira.hpp"
+#include "Fase_Segunda.hpp"
 #include "Gerenciador_Grafico.hpp"
+#include "Formigueiro.hpp"
+#include "Folha.hpp"
 
-
-class Jogo{
-   private:
+class Jogo
+{
+private:
+    Fases::Fase* pF1;
+    Fases::Fase* pF2;
     Gerenciadores::Gerenciador_Grafico* pGrafico;
-    Entidades::Personagens::Jogador* j1;
-    Entidades::Personagens::Formiga* i1;
-    
+    Gerenciadores::Gerenciador_Colisoes pColisoes;
+    Fases::Fase* pFaseAtual;
 
-   public:
-     Jogo();
-     ~Jogo();
-     void executar();
+public:
+    Jogo();
+    ~Jogo();
+    void executar();
 };

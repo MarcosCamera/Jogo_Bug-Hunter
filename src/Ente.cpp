@@ -8,17 +8,16 @@ Gerenciadores::Gerenciador_Grafico* Ente::pGG(Gerenciadores::Gerenciador_Grafico
 Ente::Ente() :id(cont_id++), pFig(new sf::Sprite()) //new deve ser aqui mesmo?
 {
     //usar setTexture no lugar:
-    string caminho = "Texturas/imagem" + to_string(id) + ".png";
+    /*string caminho = "Texturas/imagem" + to_string(id) + ".png";
     if (!text.loadFromFile(caminho))
         throw "nao abriu imagem";
 
     pFig->setTexture(text);
-    pFig->setScale(0.03, 0.03); //tratar em gerenciador grafico
+    pFig->setScale(0.03f, 0.03f); //tratar em gerenciador grafico
+    */
 }
 
-Ente::~Ente() 
-{
-}
+Ente::~Ente() {}
 
 void Ente::setTexture(string caminho, sf::Vector2f scale)
 {
@@ -41,8 +40,12 @@ void Ente::desenhar()
        cout<<"pGG NULL"<<endl;
 }
 
-
 void  Ente::setpGG(Gerenciadores::Gerenciador_Grafico* pG)
 {
     pGG = pG;
+}
+
+int Ente::getContId()
+{
+    return cont_id;
 }

@@ -1,5 +1,4 @@
 #include "Jogador.hpp"
-#include "inimigo.hpp"
 #include "Gerenciador_Grafico.hpp"
 #include <iostream>
 using namespace std;
@@ -11,15 +10,33 @@ namespace Entidades
 		Jogador::Jogador() :Personagem(), pontos(0)
 		{
 			pFig->setPosition(10, 300); //setar posiçao padrao na fase.
-			forca = 1;
+			impacto = 1;
 			num_vidas = 10;
-
+			velMovMax = 2;
 		}
-		//para jogador2, posiçao relativa ao jogador 1, ou ambos aparecem ao mesmo tempo.
+		Jogador::Jogador(sf::Vector2f posicao) : Personagem(), pontos(0)
+		{
+			pFig->setPosition(posicao); //setar posiçao padrao na fase.
+			impacto = 1;
+			num_vidas = 10;
+			velMovMax = 2;
 
-	/* Posso fazer: (?)
-	Jogador::Jogador():Personagem():Entidade(5, 10, ...), pontos {}
-	*/
+			try
+			{
+
+				setTexture("Textures/spider2.png", sf::Vector2f(2.0f, 2.0f));
+				if (pFig) {
+					sf::FloatRect bounds = pFig->getGlobalBounds();
+					pFig->setOrigin(bounds.width / 2.f, bounds.height / 2.f);
+				}
+				else
+					cout << "Jogador -> pFig NULL" << endl;
+			}
+			catch (const std::exception& e)
+			{
+				std::cerr << e.what() << std::endl;
+			}
+		}
 
 
 		Jogador::~Jogador()
@@ -31,81 +48,104 @@ namespace Entidades
 			}
 		}
 
-
 		void Jogador::danificarInim(Inimigo* pIn)
 		{
-			pIn->setVida(forca);
+			pIn->perdeVida(impacto);
 		}
-
 
 		void Jogador::colidir(Inimigo* pIn)
 		{
-			float alturaJog = getFig()->getGlobalBounds().height;
+			sf::FloatRect intersec;
+			sf::FloatRect inimigoBounds = pIn->getFig()->getGlobalBounds();
+			sf::FloatRect jogadorBounds = this->getFig()->getGlobalBounds();
 
-			if (pos.y + 0.9 * alturaJog < pIn->getPos().y) //para o caso de o jogador passar pelo inimigo
-				//ao invés de 0.9, o que poderia ser?
+			if (inimigoBounds.intersects(jogadorBounds, intersec))
 			{
-				danificarInim(pIn);
-				vel.y = -0.9 * vel.y; // 0.9 relativo a perda de energia. Pode se tornar atributo?
-			}
-			else
-			{
-				pIn->danificar(this); //ta certo???
+				sf::Vector2f novaPos = pIn->getPos();
+				if (intersec.width < intersec.height) //colisao horizontal
+				{
+					pIn->mudaDir(); //talvez nao seja necessario o if seguinte?
+
+					if (inimigoBounds.left < jogadorBounds.left) //inimigo esquerda
+					{
+						pIn->danificar(this);
+						novaPos.x -= intersec.width;
+						vel = (sf::Vector2f(static_cast<float>(-pIn->getImpacto()), static_cast<float>(-pIn->getImpacto() / 2)));
+					}
+					else //inimigo direita
+					{
+						pIn->danificar(this);
+						novaPos.x += intersec.width;
+						vel = (sf::Vector2f(static_cast<float>(pIn->getImpacto()), static_cast<float>(-pIn->getImpacto() / 2)));
+					}
+				}
+				else //colisao vertical
+				{
+					if (inimigoBounds.top < jogadorBounds.top) //inimigo em cima
+					{
+						pIn->danificar(this);
+						novaPos.y -= intersec.height;
+						pIn->setVel(sf::Vector2f(pIn->getVel().x, -pIn->getVel().y));
+					}
+					else //inimigo embaixo
+					{
+						danificarInim(pIn);
+						pos.y -= intersec.height; //só aqui o jogador que ajusta sprite
+						vel.y = -vel.y;
+					}
+				}
+
+				pIn->setPos(novaPos);
 			}
 		}
 
-
-		void Jogador::salvar() {}//...
-
-
-		void Jogador::controlar()
+		void Jogador::operator++()
 		{
+			pontos++;
+		}
+
+		void Jogador::controlar(char tecla)
+		{
+			//int keyTimeMax = 1; // delay para mover novamente //faço como atributo(???)
 			//posição mouse //para debugar
 			/* sf::Vector2i posMouse = sf::Mouse::getPosition(*pGG->getWindow());
 			setPos(static_cast<float>(posMouse.x), static_cast<float>(posMouse.y));*/
 
-			int keyTimeMax = 10; // delay para mover novamente //faço como atributo(???)
-			int keyTime = 0;
-			if (keyTime < keyTimeMax) // para eliminar o atraso, KeyTimeMax = 0;
-				keyTime++;
 
 			//implementar para ao invés de aumentar a velocidade, o controle modificar a aceleração ate a velocidade limite.
 			//velocidade = velocidade + aceleração;
 			//posiçao = posiçao + velocidade; // talvez esse seja melhor para padronizar. Teria que fazer um setPosicao.
 			//.move(velocidade); um dos dois.
 			//implementar o mesmo para outras entidades.
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && keyTime >= keyTimeMax && vel.x < (-velMovMax))
+			if (tecla == 'A' && vel.x > (-velMovMax))
 			{
-				vel.x -= velMovMax / 10; //há uma aceleração
-				keyTime = 0;
+				vel.x -= velMovMax;
+				direcao = false;
 			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && keyTime >= keyTimeMax && vel.x < velMovMax)
+
+			if (tecla == 'D' && vel.x < velMovMax)
 			{
-				vel.x += velMovMax / 10;
-				keyTime = 0;
+				vel.x += velMovMax;
+				direcao = true;
 			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && keyTime >= keyTimeMax && vel.y < (-velMovMax))
+			
+
+			if (tecla == 'W' && chao)
 			{
-				vel.y -= velMovMax / 10; //fazer como velocidade de pulo depois
-				keyTime = 0;
+				vel.y -= 5 * velMovMax;
 			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && keyTime >= keyTimeMax && vel.y < velMovMax)
+			
+			if (tecla == 'Z')
 			{
-				vel.y += velMovMax / 10; //na pratica so a gravidade acelera
-				keyTime = 0;
+				vel.x = 0;
 			}
 		}
-		//é possivel implementar tambem sem haver uma velocidade maxima, mas a desaceleraçao naturalmente limita
-
 
 		void Jogador::mover()
 		{
-
-			controlar();
 			acelerar();
 			atualizaVel(); //antes ou depois das acelerações? Testar com ambas formas.
-
-			pFig->move(vel); //ou uso (this)->move ?
+			atualizaPos();
 		}
 
 

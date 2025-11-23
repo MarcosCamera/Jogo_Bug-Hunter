@@ -9,19 +9,35 @@ namespace Entidades
 {
     namespace Obstaculos
     {
+        int Formigueiro::numeroFormigueiros = 0;
 
-        Formigueiro::Formigueiro() :Obstaculo(), largura() {}
-        /*Formigueiro::Formigueiro(const std::string& caminhoSprite, sf::Vector2f posicao) :
-        Obstaculo(caminhoSprite, posicao),
-        largura(0)
+        Formigueiro::Formigueiro(sf::Vector2f posicao, int l) : Obstaculo(), largura(1), ativo(true)
         {
-          if (pFig)
-              pFig->setScale(0.05f,0.05f);
-            else
-              cout<<"Formigueiro::Formigueiro()-> pFig NULL"<<endl;
-          setDano(false);
+            chao = true;
 
-        }*/
+            largura = static_cast<float>(l);
+
+            if (pFig)
+            {
+                pFig->setScale(static_cast<float>(largura), 1.f);
+                pFig->setPosition(posicao);
+            }
+            else
+                cout << "Formigueiro::Formigueiro()-> pFig NULL" << endl;
+        }
+
+        Formigueiro::Formigueiro(sf::Vector2f posicao): Obstaculo(), largura(1), ativo(true)
+        {
+            chao = true;
+
+            if (pFig)
+            {
+                pFig->setScale(static_cast<float>(largura), 1.f);
+                pFig->setPosition(posicao);
+            }
+            else
+                cout<<"Formigueiro::Formigueiro()-> pFig NULL"<<endl;
+        }
 
         Formigueiro::~Formigueiro() 
         {
@@ -32,34 +48,64 @@ namespace Entidades
             }
         }
 
-        void Formigueiro::executar() {}
-
-        void Formigueiro::obstaculizar(Personagens::Jogador* p)
+        void Formigueiro::setNumeroFormigueiros(int n)
         {
-            if (p && !getDano()) {
-                Vector2f novaPos = p->getPos();
-                FloatRect intersec;
-                if (p->getFig()->getGlobalBounds().intersects(this->getFig()->getGlobalBounds(), intersec))
-                {
-                    if (intersec.width < intersec.height)
-                    {
+            numeroFormigueiros = n;
+        }
 
-                        if (p->getFig()->getGlobalBounds().left < this->getFig()->getGlobalBounds().left)
+        int Formigueiro::getNumeroFormigueiros()
+        {
+            return numeroFormigueiros;
+        }
+
+        void Formigueiro::setLargura(float l)
+        {
+            largura = l;
+        }
+
+        float Formigueiro::getLargura()const
+        {
+            return largura;
+        }
+
+        bool Formigueiro::getAtividade()const
+        {
+            return ativo;
+        }
+
+        void Formigueiro::obstaculizar(Personagens::Personagem* p)
+        {
+            if (p)
+            {
+                sf::FloatRect intersec;
+                sf::FloatRect personagemBounds = p->getFig()->getGlobalBounds();
+                sf::FloatRect obstaculoBounds = this->getFig()->getGlobalBounds();
+
+                if (personagemBounds.intersects(obstaculoBounds, intersec))
+                {
+                    sf::Vector2f novaPos = p->getPos();
+                    if (intersec.width < intersec.height)                   //colisao horizontal
+                    {
+                        if (personagemBounds.left < obstaculoBounds.left)   //na esquerda
                         {
                             novaPos.x -= intersec.width;
                         }
-                        else
+                        else                                                //na direita
                         {
                             novaPos.x += intersec.width;
                         }
+                        p->mudaDir(); //talvez nao seja necessario o if seguinte?
+
                     }
-                    else
+                    else                                                    //colisao vertical
                     {
-                        if (p->getFig()->getGlobalBounds().top < this->getFig()->getGlobalBounds().top)
+                        if (personagemBounds.top < obstaculoBounds.top)     //em cima
                         {
+                            p->setChao(true); //para o gerenciador de colisões
                             novaPos.y -= intersec.height;
+                            ativo = false;
                         }
-                        else
+                        else                                                //embaixo
                         {
                             novaPos.y += intersec.height;
                         }
@@ -68,18 +114,32 @@ namespace Entidades
                     p->setPos(novaPos);
                 }
             }
-
-
         }
 
-        void Formigueiro::setLargura(float l)
+        void Formigueiro::vibrar()
         {
-            largura = l;
+            if (timer * largura >= 20)
+            {
+                pFig->move(1.f, 0.f);
+                if (timer * largura >= 40)
+                {
+                    pFig->move(-1.f, 0.f);
+                    timer = 0;
+                }
+            }
+            timer++;
         }
 
-        float Formigueiro::getLargura()
+        void Formigueiro::mover()
         {
-            return largura;
+            acelerar();
+            atualizaVel();
+            atualizaPos();
+        }
+
+        void Formigueiro::executar() 
+        {
+            vibrar();
         }
     }
 }

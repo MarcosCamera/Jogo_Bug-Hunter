@@ -19,10 +19,13 @@ namespace Entidades
         public:
             Inimigo();
             virtual ~Inimigo();
-            void salvarDataBuffer(); //usar
+            void setMaldade(int m);
+            int getMaldade();
+            void operator++();  //nivel_maldade++
+            void operator--();  //nivel_maldade--
+
             virtual void danificar(Jogador* p) = 0;
             virtual void mover() = 0;
-            virtual void salvar() = 0;
             virtual void executar() = 0;
         };
     }

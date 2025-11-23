@@ -1,7 +1,10 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "Entidade.hpp"
+
 
 class Ente;
+class Entidade;
 
 namespace Gerenciadores
 {
@@ -12,16 +15,16 @@ namespace Gerenciadores
         sf::RenderWindow window;
 
     public:
-        Gerenciador_Grafico();    
+        Gerenciador_Grafico();
         ~Gerenciador_Grafico();
-        sf::RenderWindow& getWindow(); //estava static e sem o & //porque esta assim?
+        sf::RenderWindow& getWindow();
         static Gerenciador_Grafico* getInstancia();
         void mostrar();
         void limparJanela();
         bool abertaJanela();
         void fecharJanela();
         void desenharEnte(Ente* pE);
-        //criar executar para limpar, desenhar e mostrar. nesse caso, pE (Ente) é uma lista
+        void moverCamera(sf::Text* t, Entidades::Entidade* p1, Entidades::Entidade* p2);
     };
 }
 

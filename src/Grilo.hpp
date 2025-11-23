@@ -1,5 +1,6 @@
 #pragma once
 #include "Inimigo.hpp"
+#include "SFML/Graphics.hpp"
 
 namespace Entidades
 {
@@ -12,11 +13,11 @@ namespace Entidades
             //nivel_maldade aumenta se danificar jogador  
         public:
             Grilo();
+            Grilo(sf::Vector2f posicao);
             ~Grilo();
 
             void danificar(Jogador* pJog);
             void mover();
-            void salvar();
             void executar();
         };
     }

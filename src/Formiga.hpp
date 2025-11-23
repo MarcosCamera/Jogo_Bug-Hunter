@@ -1,5 +1,8 @@
 #pragma once
 #include "Inimigo.hpp"
+#include "Jogador.hpp"
+#include "Gerenciador_Grafico.hpp"
+#include <cmath>
 
 namespace Entidades
 {
@@ -8,22 +11,20 @@ namespace Entidades
         class Formiga : public Inimigo
         {
         private:
-            float raio; //alcance do jogador para nivel de maldade. TRATAR EM COLISOES (???) ou em eventos...
-                        //se estiver no raio de alcance, a velocidade altera
-                        //e deixa de ser aleatoria para seguir o jogador
-                        //pCabeca //a cabeça será separada do corpo e terá movimento próprio, seguindo o jogador.
-                        //float velFuria; //será? 
-            //Jogador* pJog //conhece jogador
+            float raio; //se estiver no raio de alcance, ela segue
+            static int numeroFormigas;
 
         public:
-            Formiga();
+            Formiga(sf::Vector2f pos);
             ~Formiga();
 
-            void seguir(Jogador* pJog);
-            void verificaAlcance(Jogador* pJog);
+            float getRaio();
+            static void setNumeroFormigas(int n);
+            static int getNumeroFormigas();
+            void seguir(Jogador* pJ); //fazer formiga seguir jogadores a partir de algum gerenciador
+            float verificaAlcance(Jogador* pJ);
             void danificar(Jogador* pJog);
             void mover();
-            void salvar();
             void executar();
         };
     }

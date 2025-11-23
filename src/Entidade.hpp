@@ -5,35 +5,43 @@
 
 namespace Entidades
 {
-    class Personagem; //está correto fazer assim?
+    class Personagem;
     class Projetil;
     class Obstaculo;
     class Parede;
+
     class Entidade:public Ente
     {
         protected:
             sf::Vector2f pos;
             sf::Vector2f vel;
-            sf::Vector2f acel; //faço um vetor aceleracao???
+            sf::Vector2f acel;
             const float gravidade;
+            float normal; //força normal que anula gravidade
             const float arrasto;
-            const float velMovMax; //cada ente terá uma velocidade maxima para a qual pode acelerar atraves de mover
-            bool direcao; //true se for pra direita e false se for pra esquerda. TRATAR EM OBSTACULIZAR
-            bool chao; //se está pisando em algo
-            //ostream buffer; //para que serve???
+            float velMovMax; //maxima velocidade para cada direção
+            bool direcao; //true se for pra direita e false se for pra esquerda
+            bool chao; //se está pisando em algo 
+            //bool vivo//
+            //sf::RectangleShape tamanhoVida;
 
         public:
             Entidade();
-            //Entidade(const std::string& caminhoSprite, sf::Vector2f posicao); //sobrecarga construtora
             virtual ~Entidade();
 
             void setChao(bool c);
-            bool getChao();
-            sf::Vector2f getPos()const;
+            bool getChao()const;
+            void mudaDir(); //mais seguro um setDir? porque as condições garantem a direção correta
+            bool getDir()const;
             void setPos(sf::Vector2f novaPos);
-            void acelerar(); //incluir resistencia do ar
-            void atualizaVel();
+            sf::Vector2f getPos()const;
+            void setVel(sf::Vector2f novaVel);
+            sf::Vector2f getVel()const;
+            void acelerar(); 
+            void atualizaVel(); //sobrecarregar essa função, para não precisar de set!!
+            void atualizaPos();
+            virtual void mover() = 0;
             virtual void executar() = 0;
-            virtual void salvar() = 0;
     };
 }
+

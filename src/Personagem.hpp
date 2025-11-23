@@ -13,19 +13,25 @@ namespace Entidades
         {
         protected:
             int num_vidas;
-            int forca;
+            int impacto;
+            int timer;
+            bool disparar;
 
         public:
             Personagem();
             virtual ~Personagem();
 
-            void setVida(int f); //fazer como operator--
+            //quicar ~bounce
+            //empurrao ~knockback
+
+            void perdeVida(int i);
             int getVida()const;
-            int getForca()const;
+            int getImpacto()const;
+            void setDisparo(bool d);
+            bool getDisparo()const;
 
             virtual void mover() = 0;
             virtual void executar() = 0;
-            virtual void salvar() = 0;
         };
     }
 }

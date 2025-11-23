@@ -3,24 +3,30 @@
 #include "Obstaculo.hpp"
 #include "Jogador.hpp"
 
-/* obstáculo imóvel e que não causa dano ao jogador*/
 namespace Entidades
 {
     namespace Obstaculos
     {
         class Formigueiro: public Obstaculo
         {
-        protected:
-            float largura; //largura diz quantas formigas saem ao destruir
+        private:
+            float largura; //interfere no nive_maldade das formigas
+            bool ativo;
+            static int numeroFormigueiros;
 
         public:
-            Formigueiro();
-            //Formigueiro(const std::string& caminhoSprite, sf::Vector2f posicao);
+            Formigueiro(sf::Vector2f posicao, int l);
+            Formigueiro(sf::Vector2f posicao);
             ~Formigueiro();
 
+            static void setNumeroFormigueiros(int n);
+            static int getNumeroFormigueiros();
             void setLargura(float l);
-            float getLargura();
-            void obstaculizar(Personagens::Jogador* p);
+            float getLargura()const;
+            bool getAtividade()const;
+            void obstaculizar(Personagens::Personagem* p);
+            void vibrar();
+            void mover();
             void executar();
         };
     }

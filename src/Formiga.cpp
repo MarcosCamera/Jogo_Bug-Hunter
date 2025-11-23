@@ -1,17 +1,19 @@
 #include "Formiga.hpp"
-#include "Gerenciador_Grafico.hpp"
-#include "Jogador.hpp" // Certifique-se de incluir o cabeçalho completo de Jogador
+
 using namespace std;
 
 namespace Entidades
 {
     namespace Personagens
     {
-        Formiga::Formiga() :Inimigo(), raio(0)
+        int Formiga::numeroFormigas = 0;
+
+        Formiga::Formiga(sf::Vector2f pos) :Inimigo(), raio(30)
         {
-            pFig->setPosition(250, 300); //setar posiçao padrao na fase.
-            forca = 1;
+            pFig->setPosition(pos);
+            impacto = 1;
             num_vidas = 10;
+            velMovMax = 1;
         }
 
         Formiga::~Formiga()
@@ -23,77 +25,86 @@ namespace Entidades
             }
         }
 
-
-        void Formiga::verificaAlcance(Jogador* pJog) //em gerenciador de eventos
+        float Formiga::getRaio()
         {
-            if (!pJog)
-            {
-                cout << "Jogador não encontrado" << endl;
-                return;
-            }
-
-            float x = pos.x - pJog->getPos().x;
-            float y = pos.y - pJog->getPos().y;
-            if (sqrt(x * x + y * y) <= raio && !nivel_maldade)
-            {
-                nivel_maldade++;
-            }
+            return raio;
         }
 
-        void Formiga::seguir(Jogador* pJog) //no gerenciador de eventos...
+        void Formiga::setNumeroFormigas(int n)
         {
-            if (nivel_maldade)
+            numeroFormigas = n;
+        }
+
+        int Formiga::getNumeroFormigas()
+        {
+            return numeroFormigas;
+        }
+
+        void Formiga::seguir(Jogador* pJ) //no gerenciador de eventos
+        {
+            if (pJ)
             {
-                if (pJog->getPos().x < getPos().x)
+                if (pJ->getPos().x < getPos().x)
                     direcao = false;
                 else
                     direcao = true;
             }
+
         }
 
+        float Formiga::verificaAlcance(Jogador* pJ) //em gerenciador de eventos
+        {
+            if (pJ)
+            {
+                float x = pos.x - pJ->getPos().x;
+                float y = pos.y - pJ->getPos().y;
+                float alcance = sqrt(x * x + y * y);
+                return alcance;
+            }
+            return 100.0;
+        }
 
         void Formiga::danificar(Jogador* pJog)
         {
-            pJog->setVida(forca);
+            if (timer >= 10)
+            {
+                pJog->perdeVida(impacto);
+                timer = 0;
+            }
         }
 
 
-        void Formiga::mover() //pode fazer sobrecarga para o caso em que nao houver jogador proximo e o caso em que estiver no alcance do raio?
+        void Formiga::mover() //atualizar. consertar.
         {
             if (chao)
             {
                 if (direcao && vel.x < velMovMax)
                 {
-                    acel.x = velMovMax / 4;
+                    acel.x = velMovMax / 10;
                 }
                 else if (!direcao && vel.x > -velMovMax)
                 {
-                    acel.x = -velMovMax / 4;
+                    acel.x = -velMovMax / 10;
                 }
                     //direção do jogador //gerenciador eventos
-            }
-            else
-            {
-                acel.y = gravidade;
+                //vel.y = 0;
             }
 
+            acelerar();
+            atualizaVel();
+            // qual ordem de inicialização de velocidades?
             vel.x += acel.x * (nivel_maldade + 1);
             vel.y += acel.y * (nivel_maldade + 1);
-            pFig->move(vel);
+
+            atualizaPos();
         }
-
-
-        void Formiga::salvar()
-        {
-            //
-        }
-
 
         void Formiga::executar()
         {
-            //seguir() tambem
-            //verificaAlcance(Jogador *pJog); nao funciona porque nao passa por parametro na funçao
-            mover();                        //solução: ponteiro de jogadores. A fase deve começar com ambos jogadores ou um só
+            if (timer <= 10) //timer para nao dar dano continuo
+                timer++;
+
+            mover();
         }
     }
 }
