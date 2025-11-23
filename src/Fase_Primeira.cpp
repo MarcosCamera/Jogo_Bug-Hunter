@@ -4,26 +4,24 @@
 #include "Obstaculo.hpp"
 #include <cstdlib> 
 #include <ctime>
-#include <iostream>     
-#include <vector>       
-#include <algorithm>    
 
+using namespace Entidades;
+using namespace Entidades::Personagens; 
+using namespace Entidades::Obstaculos;
 using std::cout;
 using std::endl;
 using std::vector;
-
+using namespace Entidades;
 
 Fases::Fase_Primeira::Fase_Primeira(Gerenciadores::Gerenciador_Grafico* pGG, Gerenciadores::Gerenciador_Colisoes& gC, std::string caminho) :
     Fase(pGG, gC), 
-    maxFormigueiro(7),    
-    minFormigueiro(3),
-    maxGrilo(7),
-    minGrilo(3)
+    maxFormigueiro(2),    
+    minFormigueiro(1),
+    maxGrilo(2),
+    minGrilo(1)
 {
     srand(static_cast<unsigned>(time(NULL)));
     carregarFase(caminho); 
-
-    criarCenario();
 }
 
 Fases::Fase_Primeira::~Fase_Primeira() { }
@@ -36,63 +34,119 @@ void Fases::Fase_Primeira::carregarFase(const std::string& caminho)
 
     vector<vector<vector<int>>> camadas = extrairCamadas(mapa); 
     gerarFase(camadas);
+     gC.executar();
+    criarCenario();
 }
 
 void Fases::Fase_Primeira::gerarFase(vector<vector<vector<int>>> mapa)
 {
-   float tileWidth = 32.0f;
-    float tileHeight = 32.0f;
+  
+   if (mapa.empty() || mapa[0].empty() || mapa[0][0].empty()) {
+        cerr << "ERRO: dados do mapa incompletos ou vazios em gerarFase()" << endl;
+        return;
+    }
+    
+    const int larguraTiles = 32;//32 px
+    const int alturaTiles = 32;
 
     for (size_t k = 0; k < mapa.size(); k++) { 
         for (size_t i = 0; i < mapa[k].size(); i++) { 
             for (size_t j = 0; j < mapa[k][i].size(); j++) { 
                 
                 int id_tile = mapa[k][i][j];
-                if (id_tile == 0) {
-                    continue;
-                }
-
-                float posX = j * tileWidth;
-                float posY = i * tileHeight;
-
-
-                switch(id_tile)
-                {
-                    
-                    case 17: 
-                    case 18:
-                    case 19:
-                    case 34:
-                        criarPlataforma();
-                        break;
-                    case 309: 
-                        cout<<"ok3"<<endl;
-                        criarJogador(); 
-                        break;
-
-                    
-                    case 332: 
-                        criarFormigas();
-                        break;
-                    case 9:   
-                        criarInimMedios();
-                        break;
-                    case 440: 
-                        criarObstMedios();
-
-                        break;
-
-                    default:
-                        break;
+                
+                if (id_tile != 0) { 
+                    float posX = j * larguraTiles;
+                    float posY = i * alturaTiles;
+                    criarEntidades(posX, posY, id_tile);
                 }
             }
         }
     }
+
 }
 
 
-void Fases::Fase_Primeira::criarInimMedios() {
-     int numInim = minInim + (rand() % (maxInim - minInim + 1));
+void Fases::Fase_Primeira::criarEntidades(float posX, float posY, int n) 
+{
+    
+    switch (n) 
+    {
+        case 183:
+        case 43:
+        case 88:
+        case 55:
+        case 2:
+        case 248:
+        case 21:
+        case 229:
+        case 145:
+        
+             {
+                Entidades::Parede* pTile = new Entidades::Parede(sf::Vector2f(posX, posY), n);
+                  if (pTile->getFig() == NULL) {
+                  cout << "ERRO: pFig da Parede é NULL" << endl;
+                  break;
+                }
+                if (!pParedeChao) { 
+                    pParedeChao = pTile; 
+                }
+                criarParede(pTile, n);//é preciso fazer essa gambiarra toda pq eu não estou pegando a imagem chao.png inteira, estou apenas pegando cada tile com ids diferentes
+  
+                pTile->setpGG(pGG); 
+                gC.incluirParede(pTile); 
+                lista_ents.incluir(static_cast<Entidades::Parede*>(pTile));
+            }
+            break;
+            
+        case 748: {
+        cout<<"jogador chamado"<<endl;
+        //cout<<posY<<endl;debug
+            criarJogador();
+        }
+            break;
+    
+        case 751: 
+            
+           {
+            
+             int chance = rand()%2;//eu acho q a lógica está errada aqui para a criação aleatoria de instancias
+             if(chance == 0){
+             cout<<"formigas chamado"<<endl;
+              criarFormigas();}
+             }
+            
+            break;
+            
+        case 752: 
+             {
+             int chance = rand()%2;
+             if(chance == 0){
+             cout<<"grilos"<<endl;
+              criarGrilos();}
+        }
+            break;
+            
+        case 425: 
+            cout<<"folhas"<<endl;
+            criarFolhas();
+            break;
+            
+        case 753: 
+        {
+             int chance = rand()%2;
+             if(chance == 0){
+                cout<<"formigueiros"<<endl;
+              criarFormigueiros();}
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+void Fases::Fase_Primeira::criarGrilos() {
+     /*int numInim = minInim + (rand() % (maxInim - minInim + 1));
      float y = pParedeChao->getPos().y;
      
 
@@ -115,74 +169,93 @@ void Fases::Fase_Primeira::criarInimMedios() {
 
     lista_ents.incluir(static_cast<Entidade*>(pInim));
     gC.incluirInimigo(pInim);
-   }
+   }*/
+  if(!pParedeChao)
+    {
+        cout<<"grilos NULL"<<endl;
+        return;
+    }
+     int numGrilos = minGrilos + (rand() % (maxGrilos - minGrilos + 1));
+    float y = pParedeChao->getAltura();
+    
+
+    //for(int i = 0; i < numGrilos ; i++) não estava funcionando fazer as instancias aleatorias assim
+    
+    float x = 100.f + static_cast<float>(rand() % static_cast<int>(larguraNivel - 200.f));
+
+    //cout<<"chegou aqui"<<endl;
+    Entidades::Personagens::Grilo* pInim = new Entidades::Personagens::Grilo(sf::Vector2f(x,y));
+    cout<<"criarGrilos()"<<endl;
+    if(pInim)
+    {        
+         pInim->setpGG(pGG); 
+           float altura_inimigo = pInim->getFig()->getGlobalBounds().height;
+
+           float y_corrigido = y-altura_inimigo ;
+           cout<<y_corrigido<<endl;
+           pInim->getFig()->setPosition(x, y_corrigido);
+           cout<<"criarGrilos()->grilo nao é nulo"<<endl;
+
+    }
+    else
+      cout<<"criarGrilos()->grilo NULL"<<endl;
+    if(pJog1) {
+       pInim->setJogador(pJog1); 
+    }
+    else
+             cout<<"pJogNULL"<<endl;
+
+
+    lista_ents.incluir(static_cast<Entidade*>(pInim));
+    gC.incluirInimigo(pInim);
+   
+
 }
 
-void Fases::Fase_Primeira::criarObstMedios() {
-    
-    if (!pParedeChao) return;
-    
-    const float groundY = pParedeChao->getPos().y; 
-    
-    const float alturaSprite = 50.0f; 
-    
-    const float obstaculoY = groundY - alturaSprite; 
-    
-    int numObstaculos = minPlat + rand() % (maxPlat - minPlat + 1);
-    
-    const float ESPACAMENTO_MINIMO = 150.0f; 
-
-    std::vector<float> availablePositions;
-    
-    for (float x = 100.f; x < larguraNivel - 100.f; x += 50.f) {
-      availablePositions.push_back(x);
+void Fases::Fase_Primeira::criarFormigueiros() {
+    if(!pParedeChao)
+    {
+        cout<<"NULL"<<endl;
+        return;
     }
+     float y =  pParedeChao->getPos().y;
+     cout<<"chega até aqui"<<endl;
+     float x = 100.f + static_cast<float>(rand() % static_cast<int>(larguraNivel - 200.f));
+    Entidades::Obstaculos::Formigueiro* pForms = new Entidades::Obstaculos::Formigueiro(sf::Vector2f(x,y));
+    if(pForms)
+    {
+        
+              float altura_obstaculo = pForms->getFig()->getGlobalBounds().height;
+              
+              
+              float y_corrigido = y - altura_obstaculo;
+              
+              cout<<"y_corrigido "<<y_corrigido<<endl;
+              pForms->getFig()->setPosition(x, y_corrigido); 
+              lista_ents.incluir(static_cast<Entidade*>(pForms));
+              gC.incluirObstaculo(pForms);
+         
 
-    for (size_t i = availablePositions.size() - 1; i > 0; --i) {
-      int j = std::rand() % (i + 1); 
-      float temp = availablePositions[i];
-      availablePositions[i] = availablePositions[j];
-      availablePositions[j] = temp;
-    }
-
-    std::vector<float> usedPositions;
-    int createdObstaculos = 0;
-
-    for (size_t i = 0; i < availablePositions.size() && createdObstaculos < numObstaculos; i++) {
-        float x = availablePositions[i];
-        bool positionValid = true;
-
-        for (std::vector<float>::iterator it = usedPositions.begin(); it != usedPositions.end(); ++it) {
-          if (fabs(x - *it) < ESPACAMENTO_MINIMO) {
-            positionValid = false;
-            break; 
-          }
-        }
-
-        if (positionValid) {
-          
-          Entidades::Obstaculos::Plataforma *pPlat = 
-                new Entidades::Obstaculos::Plataforma(sf::Vector2f(x, obstaculoY), 440);
-          
-          lista_ents.incluir(static_cast<Entidades::Entidade*>(pPlat));
-          gC.incluirObstaculo(pPlat);
-          
-          usedPositions.push_back(x); 
-          createdObstaculos++;
-        }
-    }
-}
+    } 
+    else
+      cout<<"criarFormigueiros, pForms NULL"<<endl;
+} 
 
 void Fases::Fase_Primeira::criarInimigos()
 {  
    criarFormigas();
-   criarInimMedios();
+   criarGrilos();
 
 }
 
 void Fases::Fase_Primeira::criarObstaculos()
 {
-    criarPlataforma();
-    criarObstMedios();
+    criarFolhas();
+    criarFormigueiro();
     
+}
+ void Fases::Fase_Primeira::criarCenario()
+{
+        criarInimigos();
+        criarObstaculos();
 }
