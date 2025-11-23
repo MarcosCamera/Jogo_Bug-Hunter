@@ -1,23 +1,21 @@
 #pragma once
-#include "Entidade.hpp" 
-#include <SFML/Graphics.hpp>
+#include "Entidade.hpp"
+#include "Jogador.hpp"
 
 namespace Entidades
 {
-    class Parede : public Entidade 
+    class Parede : public Entidade
     {
-    private:
-        float altura; 
+    protected:
+     const float altura;
 
     public:
-        Parede(sf::Vector2f posicao, sf::Vector2f dimensoes);
-        virtual ~Parede();
+        Parede(sf::Vector2f posicao, int id_tile);
+        ~Parede();
 
-        void executar() override;
-        
-        float getAltura() const { return altura; }
-        
-
-        
+        void obstaculizar(Personagens::Personagem* p);
+        void executar();
+        const float getAltura();
+        //json toJson();
     };
 }
