@@ -1,26 +1,32 @@
 #pragma once
 #include "Personagem.hpp"
-#include <iostream>
-#include <SFML/Graphics.hpp>
+#include "Inimigo.hpp"
 #include <cstdlib>
 #include <ctime>
 #include <list>
 
-namespace Entidades::Personagens{
-    class Jogador : public Personagem{
+namespace Entidades
+{
+    namespace Personagens
+    {
+        class Jogador : public Personagem
+        {
         protected:
-            int pontos;
+            int pontos; 
 
         public:
-            Jogador();
+            Jogador(sf::Vector2f posicao);
             ~Jogador();
 
-            /*tipo?*/ colidir(Inimigo* pIn);
-            void executar();
-            void salvar();
+            void danificarInim(Inimigo* pIn);
+        
+            void colidir(Inimigo* pIn);
+            void controlar();
             void mover();
-    
+            void executar();
+            void setPontos(int p);
+            //json toJson();//salvamento
 
-
-    };
+        };
+    }
 }
