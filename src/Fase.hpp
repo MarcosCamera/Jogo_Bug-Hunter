@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include "Gerenciador_Colisoes.hpp"
 #include "Gerenciador_Grafico.hpp"
-#include "Plataforma.hpp"
-#include "Inim_Facil.hpp"
+#include "Folha.hpp"
+#include "Formiga.hpp"
 #include "ListaEntidades.hpp"
 #include "Lista.hpp"
 #include "Jogador.hpp"
@@ -54,8 +54,7 @@ namespace Fases
 
 
     protected:
-        float larguraNivel;
-        float alturaNivel;
+        
 
         virtual void carregarFase(const std::string& caminho) = 0;
         virtual void gerarFase(vector<vector<vector<int>>> mapa) = 0;
@@ -69,7 +68,7 @@ namespace Fases
         virtual void criarParede(Entidades::Parede* pParede, int id_tile)=0;//mudei os parâmetros passados, tive q fazer isso pq tava não estava pegando os ids certinhos de cada tile
         virtual void criarEntidades(float posX,float posY, int id_tile) =0;//criei esta função para desacoplar a função gerarFase();
         void criarFormigas();
-        void criarPlataforma();
+        void criarFolhas();
         void criarJogador();
 
 };
