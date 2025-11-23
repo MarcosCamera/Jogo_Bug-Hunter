@@ -33,10 +33,14 @@ namespace Fases
         Entidades::Personagens::Jogador* pJog1;
         Entidades::Parede* pParedeChao;
 
-        int maxInim;
-        int minInim;
-        int maxPlat;
-        int minPlat;
+        int maxFormigas;
+        int minFormigas;
+        int maxPlataformas;
+        int minPlataformas;
+
+        float larguraNivel;
+        float alturaNivel;
+
         
 
 
