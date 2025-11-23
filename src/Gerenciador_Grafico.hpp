@@ -10,19 +10,18 @@ namespace Gerenciadores
     private:
         static Gerenciador_Grafico* instancia;
         sf::RenderWindow window;
+        //lista de texturas para cada entidade?
 
     public:
         Gerenciador_Grafico();    
         ~Gerenciador_Grafico();
-        sf::RenderWindow& getWindow(); //estava static e sem o & //porque esta assim?
+        sf::RenderWindow& getWindow();
         static Gerenciador_Grafico* getInstancia();
         void mostrar();
         void limparJanela();
         bool abertaJanela();
         void fecharJanela();
         void desenharEnte(Ente* pE);
-
-        //criar executar para limpar, desenhar e mostrar. nesse caso, pE (Ente) é uma lista
     };
 }
 

@@ -20,10 +20,9 @@ namespace Entidades
 
         public:
             Obstaculo();
-            //Obstaculo(const std::string& caminhoSprite, sf::Vector2f posicao);
             virtual ~Obstaculo();
 
-            virtual void obstaculizar(Personagens::Personagem* pE) = 0; //pode ser entidade??? no UML ta como jogador!!!
+            virtual void obstaculizar(Personagens::Personagem* pE) = 0;
             virtual void executar() = 0;
         };
     }

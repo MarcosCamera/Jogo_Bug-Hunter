@@ -39,16 +39,6 @@ namespace Entidades
 
 		void Jogador::colidir(Inimigo* pIn)
 		{
-			/*
-			float alturaJog = getFig()->getGlobalBounds().height;
-			float alturaInim = pIn->getFig()->getGlobalBounds().height;
-			
-			if (pos.y + alturaJog < pIn->getPos().y + alturaInim)
-			{
-				danificarInim(pIn);
-				vel.y = -vel.y; // * 0.9 relativo a perda de energia?
-			}*/
-			
 			sf::FloatRect intersec;
 			sf::FloatRect inimigoBounds = pIn->getFig()->getGlobalBounds();
 			sf::FloatRect jogadorBounds = this->getFig()->getGlobalBounds();
@@ -93,7 +83,12 @@ namespace Entidades
 			}
 		}
 
-		void Jogador::controlar()
+		void Jogador::operator++()
+		{
+			pontos++;
+		}
+
+		void Jogador::controlar(char tecla)
 		{
 			//int keyTimeMax = 1; // delay para mover novamente //faço como atributo(???)
 			//posição mouse //para debugar
@@ -106,47 +101,34 @@ namespace Entidades
 			//posiçao = posiçao + velocidade; // talvez esse seja melhor para padronizar. Teria que fazer um setPosicao.
 			//.move(velocidade); um dos dois.
 			//implementar o mesmo para outras entidades.
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && vel.x > (-velMovMax) )
+			if (tecla == 'A' && vel.x > (-velMovMax))
 			{
 				vel.x -= velMovMax;
 				direcao = false;
 			}
 
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && vel.x < velMovMax )
+			if (tecla == 'D' && vel.x < velMovMax)
 			{
 				vel.x += velMovMax;
 				direcao = true;
 			}
 			
 
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && chao )
+			if (tecla == 'W' && chao)
 			{
 				vel.y -= 5 * velMovMax;
 			}
-			/*
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && vel.y < velMovMax)
-				//&& timer >= keyTimeMax)
-			{
-				vel.y += velMovMax / 10; //na pratica so a gravidade acelera
-				//timer = 0;
-			}
-			*/
-			//timer++;
-			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::A) && !sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+			
+			if (tecla == 'Z')
 			{
 				vel.x = 0;
 			}
-
-			//if(jog2) //para jogador 2
 		}
-			//é possivel implementar tambem sem haver uma velocidade maxima mas com a desaceleraçao naturalmente limitando
-
 
 		void Jogador::mover()
 		{
 			acelerar();
 			atualizaVel(); //antes ou depois das acelerações? Testar com ambas formas.
-			controlar();
 			atualizaPos();
 		}
 

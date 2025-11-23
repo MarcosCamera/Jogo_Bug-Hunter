@@ -1,7 +1,7 @@
 #pragma once
 #include "Personagem.hpp"
 #include "Inimigo.hpp"
-#include <iostream>  //precisa desses includes que foram adicionados nas primitivas???
+#include <iostream>  
 #include <SFML/Graphics.hpp>
 #include <cstdlib>
 #include <ctime>
@@ -21,12 +21,10 @@ namespace Entidades
             Jogador(sf::Vector2f posicao);
             ~Jogador();
 
-            //void setText() //no executar. //usar string para diferentes texturas de animações.
             void danificarInim(Inimigo* pIn);
-            // fazer danificar estrutura, ou o danificar ser geral e usar sobrecarga ou cast?
-            // danificar estrutura pelo projétil
             void colidir(Inimigo* pIn);
-            void controlar();
+            void operator++(); //pontuação++
+            void controlar(char tecla);
             void mover();
             void executar();
         };

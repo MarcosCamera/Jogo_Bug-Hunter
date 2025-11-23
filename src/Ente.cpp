@@ -44,3 +44,8 @@ void  Ente::setpGG(Gerenciadores::Gerenciador_Grafico* pG)
 {
     pGG = pG;
 }
+
+int Ente::getContId()
+{
+    return cont_id;
+}

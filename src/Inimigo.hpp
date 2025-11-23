@@ -19,6 +19,8 @@ namespace Entidades
         public:
             Inimigo();
             virtual ~Inimigo();
+            void setMaldade(int m);
+            int getMaldade();
             void operator++();  //nivel_maldade++
             void operator--();  //nivel_maldade--
 

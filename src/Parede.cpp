@@ -2,7 +2,7 @@
 
 namespace Entidades
 {
-	Parede::Parede() : Entidade()
+	Parede::Parede() : Entidade(), colidiu(false)
 	{
 
 	}
@@ -16,20 +16,22 @@ namespace Entidades
 		}
 	}
 
-    void Parede::obstaculizar(Personagens::Personagem* p)
+    void Parede::obstaculizar(Entidades::Entidade* p)
     {
         if (p)
         {
             sf::FloatRect intersec;
-            sf::FloatRect personagemBounds = p->getFig()->getGlobalBounds();
-            sf::FloatRect obstaculoBounds = this->getFig()->getGlobalBounds();
+            sf::FloatRect entidadeBounds = p->getFig()->getGlobalBounds();
+            sf::FloatRect paredeBounds = this->getFig()->getGlobalBounds();
 
-            if (personagemBounds.intersects(obstaculoBounds, intersec))
+            if (entidadeBounds.intersects(paredeBounds, intersec))
             {
+                colidiu = true;
+
                 sf::Vector2f novaPos = p->getPos();
                 if (intersec.width < intersec.height)                   //colisao horizontal
                 {
-                    if (personagemBounds.left < obstaculoBounds.left)   //na esquerda
+                    if (entidadeBounds.left < paredeBounds.left)   //na esquerda
                     {
                         novaPos.x -= intersec.width;
                     }
@@ -42,7 +44,7 @@ namespace Entidades
                 }
                 else                                                    //colisao vertical
                 {
-                    if (personagemBounds.top < obstaculoBounds.top)     //em cima
+                    if (entidadeBounds.top < paredeBounds.top)     //em cima
                     {
                         p->setChao(true); //para o gerenciador de colisões
                         novaPos.y -= intersec.height;

@@ -9,8 +9,9 @@ namespace Entidades
 {
     namespace Obstaculos
     {
+        int Formigueiro::numeroFormigueiros = 0;
 
-        Formigueiro::Formigueiro(sf::Vector2f posicao, int l) : Obstaculo(), largura(1)
+        Formigueiro::Formigueiro(sf::Vector2f posicao, int l) : Obstaculo(), largura(1), ativo(true)
         {
             largura = static_cast<float>(l);
 
@@ -43,6 +44,16 @@ namespace Entidades
             }
         }
 
+        void Formigueiro::setNumeroFormigueiros(int n)
+        {
+            numeroFormigueiros = n;
+        }
+
+        int Formigueiro::getNumeroFormigueiros()
+        {
+            return numeroFormigueiros;
+        }
+
         void Formigueiro::setLargura(float l)
         {
             largura = l;
@@ -51,6 +62,11 @@ namespace Entidades
         float Formigueiro::getLargura()const
         {
             return largura;
+        }
+
+        bool Formigueiro::getAtividade()const
+        {
+            return ativo;
         }
 
         void Formigueiro::obstaculizar(Personagens::Personagem* p)
@@ -83,6 +99,7 @@ namespace Entidades
                         {
                             p->setChao(true); //para o gerenciador de colisões
                             novaPos.y -= intersec.height;
+                            ativo = false;
                         }
                         else                                                //embaixo
                         {

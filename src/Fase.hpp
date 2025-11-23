@@ -31,8 +31,8 @@ namespace Fases
         Entidades::Personagens::Jogador* pJog1;
         int maxInim;
         int minInim;
-        sf::Texture*  texFundo; //ainda sem uso
-        sf::Sprite spriteFundo; //ainda sem uso
+        sf::Texture*  texFundo;
+        sf::Sprite spriteFundo;
 
     public:
         Fase(Gerenciadores::Gerenciador_Grafico* pGG, Gerenciadores::Gerenciador_Colisoes& gC);

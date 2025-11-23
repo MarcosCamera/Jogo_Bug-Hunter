@@ -10,13 +10,13 @@ namespace Entidades
 	protected:
 		bool ativo;
 		bool aliado;
-		Personagens::Personagem* pAtirador; //só até implementar gerenciador_eventos
 
 	public:
-		Projetil(Personagens::Personagem* pAt);
+		Projetil(bool al, bool dir, sf::Vector2f(pos));
 		~Projetil();
 
 		bool getAliado()const;
+		bool getAtividade()const;
 		void desativar();
 		void danificarPersonagem(Personagens::Personagem* pVitima);
 		void mover();

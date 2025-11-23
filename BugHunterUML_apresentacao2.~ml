@@ -4763,7 +4763,7 @@
 <XPD:ATTR name="LineColor" type="string">clBlue</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">1488,1404;1488,1372;1828,1372;1828,1164</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">1488,1404;1488,1376;1828,1376;1828,1164</XPD:ATTR>
 <XPD:REF name="Model">2XevCMJuk0m+HGZ/Q/0IcAAA</XPD:REF>
 <XPD:REF name="Head">+sk7CpvBPUqdgZSuwoXOwgAA</XPD:REF>
 <XPD:REF name="Tail">ZY9+MLImI0yg29f/o3RiqwAA</XPD:REF>

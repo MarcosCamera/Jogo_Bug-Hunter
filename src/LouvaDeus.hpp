@@ -9,7 +9,6 @@ namespace Entidades
         {
         private:
             short int forca; //depende de nivel_maldade
-                             // nivel de maldade varia com o timer
                              // aumenta dano e tamanho de projetil conforme diminui a vida
             short int voo;   //direcao do voo
         public:

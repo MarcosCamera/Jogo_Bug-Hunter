@@ -7,13 +7,13 @@ namespace Entidades
     class Parede : public Entidade
     {
     protected:
-        //atributo?
+        bool colidiu; //a textura muda se houver colisão qualquer.
 
     public:
         Parede();
         ~Parede();
 
-        void obstaculizar(Personagens::Personagem* p);
+        void obstaculizar(Entidades::Entidade* p);
         void executar();
     };
 }

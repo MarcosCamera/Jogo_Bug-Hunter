@@ -14,7 +14,7 @@ namespace Entidades
         protected:
             int num_vidas;
             int impacto;
-            int timer; //para voltar a realizar alguma ação. //fazer static e função estatica em algum lugar
+            int timer;
             bool disparar;
 
         public:
@@ -24,7 +24,7 @@ namespace Entidades
             //quicar ~bounce
             //empurrao ~knockback
 
-            void perdeVida(int i); //fazer como operator-- ?
+            void perdeVida(int i);
             int getVida()const;
             int getImpacto()const;
             void setDisparo(bool d);

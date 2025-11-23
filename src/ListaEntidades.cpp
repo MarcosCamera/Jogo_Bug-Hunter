@@ -6,11 +6,14 @@ using Iterador = Listas::Lista<Entidades::Entidade>::Iterador<Entidades::Entidad
 
 namespace Listas
 {
-    ListaEntidades::ListaEntidades() {}
+    ListaEntidades::ListaEntidades(Gerenciadores::Gerenciador_Eventos* ger) 
+    {
+        pGe = ger;
+    }
 
     ListaEntidades::~ListaEntidades()
     {
-        LEs.limpar();
+        limpar();
     }
 
     Lista<Entidades::Entidade>* ListaEntidades::getLista()
@@ -33,16 +36,21 @@ namespace Listas
 
         Iterador it = LEs.getIterador();
 
+        pGe->setNumeroFormigas(0);
+        pGe->setNumeroFormigueiros(0);
         while (!it.end())
         {
 
             Entidades::Entidade* pEntidade = it.getElemento();
             if (pEntidade)
             {
+                pGe->percorrer(pEntidade);
                 pEntidade->executar();
             }
             it.proximo();
         }
+        Entidades::Personagens::Formiga::setNumeroFormigas(pGe->getNumeroFormigas());
+        Entidades::Obstaculos::Formigueiro::setNumeroFormigueiros(pGe->getNumeroFormigueiros());
     }
 
 

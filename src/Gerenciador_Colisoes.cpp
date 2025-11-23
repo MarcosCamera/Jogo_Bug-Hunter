@@ -6,17 +6,19 @@ using namespace sf;
 
 namespace Gerenciadores
 {
-    //fazer jogador 2;
     //tratar multiplas colisões;
 
     Gerenciador_Colisoes::Gerenciador_Colisoes() :
         LIs(),
         LOs(),
+        LPas(),
         LPs(),
-        pJog1(NULL)
+        pJog1(NULL),
+        pJog2(NULL)
     {
         LIs.clear();
         LOs.clear();
+        LPas.clear();
         LPs.clear();
     }
 
@@ -24,8 +26,10 @@ namespace Gerenciadores
     {
         LIs.clear();
         LOs.clear();
+        LPas.clear();
         LPs.clear();
         pJog1 = NULL;
+        pJog2 = NULL;
     }
 
     void Gerenciador_Colisoes::incluirInimigo(Entidades::Personagens::Inimigo* pi)
@@ -65,6 +69,12 @@ namespace Gerenciadores
         pJog1 = pJ;
     }
 
+    void Gerenciador_Colisoes::setJogador(Entidades::Personagens::Jogador* pJ1, Entidades::Personagens::Jogador* pJ2)
+    {
+        pJog1 = pJ1;
+        pJog2 = pJ2;
+    }
+
     const bool Gerenciador_Colisoes::verificarColisao(Entidades::Entidade* p1, Entidades::Entidade* p2) const
     {
         if (p1 && p2)
@@ -83,23 +93,38 @@ namespace Gerenciadores
     void Gerenciador_Colisoes::tratarColisoesJogsObstacs()
     {
         list<Entidades::Obstaculos::Obstaculo*>::iterator it;
-        if (!pJog1)
+
+        if (pJog1)
         {
-            cout << "Gerenciador_Colisoes::tratarColisoesJogsObstacs() -> pJog1 NULL" << endl;
-            return;
+            pJog1->setChao(false); //vai dar true na funçao obstaculizar
+            for (it = LOs.begin(); it != LOs.end(); it++)
+            {
+                if(*it)
+                {
+                    Entidades::Obstaculos::Obstaculo* pObst = *it;
+                
+                    if (pObst && verificarColisao(pJog1, pObst)) // nao esta redundante?? ele verifica colisao aqui e em obstaculizar
+                    {
+                        pObst->obstaculizar(pJog1);
+                    }
+                }
+            }
         }
 
-        pJog1->setChao(false); //vai dar true na funçao !!obstaculizar!! se estiver pisando em obstaculo.
-        for (it = LOs.begin(); it != LOs.end(); it++)
+        if (pJog2)
         {
-            if(*it) //padronizar
+            pJog2->setChao(false);
+            for (it = LOs.begin(); it != LOs.end(); it++)
             {
-                Entidades::Obstaculos::Obstaculo* pObst = *it;
-                
-                if (pObst && verificarColisao(pJog1, pObst)) // nao esta redundante?? ele verifica colisao aqui e em obstaculizar
+                if (*it)
                 {
-                    pObst->obstaculizar(pJog1); //tratar em obstaculizar os obstaculos de dano também. obstaculizar deve 
-                }                               //ser implementada em cada tipo de obstaculo diferentemente.
+                    Entidades::Obstaculos::Obstaculo* pObst = *it;
+
+                    if (pObst && verificarColisao(pJog2, pObst)) 
+                    {
+                        pObst->obstaculizar(pJog2);
+                    }
+                }
             }
         }
     }
@@ -108,21 +133,42 @@ namespace Gerenciadores
     {
         vector<Entidades::Personagens::Inimigo*>::iterator it;
 
-        if (!pJog1)
+        if (pJog1)
         {
-            cout << "GerenciadorColisoes::coliJogsInimigo() -> pJog1 NULL" << endl;
-            return;
-        }
-        if (!LIs.empty())
-        {
-
-            for (it = LIs.begin(); it != LIs.end(); it++)
+            if (!LIs.empty())
             {
-                Entidades::Personagens::Inimigo* pInim = *it;
 
-                if (pInim && verificarColisao(pJog1, pInim))
+                for (it = LIs.begin(); it != LIs.end(); it++)
                 {
-                    pJog1->colidir(pInim);
+                    if (*it)
+                    {
+                        Entidades::Personagens::Inimigo* pInim = *it;
+
+                        if (pInim && verificarColisao(pJog1, pInim))
+                        {
+                            pJog1->colidir(pInim);
+                        }
+                    }
+                }
+            }
+        }
+
+        if (pJog2)
+        {
+            if (!LIs.empty())
+            {
+
+                for (it = LIs.begin(); it != LIs.end(); it++)
+                {
+                    if (*it)
+                    {
+                        Entidades::Personagens::Inimigo* pInim = *it;
+
+                        if (pInim && verificarColisao(pJog2, pInim))
+                        {
+                            pJog1->colidir(pInim);
+                        }
+                    }
                 }
             }
         }
@@ -132,23 +178,44 @@ namespace Gerenciadores
     {
         set<Entidades::Projetil*>::iterator it;
 
-        if (!pJog1)
+        if (pJog1)
         {
-            cout << "GerenciadorColisoes::coliJogsProjeteis() -> pJog1 NULL" << endl;
-            return;
+            if (!LPs.empty())
+            {
+
+                for (it = LPs.begin(); it != LPs.end(); it++)
+                {
+                    if (*it)
+                    {
+                        Entidades::Projetil* pProj = *it;
+
+                        if (pProj && !pProj->getAliado() && verificarColisao(pJog1, pProj))
+                        {
+                            pProj->danificarPersonagem(pJog1); 
+                            pProj->desativar();
+                        }
+                    }
+                }
+            }
         }
 
-        if (!LPs.empty())
+        if (pJog2)
         {
-
-            for (it = LPs.begin(); it != LPs.end(); it++)
+            if (!LPs.empty())
             {
-                Entidades::Projetil* pProj = *it;
 
-                if (pProj && !pProj->getAliado() && verificarColisao(pJog1, pProj))
+                for (it = LPs.begin(); it != LPs.end(); it++)
                 {
-                    pProj->danificarPersonagem(pJog1); 
-                    pProj->desativar();
+                    if (*it)
+                    {
+                        Entidades::Projetil* pProj = *it;
+
+                        if (pProj && !pProj->getAliado() && verificarColisao(pJog2, pProj))
+                        {
+                            pProj->danificarPersonagem(pJog2);
+                            pProj->desativar();
+                        }
+                    }
                 }
             }
         }
@@ -162,16 +229,22 @@ namespace Gerenciadores
 
         for (itIn = LIs.begin(); itIn != LIs.end(); itIn++)
         {
-            Entidades::Personagens::Inimigo* pInim = *itIn;
-
-            pInim->setChao(false); //obstaculizar set verdadeiro depois
-            for (itObs = LOs.begin(); itObs != LOs.end(); itObs++)
+            if (*itIn)
             {
-                Entidades::Obstaculos::Obstaculo* pObst = *itObs;
+                Entidades::Personagens::Inimigo* pInim = *itIn;
 
-                if (pInim && pObst && verificarColisao(pInim, pObst))
+                pInim->setChao(false); //obstaculizar set verdadeiro depois
+                for (itObs = LOs.begin(); itObs != LOs.end(); itObs++)
                 {
-                    pObst->obstaculizar(pInim); //o obstaculizar personagem ou obstaculizar inimigos e jogadores (2 funçoes)?
+                    if (*itObs)
+                    {
+                        Entidades::Obstaculos::Obstaculo* pObst = *itObs;
+
+                        if (pInim && pObst && verificarColisao(pInim, pObst))
+                        {
+                            pObst->obstaculizar(pInim);
+                        }
+                    }
                 }
             }
         }
@@ -184,19 +257,24 @@ namespace Gerenciadores
 
         for (itIn = LIs.begin(); itIn != LIs.end(); itIn++)
         {
-            Entidades::Personagens::Inimigo* pInim = *itIn;
-
-            for (itPj = LPs.begin(); itPj != LPs.end(); itPj++)
+            if (*itIn)
             {
-                Entidades::Projetil* pProj = *itPj;
+                Entidades::Personagens::Inimigo* pInim = *itIn;
 
-                if (pInim && pProj && pProj->getAliado() && verificarColisao(pInim, pProj))
+                for (itPj = LPs.begin(); itPj != LPs.end(); itPj++)
                 {
-                    pProj->danificarPersonagem(pInim);
-                    pProj->desativar();
+                    if (*itPj)
+                    {
+                        Entidades::Projetil* pProj = *itPj;
+
+                        if (pInim && pProj && pProj->getAliado() && verificarColisao(pInim, pProj))
+                        {
+                            pProj->danificarPersonagem(pInim);
+                            pProj->desativar();
+                        }
+                    }
                 }
             }
-
         }
     }
 
@@ -207,16 +285,22 @@ namespace Gerenciadores
 
         for (itObs = LOs.begin(); itObs != LOs.end(); itObs++)
         {
-            Entidades::Obstaculos::Obstaculo* pObst = *itObs;
-
-            for (itPj = LPs.begin(); itPj != LPs.end(); itPj++)
+            if (*itObs)
             {
-                Entidades::Projetil* pProj = *itPj;
-                if (pObst && pProj && verificarColisao(pObst, pProj))
+                Entidades::Obstaculos::Obstaculo* pObst = *itObs;
+
+                for (itPj = LPs.begin(); itPj != LPs.end(); itPj++)
                 {
-                    pProj->desativar();
-                    //setar bool ativo para false se for de inimigo
-                    //se projetil for de aranha, o projetil fica estatico e muda a sprite
+                    if (*itPj)
+                    {
+                        Entidades::Projetil* pProj = *itPj;
+                        if (pObst && pProj && verificarColisao(pObst, pProj))
+                        {
+                            pProj->desativar();
+                            //setar bool ativo para false se for de inimigo
+                            //se projetil for de aranha, o projetil fica estatico e muda a sprite
+                        }
+                    }
                 }
             }
         }
@@ -225,22 +309,38 @@ namespace Gerenciadores
     void Gerenciador_Colisoes::tratarColisoesJogsParedes()
     {
         list<Entidades::Parede*>::iterator it;
-        if (!pJog1)
-        {
-            cout << "Gerenciador_Colisoes::tratarColisoesJogsObstacs() -> pJog1 NULL" << endl;
-            return;
-        }
-        pJog1->setChao(false); //vai dar true na funçao !!obstaculizar!! se estiver pisando em obstaculo.
-        for (it = LPas.begin(); it != LPas.end(); it++)
-        {
-            if (*it) //padronizar
-            {
-                Entidades::Parede* pPar = *it;
 
-                if (pPar && verificarColisao(pJog1, pPar)) // nao esta redundante?? ele verifica colisao aqui e em obstaculizar
+        if (pJog1)
+        {
+            pJog1->setChao(false); //vai dar true na funçao obstaculizar
+            for (it = LPas.begin(); it != LPas.end(); it++)
+            {
+                if (*it)
                 {
-                    pPar->obstaculizar(pJog1); //tratar em obstaculizar os obstaculos de dano também. obstaculizar deve 
-                }                               //ser implementada em cada tipo de obstaculo diferentemente.
+                    Entidades::Parede* pPar = *it;
+
+                    if (pPar && verificarColisao(pJog1, pPar))
+                    {
+                        pPar->obstaculizar(pJog1); 
+                    }
+                }
+            }
+        }
+
+        if (pJog2)
+        {
+            pJog2->setChao(false); //vai dar true na funçao obstaculizar
+            for (it = LPas.begin(); it != LPas.end(); it++)
+            {
+                if (*it)
+                {
+                    Entidades::Parede* pPar = *it;
+
+                    if (pPar && verificarColisao(pJog2, pPar))
+                    {
+                        pPar->obstaculizar(pJog2);
+                    }
+                }
             }
         }
     }
@@ -252,16 +352,22 @@ namespace Gerenciadores
 
         for (itIn = LIs.begin(); itIn != LIs.end(); itIn++)
         {
-            Entidades::Personagens::Inimigo* pInim = *itIn;
-
-            pInim->setChao(false); //obstaculizar set verdadeiro depois
-            for (itPar = LPas.begin(); itPar != LPas.end(); itPar++)
+            if (*itIn)
             {
-                Entidades::Parede* pPar = *itPar;
+                Entidades::Personagens::Inimigo* pInim = *itIn;
 
-                if (pInim && pPar && verificarColisao(pInim, pPar))
+                pInim->setChao(false);
+                for (itPar = LPas.begin(); itPar != LPas.end(); itPar++)
                 {
-                    pPar->obstaculizar(pInim);
+                    if (*itPar)
+                    {
+                        Entidades::Parede* pPar = *itPar;
+
+                        if (pInim && pPar && verificarColisao(pInim, pPar))
+                        {
+                            pPar->obstaculizar(pInim);
+                        }
+                    }
                 }
             }
         }
@@ -274,16 +380,50 @@ namespace Gerenciadores
 
         for (itPar = LPas.begin(); itPar != LPas.end(); itPar++)
         {
-            Entidades::Parede* pPar = *itPar;
-
-            for (itPj = LPs.begin(); itPj != LPs.end(); itPj++)
+            if (*itPar)
             {
-                Entidades::Projetil* pProj = *itPj;
-                if (pPar && pProj && verificarColisao(pPar, pProj))
+                Entidades::Parede* pPar = *itPar;
+
+                for (itPj = LPs.begin(); itPj != LPs.end(); itPj++)
                 {
-                    pProj->desativar();
-                    //setar bool ativo para false se for de inimigo
-                    //se projetil for de aranha, o projetil fica estatico e muda a sprite
+                    if (*itPj)
+                    {
+                        Entidades::Projetil* pProj = *itPj;
+                        if (pPar && pProj && verificarColisao(pPar, pProj))
+                        {
+                            pProj->desativar();
+                            //setar bool ativo para false se for de inimigo
+                            //se projetil for de aranha, o projetil fica estatico e muda a sprite
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    void Gerenciador_Colisoes::tratarColisoesObstacsParedes()
+    {
+        list<Entidades::Obstaculos::Obstaculo*>::iterator itObs;
+        list<Entidades::Parede*>::iterator itPar;
+
+        for (itObs = LOs.begin(); itObs != LOs.end(); itObs++)
+        {
+            if (*itObs)
+            {
+                Entidades::Obstaculos::Obstaculo* pObs = *itObs;
+
+                pObs->setChao(false);
+                for (itPar = LPas.begin(); itPar != LPas.end(); itPar++)
+                {
+                    if (*itPar)
+                    {
+                        Entidades::Parede* pPar = *itPar;
+
+                        if (pObs && pPar && verificarColisao(pObs, pPar))
+                        {
+                            pPar->obstaculizar(pObs);
+                        }
+                    }
                 }
             }
         }
@@ -300,5 +440,6 @@ namespace Gerenciadores
         tratarColisoesJogsParedes();
         tratarColisoesInimigsParedes();
         tratarColisoesProjeteisParedes();
+        tratarColisoesObstacsParedes();
     }
 }

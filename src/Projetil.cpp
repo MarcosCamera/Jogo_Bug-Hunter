@@ -2,12 +2,10 @@
 
 namespace Entidades
 {
-	Projetil::Projetil(Personagens::Personagem* pAt): Entidade(), ativo(true), aliado(false)
+	Projetil::Projetil(bool al, bool dir, sf::Vector2f(pos)): Entidade(), ativo(true), aliado(al)
 	{
-		pAtirador = pAt;
-		direcao = pAtirador->getDir();
-		pFig->setPosition(pAt->getPos());
-		// da problema ter ponteiro de atirador se ele for eliminado?
+		direcao = dir;
+		pFig->setPosition(pos);
 	}
 
 	Projetil::~Projetil()
@@ -22,6 +20,11 @@ namespace Entidades
 	bool Projetil::getAliado()const
 	{
 		return aliado;
+	}
+
+	bool Projetil::getAtividade()const
+	{
+		return ativo;
 	}
 
 	void Projetil::desativar()

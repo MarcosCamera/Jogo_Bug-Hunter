@@ -1,4 +1,5 @@
 #pragma once
+
 #include <vector>
 #include <list>
 #include <set>
@@ -20,6 +21,7 @@ namespace Gerenciadores
             list<Entidades::Parede*>LPas;
             set<Entidades::Projetil*> LPs;
             Entidades::Personagens::Jogador* pJog1;
+            Entidades::Personagens::Jogador* pJog2;
         
         public:
             Gerenciador_Colisoes();
@@ -36,7 +38,7 @@ namespace Gerenciadores
             void tratarColisoesJogsParedes();
             void tratarColisoesInimigsParedes();
             void tratarColisoesProjeteisParedes();
-            //ObstaculosParedes
+            void tratarColisoesObstacsParedes();
             //InimigsInimigs
 
         public:
@@ -45,6 +47,7 @@ namespace Gerenciadores
             void incluirParede(Entidades::Parede* pp);
             void incluirProjetil(Entidades::Projetil* pj);
             void setJogador(Entidades::Personagens::Jogador* pJ);
+            void setJogador(Entidades::Personagens::Jogador* pJ1, Entidades::Personagens::Jogador* pJ2);
             void executar();
     };
 }
