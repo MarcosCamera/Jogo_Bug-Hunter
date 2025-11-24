@@ -29,6 +29,7 @@ namespace Fases
 
         Gerenciadores::Gerenciador_Colisoes& gC;
         Gerenciadores::Gerenciador_Grafico* pGG;
+        Gerenciadores::Gerenciador_Eventos* pGE; //aqui adicionei
         Listas::ListaEntidades lista_ents;
         Entidades::Personagens::Jogador* pJog1;
         Entidades::Parede* pParedeChao;
@@ -47,6 +48,8 @@ namespace Fases
     public:
 
         Fase(Gerenciadores::Gerenciador_Grafico* pGG, Gerenciadores::Gerenciador_Colisoes& gC);
+        Entidades::Personagens::Jogador* getJogador() { return pJog1; }//aqui adicionei
+        Listas::ListaEntidades* getListaEntidades() { return &lista_ents; }//aqui adicionei
         virtual ~Fase();
         virtual void executar();
         
