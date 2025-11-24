@@ -16,6 +16,8 @@ namespace Entidades
         void obstaculizar(Personagens::Personagem* p);
         void executar();
         const float getAltura();
+        void mover();
+
         //json toJson();
     };
 }
