@@ -88,6 +88,7 @@ namespace Listas
         Lista();
         ~Lista();
         void incluir(TL*p);
+        void remove(TL* p);
         void limpar();
         Iterador<TL> getIterador();
     private:
@@ -126,6 +127,42 @@ namespace Listas
         else
           cout<<"Ponteiro nulo"<< endl;
     }
+
+    template <class TL>
+    void Lista<TL>::remove(TL* p)
+    {
+        if (p == NULL)
+            return; 
+        Elemento<TL>* pAtual = pPrimeiro;
+        Elemento<TL>* pAux = NULL;
+        while(pAtual != NULL)
+        {
+            if(pAtual->getInfo() == p)
+            {
+                if (pAux == NULL)
+                {
+                    pPrimeiro = pAtual->getProximo();
+                }
+                else
+                {
+                    pAux->setProx(pAtual->getProximo());
+                }
+                
+                if (pAtual == pUltimo)
+                {
+                    pUltimo = pAux; 
+                }
+                
+                delete pAtual;
+                pAtual = NULL; 
+                return; 
+            }
+            
+            pAux =  pAtual;
+            pAtual = pAtual->getProximo();
+        }
+    }
+
     template <class TL>
     void Lista<TL>::limpar()
     {
