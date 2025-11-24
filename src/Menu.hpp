@@ -8,10 +8,10 @@ protected:
     sf::Font fonte;
     sf::Text titulo;
     std::vector<sf::Text> opcoes;
+    int opcaoEscolhida;
+    void desenharBase(sf::RenderWindow& window);
     sf::Texture texturaFundo;
     sf::Sprite spriteFundo;
-    int opcaoSelecionada;
-    void desenharBase(sf::RenderWindow& window);
 
 public:
     Menu();
