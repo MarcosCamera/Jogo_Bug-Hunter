@@ -1,27 +1,35 @@
 #pragma once
+#include <iostream>
 #include <SFML/Graphics.hpp>
+
+
+class Entidade;
+class Fase;
+class Menu;
 
 namespace Gerenciadores{
 class Gerenciador_Grafico;
 }
 
-
 class Ente
 {
     protected:
+  
+      static int  cont_id; 
       int id;
-      static Gerenciadores :: Gerenciador_Grafico* pGG;//da acesso a todas os entes ao mesmo gerenciador grafico
-      static int  cont_id;//contar cada ente criado
-      sf::RectangleShape corpo;
+      static Gerenciadores::Gerenciador_Grafico* pGG; 
+      sf::Sprite* pFig; 
+      sf::Texture text;
 
-      sf::Texture text; 
+
     public:
       Ente();
       virtual ~Ente();
-      virtual void executar()=0;
-      void desenhar();
-      void setTexture(std::string caminho);
-      void static setpGG(Gerenciadores :: Gerenciador_Grafico* pG);
-      sf::RectangleShape& getCorpo();
 
+      sf::Sprite* getFig();
+      void setTexture(std::string caminho, sf::Vector2f scale);
+      void desenhar();
+      void static setpGG(Gerenciadores :: Gerenciador_Grafico* pG);
+      static int getContId();
+      virtual void executar()=0;
 };
