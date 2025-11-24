@@ -1,6 +1,8 @@
 #pragma once
 #include "Personagem.hpp"
 #include "Inimigo.hpp"
+#include <iostream>  //precisa desses includes que foram adicionados nas primitivas???
+#include <SFML/Graphics.hpp>
 #include <cstdlib>
 #include <ctime>
 #include <list>
@@ -19,12 +21,13 @@ namespace Entidades
             ~Jogador();
 
             void danificarInim(Inimigo* pIn);
-        
             void colidir(Inimigo* pIn);
-            void controlar();
+
+            void operator++();
+            void controlar(char tecla);
             void mover();
             void executar();
-            void setPontos(int p);
+        
             //json toJson();//salvamento
 
         };
