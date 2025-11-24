@@ -52,3 +52,15 @@ using Iterador = Listas::Lista<Entidades::Entidade>::Iterador<Entidades::Entidad
     {
         LEs.limpar();
     }
+
+    void ListaEntidades::retirar(Entidades::Entidade* pE)
+    {
+        if (pE)
+        {
+            LEs.remove(pE);
+        }
+        else
+        {
+             cout<<"ListaEntidades::retirar() -> Entidade* pE NULL"<<endl;
+        }
+    }
