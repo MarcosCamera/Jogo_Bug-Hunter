@@ -21,6 +21,7 @@ namespace Listas
         void incluir(Entidades::Entidade* pE);//pq dois incluir???
         void percorrer();
         void limpar();
+        void retirar(Entidades::Entidade* pE = NULL);
     };
 
 }
