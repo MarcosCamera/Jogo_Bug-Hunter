@@ -8,16 +8,18 @@ namespace Entidades
         class LouvaDeus : public Inimigo
         {
         private:
-            short int forca; //depende de nivel_maldade
+            short int forca; //depende de nivel_maldade //velocidade de disparo
                              // aumenta dano e tamanho de projetil conforme diminui a vida
-            short int voo;   //direcao do voo
+            bool voo;   //direcao do voo
         public:
             LouvaDeus();
+            LouvaDeus(sf::Vector2f(posicao));
             ~LouvaDeus();
 
             void danificar(Jogador* pJog);
             void atirar();
             void mover();
+            void atualizaMaldade();
             void executar();
         };
     }

@@ -1,14 +1,12 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Jogador.hpp"
-#include "Formiga.hpp"
-#include "ListaEntidades.hpp"
-#include "Fase.hpp"
-#include "Fase_Primeira.hpp"
-#include "Fase_Segunda.hpp"
 #include "Gerenciador_Grafico.hpp"
-#include "Formigueiro.hpp"
-#include "Folha.hpp"
+#include "Gerenciador_Colisoes.hpp"
+
+namespace Fases 
+{ 
+    class Fase;
+}
 
 class Jogo
 {

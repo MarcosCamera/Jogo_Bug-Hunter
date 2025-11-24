@@ -2,7 +2,7 @@
 
 namespace Entidades
 {
-	Projetil::Projetil(bool al, bool dir, sf::Vector2f(pos)): Entidade(), ativo(true), aliado(al)
+	Projetil::Projetil(bool al, bool dir, sf::Vector2f(pos), short int i): Entidade(), ativo(true), aliado(al), impacto(i)
 	{
 		direcao = dir;
 		pFig->setPosition(pos);
@@ -36,7 +36,7 @@ namespace Entidades
 	{
 		if (ativo)
 		{
-			pVitima->perdeVida(pAtirador->getImpacto());
+			pVitima->perdeVida(impacto);
 			ativo = false;
 		}
 	}

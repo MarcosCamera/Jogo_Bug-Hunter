@@ -1,4 +1,14 @@
 #include "Gerenciador_Eventos.hpp"
+#include "ListaEntidades.hpp"
+#include "Entidade.hpp"
+#include "Personagem.hpp"
+#include "SFML/Window.hpp"
+#include "Projetil.hpp"
+#include "Jogo.hpp"
+#include "Jogador.hpp"
+#include "Formiga.hpp"
+#include "Formigueiro.hpp"
+
 
 namespace Gerenciadores
 {
@@ -89,7 +99,7 @@ namespace Gerenciadores
 					}
 				}
 
-				pLista->remove(pers);
+				pLista->remover(pers);
 			}
 			else if (form && !form->getAtividade())
 			{
@@ -102,11 +112,11 @@ namespace Gerenciadores
 					pJog2->operator++();
 				}
 
-				pLista->remove(form);
+				pLista->remover(form);
 			}
 			else if (proj && !proj->getAtividade())
 			{
-				pLista->remove(proj);
+				pLista->remover(proj);
 			}
 		}
 	}
@@ -127,13 +137,13 @@ namespace Gerenciadores
 
 		if (inim)
 		{
-			Entidades::Projetil* pProj = new Entidades::Projetil(false, inim->getDir(), inim->getPos());
+			Entidades::Projetil* pProj = new Entidades::Projetil(false, inim->getDir(), inim->getPos(), inim->getImpacto());
 			pLista->incluir(pProj);
 			pGc->incluirProjetil(pProj);
 		}
 		else if (jog)
 		{
-			Entidades::Projetil* pProj = new Entidades::Projetil(true, jog->getDir(), jog->getPos());
+			Entidades::Projetil* pProj = new Entidades::Projetil(true, jog->getDir(), jog->getPos(), jog->getImpacto());
 			pLista->incluir(pProj);
 			pGc->incluirProjetil(pProj);
 		}
@@ -167,7 +177,7 @@ namespace Gerenciadores
 	{
 		if (pForm)
 		{
-			pForm->setLargura(numeroFormigas);
+			pForm->setLargura(static_cast<float>(numeroFormigas));
 		}
 	}
 
@@ -188,6 +198,11 @@ namespace Gerenciadores
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 			{
 				pJog1->controlar('W');
+			}
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+			{
+				pJog1->controlar('S');
 			}
 
 			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::A) && !sf::Keyboard::isKeyPressed(sf::Keyboard::D))
@@ -213,9 +228,14 @@ namespace Gerenciadores
 				pJog2->controlar('W');
 			}
 
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+			{
+				pJog2->controlar('S');
+			}
+
 			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 			{
-				pJog1->controlar('Z'); //zera vel x
+				pJog2->controlar('Z'); //zera vel x
 			}
 		}
 	}

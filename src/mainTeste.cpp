@@ -1,4 +1,4 @@
-#include "Ente.hpp"
+/*#include "Ente.hpp"
 #include "Gerenciador_Colisoes.hpp"
 #include "Gerenciador_Grafico.hpp"
 #include "Formiga.hpp"
@@ -32,7 +32,7 @@ int main()
 	jog.setPos(sf::Vector2f(200, 400));
 	colis.setJogador(&jog);
 
-	Formiga form(&jog);
+	Formiga form(sf::Vector2f(0, 400));
 	Ente* eForm = &form;
 	form.setTexture("Texturas/formiga.png", sf::Vector2f(0.03f, 0.03f));
 	form.setPos(sf::Vector2f(0, 400));
@@ -50,7 +50,7 @@ int main()
 	ld.setPos(sf::Vector2f(0, 400));
 	colis.incluirInimigo(&ld);
 
-	Folha fol(sf::Vector2f(0.f, 0.f)); //
+	Folha fol(sf::Vector2f(0.f, 0.f)); 
 	Ente* eFol = &fol;
 	fol.setTexture("Texturas/folha.png", sf::Vector2f(1.f, 1.f));
 	fol.setPos(sf::Vector2f(430, 400));
@@ -68,19 +68,19 @@ int main()
 	pc.setPos(sf::Vector2f(490, 400));
 	colis.incluirObstaculo(&pc);
 
-	Parede plat1;
+	Parede plat1(sf::Vector2f(0, 500));
 	Ente* ePlat1 = &plat1;
 	plat1.setTexture("Texturas/parede.png", sf::Vector2f(100.f, 100.f));
 	plat1.setPos(sf::Vector2f(0, 500));
 	colis.incluirParede(&plat1);
 
-	Parede plat2;
+	Parede plat2(sf::Vector2f(0, 480));
 	Ente* ePlat2 = &plat2;
 	plat2.setTexture("Texturas/parede.png", sf::Vector2f(1.f, 1.f));
 	plat2.setPos(sf::Vector2f(0, 480));
 	colis.incluirParede(&plat2);
 
-	Parede plat3;
+	Parede plat3(sf::Vector2f(400, 480));
 	Ente* ePlat3 = &plat3;
 	plat3.setTexture("Texturas/parede.png", sf::Vector2f(1.f, 1.f));
 	plat3.setPos(sf::Vector2f(400, 480));
@@ -95,7 +95,7 @@ int main()
 				graf.fecharJanela();
 		}
 
-		/*UPDATE*/
+		//UPDATE
 
 		colis.executar(); //deve ser primeiro?
 
@@ -139,18 +139,17 @@ int main()
 			ld.setPos(sf::Vector2f(80, 800));
 		}
 
-		/*
-		if (ld.getDisparo())
-		{
-			ld.setDisparo(false);
+		
+		//if (ld.getDisparo())
+		//{
+		//	ld.setDisparo(false);
 
-			Projetil pj(&ld);
-			Ente* ePj = &pj;
-			jog.setTexture("Texturas/projetil.png", sf::Vector2f(1.f, 1.f));
+		//	Projetil pj(&ld);
+		//	Ente* ePj = &pj;
+		//	jog.setTexture("Texturas/projetil.png", sf::Vector2f(1.f, 1.f));
+		//}
 
-		}*/
-
-		/*DRAW*/
+		//DRAW
 		graf.getWindow().clear(Color::White);
 
 		graf.desenharEnte(eJog);
@@ -169,9 +168,9 @@ int main()
 	}
 	return 0;
 }
+*/
 
 
-/*
 #include "Jogo.hpp"
 
 int main()
@@ -179,4 +178,4 @@ int main()
 	Jogo jogo;
 	jogo.executar();
 	return 0;
-}*/
+}

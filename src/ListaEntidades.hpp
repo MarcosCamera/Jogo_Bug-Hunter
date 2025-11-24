@@ -1,10 +1,8 @@
 #pragma once
-#include <iostream>
 #include "Lista.hpp"
-#include "Entidade.hpp"
-#include "Gerenciador_Grafico.hpp"
-#include "Gerenciador_Colisoes.hpp"
-#include "Gerenciador_Eventos.hpp"
+
+namespace Gerenciadores { class Gerenciador_Eventos; }
+
 
 namespace Entidades
 {
@@ -26,6 +24,7 @@ namespace Listas
 
         Lista<Entidades::Entidade>* getLista();
         void incluir(Entidades::Entidade* pE);
+        void remover(Entidades::Entidade* pE);
         void percorrer();
         void limpar();
     };

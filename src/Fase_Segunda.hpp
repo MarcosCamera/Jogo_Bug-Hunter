@@ -21,13 +21,13 @@ namespace Fases
         Fase_Segunda(Gerenciadores::Gerenciador_Grafico* pGG, Gerenciadores::Gerenciador_Colisoes& gC, std::string caminho);
         ~Fase_Segunda();
 
+        void criarParede(Entidades::Parede* pParede, int id_tile)override;
         void carregarFase(const std::string& caminho) override;
         void gerarFase(vector<vector<vector<int>>> mapa) override;
         void criarInimigos()override;
         void criarObstaculos()override;
         void criarCenario()override;
         void criarEntidades(float posX, float posY, int id_tile)override;
-        void criarParede(Entidades::Parede* pParede, int id_tile)override;
 
     };
 }

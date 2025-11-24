@@ -1,12 +1,7 @@
 #pragma once
-#include "ListaEntidades.hpp"
 #include "Gerenciador_Colisoes.hpp"
-#include "Entidade.hpp"
-#include "Personagem.hpp"
-#include "SFML/Window.hpp"
-#include "Projetil.hpp"
-#include "Jogo.hpp"
-#include "Jogador.hpp"
+
+namespace Listas { class ListaEntidades; }
 
 namespace Gerenciadores
 {

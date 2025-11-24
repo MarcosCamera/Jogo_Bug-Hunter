@@ -1,4 +1,7 @@
 #include "ListaEntidades.hpp"
+#include "Gerenciador_Eventos.hpp"
+#include "Formigueiro.hpp"
+#include "Formiga.hpp"
 
 using namespace  std;
 
@@ -29,6 +32,18 @@ namespace Listas
         }
         else
             cout << "ListaEntidades::incluir() -> Entidade* pE NULL" << endl;
+    }
+
+    void ListaEntidades::remover(Entidades::Entidade* pE)
+    {
+        if (pE)
+        {
+            LEs.remove(pE);
+        }
+        else
+        {
+            cout << "ListaEntidades::retirar() -> Entidade* pE NULL" << endl;
+        }
     }
 
     void ListaEntidades::percorrer()

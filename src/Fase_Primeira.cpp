@@ -21,6 +21,34 @@ namespace Fases
 
     Fase_Primeira::~Fase_Primeira() {}
 
+    void Fases::Fase_Primeira::criarParede(Entidades::Parede* pParede, int id_tile)
+    {
+
+
+        if (!pParede || id_tile == 0) return;
+
+        const int TILE_SIZE = 32;
+        const int TILES_PER_ROW = 16;
+        const int FIRST_GID = 1;
+
+        int local_id = id_tile - FIRST_GID;
+
+        int tile_x_index = local_id % TILES_PER_ROW;
+        int tile_y_index = local_id / TILES_PER_ROW;
+
+        int tile_x_coord = tile_x_index * TILE_SIZE;
+        int tile_y_coord = tile_y_index * TILE_SIZE;
+
+        sf::IntRect areaTiled(
+            tile_x_coord,
+            tile_y_coord,
+            TILE_SIZE,
+            TILE_SIZE
+        );
+
+        pParede->getFig()->setTextureRect(areaTiled);
+    }
+
     void Fase_Primeira::carregarFase(const std::string& caminho)
     {
         json mapa = lerArquivoJSON(caminho);
@@ -53,8 +81,8 @@ namespace Fases
 
                     if (id_tile != 0)
                     {
-                        float posX = j * larguraTiles;
-                        float posY = i * alturaTiles;
+                        float posX = static_cast<float>(j) * larguraTiles;
+                        float posY = static_cast<float>(i) * alturaTiles;
                         criarEntidades(posX, posY, id_tile);
                     }
                 }
@@ -80,7 +108,7 @@ namespace Fases
         case 145:
 
         {
-            Entidades::Parede* pTile = new Entidades::Parede(sf::Vector2f(posX, posY), n);
+            Entidades::Parede* pTile = new Entidades::Parede(sf::Vector2f(posX, posY));
             if (pTile->getFig() == NULL) {
                 cout << "ERRO: pFig da Parede é NULL" << endl;
                 break;
@@ -228,53 +256,5 @@ namespace Fases
     {
         criarInimigos();
         criarObstaculos();
-    }
-    /*
-    void Fase_Primeira::criarParede(Entidades::Parede* pParede, int id_tile)
-    {
-        float altura = 100.0f;
-        float pos_y = alturaNivel - altura;
-        const sf::Vector2f dimensoes(larguraNivel, altura);
-        const sf::Vector2f posicao(0.0f, pos_y);
-        if (!pParedeChao)
-        {
-            pParedeChao = new Entidades::Parede(posicao, id_tile);//qual valor de posição e dimensão posso colocar para plataforma??
-            lista_ents.incluir(static_cast<Entidades::Parede*>(pParedeChao));
-            gC.setParede(pParedeChao);
-        }
-
-        else
-        {
-            pParedeChao->getCorpo().setPosition(posicao);
-
-        }
-    }*/
-
-    void Fases::Fase_Primeira::criarParede(Entidades::Parede* pParede, int id_tile)
-    {
-
-
-        if (!pParede || id_tile == 0) return;
-
-        const int TILE_SIZE = 32;
-        const int TILES_PER_ROW = 16;
-        const int FIRST_GID = 1;
-
-        int local_id = id_tile - FIRST_GID;
-
-        int tile_x_index = local_id % TILES_PER_ROW;
-        int tile_y_index = local_id / TILES_PER_ROW;
-
-        int tile_x_coord = tile_x_index * TILE_SIZE;
-        int tile_y_coord = tile_y_index * TILE_SIZE;
-
-        sf::IntRect areaTiled(
-            tile_x_coord,
-            tile_y_coord,
-            TILE_SIZE,
-            TILE_SIZE
-        );
-
-        pParede->getFig()->setTextureRect(areaTiled);
     }
 }

@@ -11,7 +11,7 @@ namespace Entidades
 		{
 			pFig->setPosition(10, 300); //setar posiçao padrao na fase.
 			impacto = 1;
-			num_vidas = 10;
+			num_vidas = 50;
 			velMovMax = 2;
 		}
 		Jogador::Jogador(sf::Vector2f posicao) : Personagem(), pontos(0)
@@ -133,6 +133,11 @@ namespace Entidades
 			if (tecla == 'W' && chao)
 			{
 				vel.y -= 5 * velMovMax;
+			}
+
+			if (tecla == 'S')
+			{
+				disparar = true;
 			}
 			
 			if (tecla == 'Z')

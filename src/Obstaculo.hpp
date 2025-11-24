@@ -23,7 +23,7 @@ namespace Entidades
             virtual ~Obstaculo();
 
             virtual void obstaculizar(Personagens::Personagem* pE) = 0;
-            virtual void mover();
+            virtual void mover() = 0;
             virtual void executar() = 0;
         };
     }

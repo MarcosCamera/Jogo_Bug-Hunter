@@ -10,7 +10,7 @@ namespace Entidades
         bool colidiu; //a textura muda se houver colisão qualquer.
 
     public:
-        Parede(sf::Vector2f posicao, int id_tile);        
+        Parede(sf::Vector2f posicao);  
         ~Parede();
 
         void obstaculizar(Entidades::Entidade* p);

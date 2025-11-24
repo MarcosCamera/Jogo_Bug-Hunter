@@ -13,7 +13,7 @@ namespace Entidades
         {
         protected:
             int num_vidas;
-            int impacto;
+            short int impacto;
             int timer;
             bool disparar;
 

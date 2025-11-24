@@ -4,12 +4,12 @@ namespace Entidades
 {
 	namespace Personagens
 	{
-		Grilo::Grilo(): Inimigo(), tamanhoSalto(0)
+		Grilo::Grilo(): Inimigo(), tamanhoSalto(5)
 		{
 
 		}
 
-		Grilo::Grilo(sf::Vector2f posicao)
+		Grilo::Grilo(sf::Vector2f posicao): Inimigo(), tamanhoSalto(5)
 		{
 			pFig->setPosition(posicao);
 		}

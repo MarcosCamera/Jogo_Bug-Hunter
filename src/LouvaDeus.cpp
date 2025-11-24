@@ -8,7 +8,7 @@ namespace Entidades
 {
     namespace Personagens
     {
-        LouvaDeus::LouvaDeus() :Inimigo(), forca(0), voo(-1)
+        LouvaDeus::LouvaDeus() :Inimigo(), forca(5), voo(false)
         {
             pFig->setPosition(250, 300); //setar posiçao padrao na fase.
             impacto = 1;
@@ -16,6 +16,13 @@ namespace Entidades
             velMovMax = 3;
         }
 
+        LouvaDeus::LouvaDeus(sf::Vector2f(posicao)) :Inimigo(), forca(5), voo(false)
+        {
+            pFig->setPosition(posicao); //setar posiçao padrao na fase.
+            impacto = 1;
+            num_vidas = 10;
+            velMovMax = 3;
+        }
         LouvaDeus::~LouvaDeus()
         {
             if (pFig)
@@ -33,28 +40,43 @@ namespace Entidades
 
         void LouvaDeus::atirar()
         {
-            if (timer % 5 == 0)
+            if (timer % (5 - nivel_maldade) == 0)
             {
                 disparar = true;
             }
         }
 
 
-        void LouvaDeus::mover() //pode fazer sobrecarga para o caso em que nao houver jogador proximo e o caso em que estiver no alcance do raio?
+        void LouvaDeus::mover()
         {
-            vel.y = velMovMax * voo; //pode fazer normal = gravidade quando voo true e só atua vel. quando voo false só atua gravidade.
-            atualizaPos();           //nesse caso, voo é bool.
+            acelerar();
+            acel.y += forca * voo;
+            atualizaVel();
+            atualizaPos();
+        }
+
+        void LouvaDeus::atualizaMaldade()
+        {
+            if (!nivel_maldade && num_vidas < 5)
+            {
+                operator++();
+            }
+            else if (nivel_maldade < 2 && num_vidas < 2)
+            {
+                operator++();
+            }
         }
 
         void LouvaDeus::executar()
         {
             if (timer >= 10)
             {
-                voo *= -1;
+                voo = !voo;
                 timer = 0;
             }
             timer++;
             
+            atualizaMaldade();
             mover();
             atirar();
         }

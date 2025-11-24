@@ -5,7 +5,7 @@ namespace Entidades
 	namespace Personagens
 	{
 
-		Personagem::Personagem() :Entidade(), num_vidas(0), impacto(0), disparar(false), timer(0) {}
+		Personagem::Personagem() :Entidade(), num_vidas(5), impacto(0), disparar(false), timer(0) {}
 
 		Personagem::~Personagem() {}
 

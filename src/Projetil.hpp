@@ -10,9 +10,10 @@ namespace Entidades
 	protected:
 		bool ativo;
 		bool aliado;
+		short int impacto;
 
 	public:
-		Projetil(bool al, bool dir, sf::Vector2f(pos));
+		Projetil(bool al, bool dir, sf::Vector2f(pos), short int i);
 		~Projetil();
 
 		bool getAliado()const;

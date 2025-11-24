@@ -2,7 +2,7 @@
 
 namespace Entidades
 {
-    Parede::Parede(sf::Vector2f posicao, int id_tile) : Entidade(),colidiu(false)
+    Parede::Parede(sf::Vector2f posicao) : Entidade(), colidiu(false)
     {
         chao = true;
         setPos(posicao);
@@ -10,7 +10,6 @@ namespace Entidades
         try
         {
             setTexture("Textures/chao.png", sf::Vector2f(1.0f, 1.0f));
-            //text.setRepeated(true);
 
             if (pFig) {
                 pFig->setOrigin(0.f, 0.f);
@@ -25,7 +24,6 @@ namespace Entidades
             std::cerr << e.what() << std::endl;
         }
     }
-
 
 	Parede::~Parede()
 	{
