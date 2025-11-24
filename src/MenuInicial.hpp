@@ -6,14 +6,14 @@ private:
     sf::Text seletores[2];
     sf::Text instrucoes;
 	sf::Text nomeJogo;
-    int etapa;
-    int nJogadores;
+    int nivel;
+    int numJogadores;
     int fase;
 
 public:
     MenuInicial();
     ~MenuInicial();
     int mostrar(sf::RenderWindow& window);
-    int getNJogadores() const;
+    int getNumJogadores() const;
     int getFase() const;
 };
