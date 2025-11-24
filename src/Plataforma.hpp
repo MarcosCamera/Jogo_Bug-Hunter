@@ -1,20 +1,33 @@
-#include "Obstaculo.hpp"
-#include "Jogador.hpp"
 #pragma once
+#include "Obstaculo.hpp"
+#include "Personagem.hpp"
 
-namespace Entidades::Obstaculos
+namespace Entidades
 {
-    class Plataforma:public Obstaculo
+    namespace Obstaculos
     {
-        protected:
-           int altura;
-            
-         public:
-          Plataforma();
-          Plataforma(const std::string& caminhoSprite, sf::Vector2f position);
-          ~Plataforma();
+        class Folha : public Obstaculo
+        {
+        private:
+            int altura;
+            int alturaMax;
+            int alturaMin;
 
-          void executar();
-          void obstaculizar(Personagens::Jogador* p);
-    };
+        public:
+            Folha();
+            Folha(sf::Vector2f posicao);
+            ~Folha();
+
+            void setAltura(int a);
+            int getAltura();
+
+            void obstaculizar(Personagens::Personagem* p);
+            void crescer();
+            void diminuir();
+            bool delay();
+            void executar();
+            void mover(); 
+            
+        };
+    }
 }
