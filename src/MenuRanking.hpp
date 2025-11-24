@@ -1,11 +1,11 @@
 #include "Menu.hpp"
 #pragma once
-#define N_LEADERBOARD 10 // Use o número máximo de posições desejado
+#define NUM_LEADERBOARD 10 // o número máximo de posições desejado
 
 class MenuRanking : public Menu
 {
     private:
-      int nPosicoes;
+      int numPosicoes;
     public:
       MenuRanking();
       ~MenuRanking();
