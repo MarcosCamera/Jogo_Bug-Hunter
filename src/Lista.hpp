@@ -88,8 +88,8 @@ namespace Listas
         Lista();
         ~Lista();
         void incluir(TL*p);
-        void remove(TL* p);
         void limpar();
+        void remove(TL* p);
         Iterador<TL> getIterador();
     private:
         Elemento<TL>* getPrimElem() const;
