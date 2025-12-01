@@ -31,6 +31,7 @@ namespace Fases
         Gerenciadores::Gerenciador_Grafico* pGG;
         Gerenciadores::Gerenciador_Eventos* pGE; //aqui adicionei
         Listas::ListaEntidades lista_ents;
+        Listas::ListaEntidades* lista_projeteis;//aqui adicionei
         Entidades::Personagens::Jogador* pJog1;
         Entidades::Parede* pParedeChao;
 
@@ -57,22 +58,18 @@ namespace Fases
 
 
     protected:
+        virtual void gerarFase(const std::string& caminho) = 0;
         
-
-        virtual void carregarFase(const std::string& caminho) = 0;
-        virtual void gerarFase(vector<vector<vector<int>>> mapa) = 0;
-        json lerArquivoJSON(const std::string& caminho);
-        vector<vector<vector<int>>> extrairCamadas(const json& mapa);
         
         virtual void criarCenario()=0; //deixei esta função como virtual pura, pois cada fase terá um cenário diferente
         virtual void criarInimigos() = 0;
         virtual void criarObstaculos() = 0;
         
-        virtual void criarParede(Entidades::Parede* pParede, int id_tile)=0;//mudei os parâmetros passados, tive q fazer isso pq tava não estava pegando os ids certinhos de cada tile
-        virtual void criarEntidades(float posX,float posY, int id_tile) =0;//criei esta função para desacoplar a função gerarFase();
-        void criarFormigas();
-        void criarFolhas();
-        void criarJogador();
+        virtual void criarParede(sf::Vector2f pos, int id_tile)=0;
+        virtual void criarEntidades(sf::Vector2f pos, int id_tile, const std::string& camada) =0;
+        void criarFormigas(sf::Vector2f pos);
+        void criarFolhas(sf::Vector2f pos);
+        void criarJogador(sf::Vector2f pos);
 
 };
 
