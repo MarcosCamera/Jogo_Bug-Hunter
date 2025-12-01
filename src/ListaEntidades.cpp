@@ -5,14 +5,24 @@
 #include <iostream>
 using namespace  std;
 
-using Entidades::Entidade;
-using namespace Listas;
+#include "Formiga.hpp"
+#include "Formigueiro.hpp"
+
+
+namespace Listas{
 using Iterador = Listas::Lista<Entidades::Entidade>::Iterador<Entidades::Entidade>;
 
-    ListaEntidades::ListaEntidades() {}
+    ListaEntidades::ListaEntidades() : pGe(NULL) 
+    {
+    }
+
+    ListaEntidades::ListaEntidades(Gerenciadores::Gerenciador_Eventos* ger):pGe(ger)
+    {
+         
+    }
     ListaEntidades::~ListaEntidades() 
     {
-        LEs.limpar();
+        limpar();
     }
     
     Lista<Entidades::Entidade>* ListaEntidades::getLista()
@@ -20,7 +30,7 @@ using Iterador = Listas::Lista<Entidades::Entidade>::Iterador<Entidades::Entidad
         return &LEs;
     }
 
-    void ListaEntidades::incluir(Entidade* pE)
+    void ListaEntidades::incluir(Entidades::Entidade* pE)
     {
         if (pE)
         {
@@ -34,6 +44,8 @@ using Iterador = Listas::Lista<Entidades::Entidade>::Iterador<Entidades::Entidad
     {
         
         Iterador it = LEs.getIterador();
+        pGe->setNumeroFormigas(0);
+        pGe->setNumeroFormigueiros(0);
 
         while (!it.end())
         {
@@ -41,10 +53,13 @@ using Iterador = Listas::Lista<Entidades::Entidade>::Iterador<Entidades::Entidad
             Entidades::Entidade* pEntidade = it.getElemento();
             if (pEntidade)
             {
+                pGe->percorrer(pEntidade);
                 pEntidade->executar();
             }
             it.proximo();
         }
+        Entidades::Personagens::Formiga::setNumeroFormigas(pGe->getNumeroFormigas());
+        Entidades::Obstaculos::Formigueiro::setNumeroFormigueiros(pGe->getNumeroFormigueiros());
     }
 
 
@@ -53,7 +68,7 @@ using Iterador = Listas::Lista<Entidades::Entidade>::Iterador<Entidades::Entidad
         LEs.limpar();
     }
 
-    void ListaEntidades::retirar(Entidades::Entidade* pE)
+    void ListaEntidades::remover(Entidades::Entidade* pE)
     {
         if (pE)
         {
@@ -64,3 +79,4 @@ using Iterador = Listas::Lista<Entidades::Entidade>::Iterador<Entidades::Entidad
              cout<<"ListaEntidades::retirar() -> Entidade* pE NULL"<<endl;
         }
     }
+}
