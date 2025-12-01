@@ -10,14 +10,14 @@ namespace Entidades
      const float altura;
 
     public:
-        Parede(sf::Vector2f posicao, int id_tile);
+        Parede();
+        Parede(sf::Vector2f pos = sf::Vector2f(0.0f, 0.0f), int id_tile = 0);
         ~Parede();
 
         void obstaculizar(Personagens::Personagem* p);
         void executar();
         const float getAltura();
         void mover();
-
-        //json toJson();
+    
     };
 }
