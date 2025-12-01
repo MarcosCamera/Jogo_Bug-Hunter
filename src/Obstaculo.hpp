@@ -1,8 +1,8 @@
 #pragma once
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "Entidade.hpp"
-#include "Jogador.hpp"
+#include "Obstaculo.hpp"
+#include "Personagem.hpp"
 
 namespace Entidades
 {
@@ -22,9 +22,11 @@ namespace Entidades
             Obstaculo();
             virtual ~Obstaculo();
 
-            virtual void obstaculizar(Personagens::Personagem* pE) = 0;
-            virtual void mover();
+            virtual void obstaculizar(Personagens::Personagem* pE) = 0; 
             virtual void executar() = 0;
+            void setDano(bool dano);
+            bool getDano();
+           
         };
     }
 }
