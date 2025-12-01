@@ -10,10 +10,6 @@
 #include "Folha.hpp"
 #include "Gerenciador_Eventos.hpp"
 
-#include "Menu.hpp"
-#include "MenuPausa.hpp" 
-#include "MenuInicial.hpp"
-
 #include "Fase_Primeira.hpp"
 #include "Fase_Segunda.hpp"
 
@@ -25,19 +21,12 @@ class Jogo{
    private:
     Fases::Fase* pFaseAtual;
     Fases::Fase_Primeira* pF1;
-    Fases::Fase_Segunda* pF2;
+    //Fases::Fase_Segunda* pF2;
     
     Gerenciador_Grafico* pGrafico;
     Gerenciador_Eventos* pEventos;
-    Gerenciador_Colisoes pColisoes;
-    
-
-    MenuInicial menuInicial;
-    MenuPausa menuPausa;
-    int estadoDoJogo; //(0==menu, 1==jogo, 2==sair)
     
     
-
    public:
      Jogo();
      ~Jogo();
