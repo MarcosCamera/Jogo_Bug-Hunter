@@ -19,7 +19,7 @@ namespace Entidades
 
         public:
             Inimigo();
-            Inimigo(sf::Vector2f pos); 
+            Inimigo(sf::Vector2f pos = sf::Vector2f(0.0f, 0.0f), Listas::ListaEntidades* p = NULL); //so mudei aqui
             virtual ~Inimigo();
             void operator++();  //nivel_maldade++
             void operator--();  //nivel_maldade--
