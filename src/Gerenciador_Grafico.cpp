@@ -3,14 +3,18 @@
 
 using namespace Gerenciadores;
 using namespace Entidades;
+using namespace sf;
 Gerenciador_Grafico* Gerenciadores::Gerenciador_Grafico::instancia(NULL);
 
 
 Gerenciador_Grafico::Gerenciador_Grafico():
-window(sf::VideoMode(800, 608), "BUG - HUNTER", sf::Style::Default)
+window(sf::VideoMode(800, 512), "BUG - HUNTER", sf::Style::Default)
 {
     
     window.setFramerateLimit(60); //ver testes.cpp como limite de fps, etc.
+    camera.setSize(window.getSize().x, window.getSize().y);
+    camera.setCenter(camera.getSize().x / 2, camera.getSize().y / 2);
+    window.setView(camera);
 }
 
 
@@ -69,41 +73,31 @@ void Gerenciador_Grafico::desenharEnte(Ente* pE)
     }
 }
 
-void Gerenciador_Grafico::moverCamera(sf::Text* t, Entidades::Entidade* p1, Entidades::Entidade* p2)
+void Gerenciadores::Gerenciador_Grafico::moverCamera(Entidades::Entidade* p1, Entidades::Entidade* p2)
 {
+        float larguraJanela = camera.getSize().x;
+		float larguraCenario = 32000.0f;
 
-    sf::View view = window.getView();
+		float centroX = 0;
+		if (p2 && p1) {
+			centroX = (p1->getFig()->getPosition().x+ p2->getFig()->getPosition().x) / 2.f;
+		}
+		else if (p1) {
+			centroX = p1->getFig()->getPosition().x;		}
+		else {//p2
+			centroX = p2->getFig()->getPosition().x;
+		}
 
-    float larguraJanela = view.getSize().x;//largura da janela(800.0f, 608.0f)
-    float larguraCenario = 1120.0f;//largura do mapa
-    float centroX;
-    float minCentro = larguraJanela / 2.f;
-    float maxCentro = larguraCenario - larguraJanela / 2.f;
+		float minCentro = larguraJanela / 2.f;
+		float maxCentro = larguraCenario - larguraJanela / 2.f;
 
+		if (centroX < minCentro)
+			centroX = minCentro;
+		if (centroX > maxCentro)
+			centroX = maxCentro;
 
-    if (p2 && p1) {//se há dois jogadores
-        centroX = (p1->getPos().x + p2->getPos().x) / 2.f;
-
-    }
-    else if (p1) {
-        centroX = p1->getPos().x;
-    }
-    else {//p2
-        centroX = p2->getPos().x;
-    }
-     
-
-    if (centroX < minCentro)
-        centroX = minCentro;
-    if (centroX > maxCentro)
-        centroX = maxCentro;
-    
-   // std::cout << "Posicao camX: " << p1->getPos().x << "Posicao camY: " << p1->getPos().y << "\n";
-
-    view.setCenter(sf::Vector2f(centroX, 206.25f));
-    window.setView(view);
-   // if(t)
-      //  t->setPosition(camera.getCenter()-Vector2f(LARGURA_TELA/2 - 20.f,ALTURA_TELA/2 - 10.f)); // move o texto para acompanhar a câmera	
+		camera.setCenter(Vector2f(centroX, 512.0f/ 2.f));
+		window.setView(camera);
 }
 
 
