@@ -15,19 +15,18 @@ namespace Fases
           
         
         protected:
-          void criarGrilos();
+          void criarGrilos(sf::Vector2f pos);
           void criarFormigueiros();
           
         public:
            Fase_Primeira(Gerenciadores::Gerenciador_Grafico* pGG, Gerenciadores::Gerenciador_Colisoes& gC, std::string caminho);
            ~Fase_Primeira();  
            
-           void carregarFase(const std::string& caminho) override;
-           void gerarFase(vector<vector<vector<int>>> mapa) override;
-           void criarInimigos()override;
-           void criarObstaculos()override;
-           void criarCenario()override;
-           void criarEntidades(float posX, float posY, int id_tile)override;
-           void criarParede(Entidades::Parede* pParede, int id_tile)override;    
+           void gerarFase(const std::string& caminho);
+           void criarInimigos();
+           void criarObstaculos();
+           void criarCenario();
+           void criarEntidades(sf::Vector2f pos, int id_tile, const std::string& camada);
+           void criarParede(sf::Vector2f pos, int id_tile);
     };
 }
