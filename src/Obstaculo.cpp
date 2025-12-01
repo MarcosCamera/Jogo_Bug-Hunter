@@ -1,12 +1,30 @@
 #include "Obstaculo.hpp"
+
 using namespace std;
 
 
-using namespace Entidades::Obstaculos;
+namespace Entidades
+{
+	namespace Obstaculos
+	{
 
-Obstaculo::Obstaculo() : Entidade(), danoso(){}
 
-Obstaculo::Obstaculo(const std::string& caminhoSprite,sf::Vector2f posicao):
-Entidade(caminhoSprite, posicao), danoso(){}
+		Obstaculo::Obstaculo() : Entidade(sf::Vector2f(0.0f, 0.0f)),/*aqui*/ danoso(false), timer(0) 
+		{
+			
 
-Obstaculo::~Obstaculo(){}
+		}
+		
+
+		Obstaculo::~Obstaculo() {}
+		void Obstaculo::setDano(bool dano)
+		{
+       		danoso = dano;
+		}
+
+		bool Obstaculo::getDano()
+		{
+			return danoso;
+		}
+	}
+}
