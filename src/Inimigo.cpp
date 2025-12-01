@@ -4,7 +4,6 @@ namespace Entidades
 {
 	namespace Personagens
 	{
-
 		Inimigo::Inimigo() :Personagem(sf::Vector2f(0.0f, 0.0f), NULL),nivel_maldade(0){}
 
 		Inimigo::Inimigo(sf::Vector2f pos, Listas::ListaEntidades* p ) : Personagem(pos, p), nivel_maldade(0){}
