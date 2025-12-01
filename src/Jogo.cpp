@@ -1,73 +1,56 @@
 #include "Jogo.hpp"
-#include "Gerenciador_Grafico.hpp"
-#include "Gerenciador_Colisoes.hpp"
+#include <iostream>
 
-#include "Fase_Primeira.hpp" 
-
-
-using namespace Gerenciadores;
-using namespace Entidades::Personagens;
-using namespace Entidades::Obstaculos;
-using namespace std;
-
-
-Jogo::Jogo():
-    pGrafico(Gerenciador_Grafico::getInstancia()), 
-    pColisoes(),      
-    pF1(NULL),     
-    pFaseAtual(NULL)
+Jogo::Jogo(): pFaseAtual(NULL), pF1(NULL), //pF2(NULL),
+              pGrafico(Gerenciador_Grafico::getInstancia()),
+              pEventos(NULL)
 {
     Ente::setpGG(pGrafico);
-    try {
-        
-        pF1 = new Fases::Fase_Primeira(pGrafico, pColisoes, "../src/mapa2.json");
-        pFaseAtual = pF1;
-    }
-    catch (const std::exception& e) {
-        std::cerr << "ERRO CRITICO AO INICIAR JOGO: " << e.what() << std::endl;
-        pFaseAtual = NULL;
-    }
-    
-
 }
 
 Jogo::~Jogo()
 {
-    
-    if (pF1) {
-        delete pF1;
-        pF1 = NULL;
-    }
-    pFaseAtual = NULL;
-
+    if (pF1) delete pF1;
+    //if (pF2) delete pF2;
+    if (pEventos) delete pEventos;
 }
 
 void Jogo::executar()
 {
+    Gerenciadores::Gerenciador_Colisoes& refGC = *Gerenciadores::Gerenciador_Colisoes::getInstancia();
+    pF1 = new Fases::Fase_Primeira(pGrafico, refGC, "../src/mapa2.json");
+    pFaseAtual = pF1;
+    
+    if (pFaseAtual) {
+        pEventos = new Gerenciador_Eventos(pFaseAtual->getListaEntidades(), &refGC);
+            
+        if (pFaseAtual->getJogador()) {
+            pEventos->setJogador(pFaseAtual->getJogador());
+            
+             Gerenciador_Colisoes* pGC = Gerenciador_Colisoes::getInstancia();
+             pGC->setJogador(pFaseAtual->getJogador());
             
 
-    if (!pFaseAtual) {
-        std::cout << "Jogo::executar() -> nenhuma fase carregada" << std::endl;
-        return;
+        }
     }
+    
 
+    // Loop principal simples
     while (pGrafico->abertaJanela())
     {
-        
+
         sf::Event event;
-        while (pGrafico->getWindow()->pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                pGrafico->fecharJanela();
+        while (pGrafico->getWindow().pollEvent(event)) {
+            if (event.type == sf::Event::Closed) return;
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) return;
         }
         
-    
         pGrafico->limparJanela();
-        
-        pFaseAtual->executar(); 
-    
-        pColisoes.executar();
-        
+        if (pEventos) pEventos->executar();
+        if (pFaseAtual) pFaseAtual->executar();
+        refGC.executar();
         pGrafico->mostrar();
     }
+    
+    pGrafico->fecharJanela();
 }
