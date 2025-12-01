@@ -1,10 +1,10 @@
 #pragma once
 #include "Lista.hpp"
-
-
-namespace Entidades {
-    class Entidade;
+#include "Gerenciador_Eventos.hpp"
+namespace Gerenciadores {
+    class Gerenciador_Eventos;
 }
+
 using Iterador = Listas::Lista<Entidades::Entidade>::Iterador<Entidades::Entidade>;
 
 namespace Listas
@@ -13,15 +13,17 @@ namespace Listas
     {
     private:
         Lista<Entidades::Entidade> LEs;
-
+        Gerenciadores::Gerenciador_Eventos* pGe;
     public:
         ListaEntidades();
+        ListaEntidades(Gerenciadores::Gerenciador_Eventos* ger);
         ~ListaEntidades();
         Lista<Entidades::Entidade>* getLista();
-        void incluir(Entidades::Entidade* pE);//pq dois incluir???
+        void incluir(Entidades::Entidade* pE);
         void percorrer();
         void limpar();
-        void remover(Entidades::Entidade* pE = NULL);
+        void remover(Entidades::Entidade* pE);
+
     };
 
 }
